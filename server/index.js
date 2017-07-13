@@ -9,10 +9,11 @@ const app = express();
 
 const PORT = process.env.port || 3000;
 
-app.use(express.static(path.join(__dirname, '/../public/dist')));
+app.use(express.static('./'));
+app.use(express.static(path.join(__dirname, '/../client/src')));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname + '/../public/dist/index.html'));
+  res.sendFile(path.resolve(__dirname + '/../client/src/index.html'));
 });
 
 app.listen(PORT, () => {
