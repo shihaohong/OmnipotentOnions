@@ -1,7 +1,19 @@
 'use strict';
-const app = require('./app');
-const db = require('../db');
+/* UNCOMMENT WHEN IMPLEMENTING OAUTH */
+// const app = require('./app');
+// const db = require('../db');
+const express = require('express');
+const path = require('path');
+
+const app = express();
+
 const PORT = process.env.port || 3000;
+
+app.use(express.static(path.join(__dirname, '/../public/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname + '/../public/dist/index.html'));
+});
 
 app.listen(PORT, () => {
   console.log('Example app listening on port 3000!');
