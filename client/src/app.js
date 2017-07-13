@@ -15,4 +15,4 @@ const Routes = () => (
   </BrowserRouter>
 );
 
-ReactDOM.render(<Routes />, document.getElementById('App'));
+ReactDOM.render(<Routes />, document.getElementById("App"));
