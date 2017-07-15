@@ -17,6 +17,32 @@ exports.up = function (knex, Promise) {
       table.string('password', 100).nullable();
       table.string('salt', 100).nullable();
       table.integer('profile_id').references('profiles.id').onDelete('CASCADE');
+    }),
+    knex.schema.createTableIfNotExists('users', (t) => {
+      t.increments('id').unsigned().primary();
+      t.string('name').notNullable();
+      t.string('token', 100).notNullable();
+      t.string('salt', 100).nullable();
+    }),
+    knex.schema.createTableIfNotExists('groups', (t) => {
+      t.increments('id').unsigned().primary();
+      t.string('name').notNullable();
+    }),
+    knex.schema.createTableIfNotExists('users_groups', (t) => {
+      t.integer('user_id').references('users.id').onDelete('CASCADE');
+      t.integer('group_id').references('groups.id').onDelete('CASCADE');
+    }),
+    knex.schema.createTableIfNotExists('channels', (t) => {
+      t.increments('id').unsigned().primary();
+      t.string('name').notNullable();
+      t.integer('group_id').references('groups.id').onDelete('CASCADE');
+    }),
+    knex.schema.createTableIfNotExists('messages', (t) => {
+      t.increments('id').unsigned().primary();
+      t.text('text').notNullable();
+      t.timestamp('create_at').defaultTo(knex.fn.now());
+      t.integer('user_id').references('users.id').onDelete('CASCADE');
+      t.integer('channel_id').references('channels.id').onDelete('CASCADE');
     })
   ]);
 };
@@ -24,7 +50,12 @@ exports.up = function (knex, Promise) {
 exports.down = function (knex, Promise) {
   return Promise.all([
     knex.schema.dropTable('auths'),
-    knex.schema.dropTable('profiles')
+    knex.schema.dropTable('profiles'),
+    knex.schema.dropTable('users'),
+    knex.schema.dropTable('groups'),
+    knex.schema.dropTable('users_groups'),
+    knex.schema.dropTable('channels'),
+    knex.schema.dropTable('messages')
   ]);
 };
 
