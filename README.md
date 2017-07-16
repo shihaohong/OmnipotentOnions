@@ -4,14 +4,14 @@ The project description
 
 ## Team
 
-- teamMember
-- teamMember
-- teamMember
-- teamMember
+- Dylan Gould
+- Gideon Baik
+- Peter Tan
+- Shi-Hao Hong
 
 ## Roadmap
 
-View the project roadmap [here](LINK_TO_DOC)
+View the project roadmap [here](https://docs.google.com/document/d/1yGF5G8IW_wUWLtsoPsByz7-ROYsVnniga2lB3uEiGNo/edit?usp=sharing)
 
 ## Contributing
 
@@ -20,10 +20,10 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 # Table of Contents
 
 1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
-    1. [Installing Dependencies](#installing-dependencies)
-    1. [Tasks](#tasks)
+2. [Requirements](#requirements)
+3. [Development](#development)
+4. [Installing Dependencies](#installing-dependencies)
+5. [Tasks](#tasks)
 
 ## Usage
 

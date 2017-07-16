@@ -1,5 +1,5 @@
 {
-  "name": "course.thesis",
+  "name": "Connect",
   "version": "1.0.0",
   "scripts": {
     "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash",
@@ -10,6 +10,7 @@
   "author": "Hack Reactor",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.16.2",
     "babel-core": "^6.24.1",
     "bcrypt-nodejs": "^0.0.3",
     "bluebird": "^3.5.0",
@@ -24,6 +25,7 @@
     "express-session": "^1.15.1",
     "grunt-pg": "https://github.com/watsoncj/grunt-pg.git",
     "knex": "^0.12.9",
+    "lodash": "^4.17.4",
     "morgan": "^1.8.1",
     "nodemon": "^1.11.0",
     "passport": "^0.3.2",
@@ -34,9 +36,13 @@
     "pg": "^6.1.5",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
-    "redis": "^2.7.1"
+    "redis": "^2.7.1",
+    "redux": "^3.7.2",
+    "redux-form": "^7.0.0",
+    "redux-promise": "^0.5.3"
   },
   "devDependencies": {
     "babel-loader": "^7.0.0",
