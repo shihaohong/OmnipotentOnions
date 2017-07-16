@@ -4,4 +4,4 @@ const Message = db.Model.extend({
   tableName: 'messages',
 });
 
-module.exports = db.Model('Message', Message);
+module.exports = db.model('Message', Message);

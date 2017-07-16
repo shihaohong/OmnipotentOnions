@@ -4,4 +4,4 @@ const User = db.Model.extend({
   tableName: 'users',
 });
 
-module.exports = db.Model('User', User);
+module.exports = db.model('User', User);

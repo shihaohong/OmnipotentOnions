@@ -4,4 +4,4 @@ const Group = db.Model.extend({
   tableName: 'groups',
 });
 
-module.exports = db.Model('Group', Group);
+module.exports = db.model('Group', Group);
