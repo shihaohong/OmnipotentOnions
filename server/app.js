@@ -5,6 +5,8 @@ const middleware = require('./middleware');
 const routes = require('./routes');
 
 const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 
 app.use(middleware.morgan('dev'));
 app.use(middleware.cookieParser());

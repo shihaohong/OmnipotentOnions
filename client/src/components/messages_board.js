@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 
+import { Segment } from 'semantic-ui-react';
+
 class MessageBoard extends Component {
   constructor(props) {
     super(props);
@@ -13,10 +15,10 @@ class MessageBoard extends Component {
 
     const messages = _.map(this.props.messages, message => {
       return (
-        <div key={message.id}> 
+        <Segment key={message.id}> 
           <h4>{message.user}</h4>
           <div>{message.text}</div>
-        </div>
+        </Segment>
       );
     });
 

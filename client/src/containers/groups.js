@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchGroups } from '../actions';
 
+import { Segment } from 'semantic-ui-react';
+
 class Groups extends Component { 
 
   componentDidMount() {
@@ -11,10 +13,9 @@ class Groups extends Component {
   renderGroups() {
     return _.map(this.props.groups, group => {
       return (
-        <div key={group.id}> 
-          <h3> Group {group.id} </h3>
+        <Segment key={group.id}>
           <div> {group.name} </div>
-        </div>
+        </Segment>
       );
     });
   }
@@ -22,8 +23,10 @@ class Groups extends Component {
   render() {
     return (
       <div>
-        <h1>Groups List</h1>
-        {this.renderGroups()}
+        <h2>Groups</h2>
+        <Segment.Group>
+          {this.renderGroups()}
+        </Segment.Group>
       </div>
     );
   }

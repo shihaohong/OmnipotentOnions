@@ -100,6 +100,8 @@ export let createMessage = function(message) {
   // const request = axios.post(``);
   const request = {};
 
+
+
   return {
     type: CREATE_MESSAGE,
     payload: request

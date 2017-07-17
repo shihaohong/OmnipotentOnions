@@ -4,6 +4,8 @@ import { fetchMessages } from '../actions';
 import MessageBoard from '../components/messages_board';
 import MessageInput from './messages_input';
 
+import { Segment } from 'semantic-ui-react';
+
 class Messages extends Component {
   componentDidMount() {
     this.props.fetchMessages();
@@ -12,11 +14,17 @@ class Messages extends Component {
   render() {
     return (
       <div> 
-        <h1> Messages </h1>
-        <MessageBoard 
-          messages={this.props.messages}
-        />
-        <MessageInput/>
+        <h2> Messages </h2>
+        <Segment.Group>
+          <Segment>
+            <MessageBoard 
+              messages={this.props.messages}
+            />
+          </Segment>
+          <Segment>
+            <MessageInput/>
+          </Segment>
+        </Segment.Group>
       </div>
     );
   }
