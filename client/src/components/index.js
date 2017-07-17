@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 import Groups from '../containers/groups';
 import Channels from '../containers/channels';

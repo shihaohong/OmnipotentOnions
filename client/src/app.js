@@ -18,7 +18,7 @@ const Routes = () => (
     <BrowserRouter>
       <div>
         <Switch>
-          <Route path="/main" component={Main} />
+          <Route path="/" component={Main} />
         </Switch>
       </div>
     </BrowserRouter>
@@ -26,4 +26,3 @@ const Routes = () => (
 );
 
 ReactDOM.render(<Routes />, document.getElementById("root"));
-
