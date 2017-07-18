@@ -26,4 +26,7 @@ app.use('/', routes.auth);
 // add groups router
 app.use('/groups', routes.groups);
 
+// add profiles_groups router
+app.use('/groups/:id', routes.profiles_groups);
+
 module.exports = app;

@@ -23,6 +23,7 @@ exports.up = function (knex, Promise) {
       t.string('name').notNullable().unsigned();
     }),
     knex.schema.createTableIfNotExists('profiles_groups', (t) => {
+      t.increments('id').unsigned().primary();
       t.integer('profile_id').references('profiles.id').onDelete('CASCADE');
       t.integer('group_id').references('groups.id').onDelete('CASCADE');
     }),
