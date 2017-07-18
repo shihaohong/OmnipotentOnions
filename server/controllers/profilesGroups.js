@@ -1,7 +1,7 @@
 const models = require('../../db/models');
 
 module.exports.getAllGroups = (req, res) => {
-  models.Profile_Group.where({ profile_id: req.params.id }).fetchAll({ withRelated: ['profiles.id'] })
+  models.ProfileGroup.where({ profile_id: req.params.id }).fetchAll({ withRelated: ['profiles.id'] })
   .then(groups => {
     res.status(200).send(groups);
   })
@@ -11,7 +11,7 @@ module.exports.getAllGroups = (req, res) => {
 };
 
 module.exports.joinGroup = (req, res) => {
-  modules.Profile_Group.forge({ profile_id: req.params.id, group_id: req.body.group_id })
+  modules.ProfileGroup.forge({ profile_id: req.params.id, group_id: req.body.group_id })
     .save()
     .then(result => {
       res.status(201).send(result);

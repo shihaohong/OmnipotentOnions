@@ -1,6 +1,6 @@
 const db = require('../');
 
-const Profile_Group = db.Model.extend({
+const ProfileGroup = db.Model.extend({
   tableName: 'profiles_groups',
   profile: () => {
     return this.belongTo('Profile');
@@ -10,4 +10,4 @@ const Profile_Group = db.Model.extend({
   }
 });
 
-module.exports = db.model('Profile_Group', Profile_Group);
+module.exports = db.model('Profile_Group', ProfileGroup);
