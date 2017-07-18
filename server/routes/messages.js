@@ -1,0 +1,11 @@
+'use strict';
+const express = require('express');
+const router = express.Router();
+const MessageController = require('../controllers').Messages;
+
+router.route('/messages/:id')
+  .get(MessageController.getMessages)
+  .post(MessageController.postMessage)
+;
+
+module.exports = router;
