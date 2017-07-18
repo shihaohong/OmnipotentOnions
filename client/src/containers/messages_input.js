@@ -5,6 +5,10 @@ import { createMessage } from '../actions';
 
 class MessageInput extends Component {
 
+  constructor(props) {
+    super(props);
+  }
+
   renderField(field) {
     const { meta: { touched, error } } = field; 
 
@@ -20,7 +24,17 @@ class MessageInput extends Component {
 
   onSubmit(message) {
     // currently only sends { message: 'the message' }
-    this.props.createMessage(message);
+    const data = {
+      id: 5,
+      user: 'Shi-Hao',
+      text: message.message
+    };
+
+    console.log('submit called');
+
+    this.props.socket.emit('send', data);
+    // this.props.createMessage(data);
+    // clear data after message send
   }
 
   render() {

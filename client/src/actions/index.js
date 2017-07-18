@@ -99,11 +99,9 @@ export let createMessage = function(message) {
   // replace with real ajax request
   // const request = axios.post(``);
   const request = {};
-
-
-
+  // change this back later
   return {
     type: CREATE_MESSAGE,
-    payload: request
+    payload: message
   };
 };

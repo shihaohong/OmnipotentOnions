@@ -5,8 +5,9 @@ const middleware = require('./middleware');
 const routes = require('./routes');
 
 const app = express();
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
+var server = app.listen(8080);
+const io = require('socket.io').listen(server);
+
 
 app.use(middleware.morgan('dev'));
 app.use(middleware.cookieParser());
@@ -31,5 +32,14 @@ app.use('/groups/:id', routes.profilesGroups);
 
 //  add channels router
 app.use('/channels', routes.channels);
+
+io.on('connection', function(socket) {
+  console.log('a user has connected');
+  socket.on('send', (message) => {
+    console.log('received message:', message);
+    socket.emit('return-message', message);
+  });
+});
+
 
 module.exports = app;
