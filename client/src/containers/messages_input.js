@@ -29,9 +29,7 @@ class MessageInput extends Component {
       user: 'Shi-Hao',
       text: message.message
     };
-
-    console.log('submit called');
-
+ 
     this.props.socket.emit('send', data);
     // this.props.createMessage(data);
     // clear data after message send
