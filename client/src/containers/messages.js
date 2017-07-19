@@ -39,7 +39,7 @@ class Messages extends Component {
 }
 
 const mapStateToProps = function(state) {
-  return { messages: state.messages };
+  return { messages: state.messages, profile: state.profile };
 };
 
 export default connect(mapStateToProps, { fetchMessages, createMessage })(Messages);

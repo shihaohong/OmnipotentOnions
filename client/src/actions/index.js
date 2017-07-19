@@ -4,7 +4,7 @@ export const FETCH_GROUPS = 'fetch_groups';
 export const FETCH_CHANNELS = 'fetch_channels';
 export const FETCH_MESSAGES = 'fetch_messages';
 export const CREATE_MESSAGE = 'create_message';
-export const FETCH_USER = 'fetch_user';
+export const FETCH_PROFILE = 'fetch_profile';
 
 export const fetchGroups = function(user) {
   // replace with real ajax request
@@ -107,9 +107,10 @@ export let createMessage = function(message) {
   };
 };
 
-export let fetchUser = function(user) {
+export let fetchProfile = function(profile) {
+  console.log('profile', profile);
   return {
-    type: FETCH_USER,
-    payload: user
+    type: FETCH_PROFILE,
+    payload: profile
   };
 };
