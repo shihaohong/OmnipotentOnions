@@ -43,13 +43,22 @@ exports.up = function (knex, Promise) {
 };
 
 exports.down = function (knex, Promise) {
+  // return Promise.all([
+  //   knex.schema.dropTable('auths'),
+  //   knex.schema.dropTable('profiles'),
+  //   knex.schema.dropTable('groups'),
+  //   knex.schema.dropTable('profiles_groups'),
+  //   knex.schema.dropTable('channels'),
+  //   knex.schema.dropTable('messages')
+  // ]);
   return Promise.all([
-    knex.schema.dropTable('auths'),
-    knex.schema.dropTable('profiles'),
-    knex.schema.dropTable('groups'),
-    knex.schema.dropTable('profiles_groups'),
-    knex.schema.dropTable('channels'),
-    knex.schema.dropTable('messages')
+    knex.raw('DROP TABLE if exists auths CASCADE'),
+    knex.raw('DROP TABLE if exists profiles CASCADE'),
+    knex.raw('DROP TABLE if exists groups CASCADE'),
+    knex.raw('DROP TABLE if exists profiles_groups CASCADE'),
+    knex.raw('DROP TABLE if exists channels CASCADE'),
+    knex.raw('DROP TABLE if exists messages CASCADE')
   ]);
+
 };
 
