@@ -3,7 +3,6 @@ import _ from 'lodash';
 
 import { Segment } from 'semantic-ui-react';
 
-
 class MessageBoard extends Component {
   constructor(props) {
     super(props);
@@ -25,11 +24,11 @@ class MessageBoard extends Component {
     if (Object.keys(this.props.messages).length === 0) {
       return <div>Loading... </div>;
     } 
-    
+
     return (
       <div>{this.renderMessages(this.props.messages)}</div>
     );
   }
 }
-
+ 
 export default MessageBoard;

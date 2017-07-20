@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { createMessage } from '../actions';
 
-class MessageInput extends Component {
+export class MessageInput extends Component {
 
   constructor(props) {
     super(props);

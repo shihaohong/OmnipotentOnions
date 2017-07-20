@@ -113,4 +113,4 @@ export let fetchProfile = function(profile) {
     type: FETCH_PROFILE,
     payload: profile
   };
-};
+}; 

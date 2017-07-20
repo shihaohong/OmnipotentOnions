@@ -8,7 +8,6 @@ const app = express();
 var server = app.listen(8080);
 const io = require('socket.io').listen(server);
 
-
 app.use(middleware.morgan('dev'));
 app.use(middleware.cookieParser());
 app.use(middleware.bodyParser.urlencoded({extended: false}));
@@ -36,7 +35,7 @@ app.use('/channels', routes.channels);
 // add messages router
 app.use('/messages/:id', routes.messages);
 
-io.on('connection', function(socket) {
+io.on('connection', function(socket){
   console.log('a user has connected');
   socket.on('send', (message) => {
     console.log('received message:', message);

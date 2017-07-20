@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchChannels } from '../actions';
+import _ from 'lodash';
 
 import { Segment } from 'semantic-ui-react';
 
-class Channels extends Component {
+export class Channels extends Component {
   componentDidMount() {
     this.props.fetchChannels();
   }
