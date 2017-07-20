@@ -7,4 +7,9 @@ router.route('/')
   .post(ChannelController.createChannel)
 ;
 
+router.route('/:id')
+  .get(ChannelController.getGroupChannels)
+;
+
+
 module.exports = router;

@@ -22,12 +22,12 @@ class Main extends Component {
       <h1>Welcome to Connect, {window.myUser.display}</h1>
       <Segment.Group horizontal>
         <Segment><Groups /></Segment>
+        <Segment><Channels /></Segment>
       </Segment.Group>
     </div>
     );
   }  
 }
-      // <Segment><Channels /></Segment>
       // <Segment><Messages /></Segment>
 
 export default connect(null, { fetchProfile} )(Main);

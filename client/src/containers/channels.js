@@ -6,8 +6,8 @@ import _ from 'lodash';
 import { Segment } from 'semantic-ui-react';
 
 export class Channels extends Component {
-  componentDidMount() {
-    this.props.fetchChannels();
+  componentWillMount() {
+    this.props.fetchChannels(1);
   }
 
   renderChannels() {

@@ -7,7 +7,6 @@ export const CREATE_MESSAGE = 'create_message';
 export const FETCH_PROFILE = 'fetch_profile';
 
 export const fetchGroups = function(user) {
-  console.log('action/index USER', user.id);
   const request = axios.get(`/profileGroups/${user.id}`);
   return {
     type: FETCH_GROUPS,
@@ -15,34 +14,12 @@ export const fetchGroups = function(user) {
   };
 };
 
-export let fetchChannels = function(group) {
-  // replace with real ajax request
-  // const request = axios.get(``);
-
-  // dummy request
-  // const request = [
-  //   {
-  //     id: 1,
-  //     name: 'Shi-Hao\'s Smashing Channel'
-  //   },
-  //   {
-  //     id: 2,
-  //     name: 'Dylan\'s Dynamic Channel'
-  //   },
-  //   {
-  //     id: 3,
-  //     name: 'Peter\'s Poetic Channel'
-  //   },
-  //   {
-  //     id: 4,
-  //     name: 'Gideon\'s Gallant Channel'
-  //   }
-  // ];
-
-  // return {
-  //   type: FETCH_CHANNELS,
-  //   payload: request
-  // };
+export let fetchChannels = function(groupId) {
+  const request = axios.get(`/channels/${groupId}`);
+  return {
+    type: FETCH_CHANNELS,
+    payload: request
+  };
 };
 
 export let fetchMessages = function(channel) {
