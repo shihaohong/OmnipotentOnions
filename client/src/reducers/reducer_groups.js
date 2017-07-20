@@ -4,7 +4,8 @@ import _ from 'lodash';
 export default function(state = {}, action) {
   switch (action.type) {
   case FETCH_GROUPS:
-    return _.mapKeys(action.payload, 'id');
+    console.log('reduers/reducer_groups PAYLOAD.DATA', action.payload.data);
+    return _.mapKeys(action.payload.data, 'id');
   default:
     return state;
   }   

@@ -1,11 +1,13 @@
 const models = require('../../db/models');
 
 module.exports.getAllGroups = (req, res) => {
-  models.ProfileGroup.where({ profile_id: req.params.id }).fetchAll({ withRelated: ['profiles.id'] })
+  models.ProfileGroup.where({ profile_id: req.params.id }).fetchAll({ withRelated: ['groups'] })
   .then(groups => {
+    console.log('controllers/profileGroups: ', groups);
     res.status(200).send(groups);
   })
   .catch(err => {
+    console.log('controllers/profileGroups ERRRR: ', err);
     res.status(503).send(err);
   });
 };

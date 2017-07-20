@@ -9,22 +9,25 @@ import Channels from './channels';
 import Messages from './messages';
 
 class Main extends Component {
-  componentDidMount() {
-    this.props.fetchProfile(window.myUser);
+  // constructor(props) {
+  //   super(props);
+  //   this.props.fetchProfile(window.myUser);
+  // }
+  componentWillMount() {
+    this.props.fetchProfile(window.myUser);    
   }
-
   render() {
     return (
     <div>
       <h1>Welcome to Connect, {window.myUser.display}</h1>
       <Segment.Group horizontal>
         <Segment><Groups /></Segment>
-        <Segment><Channels /></Segment>
-        <Segment><Messages /></Segment>
       </Segment.Group>
     </div>
     );
   }  
 }
+      // <Segment><Channels /></Segment>
+      // <Segment><Messages /></Segment>
 
 export default connect(null, { fetchProfile} )(Main);

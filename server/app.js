@@ -23,17 +23,18 @@ app.use(middleware.flash());
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.use('/', routes.auth);
+
 // add groups router
 app.use('/groups', routes.groups);
 
 // add profiles_groups router
-app.use('/groups/:id', routes.profilesGroups);
+app.use('/profileGroups', routes.profilesGroups);
 
 //  add channels router
 app.use('/channels', routes.channels);
 
 // add messages router
-app.use('/messages/:id', routes.messages);
+app.use('/messages/', routes.messages);
 
 io.on('connection', function(socket){
   console.log('a user has connected');
