@@ -1,0 +1,11 @@
+redis: 
+  image: redis
+  ports: 
+    - 9001:6379
+onionhost_composed:
+  image: onionhost
+  command: npm start
+  links: 
+    - redis
+  ports: 
+    - 7000:3000
