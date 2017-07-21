@@ -2,21 +2,23 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchGroups } from '../actions';
 
+import InviteLink from './invite_link';
+import NewGroup from './new_group';
+import JoinGroup from './join_group';
+
 import { Segment } from 'semantic-ui-react';
 
 class Groups extends Component { 
-  // constructor(props) {
-  //   super(props);
-  //   this.props.fetchGroups(this.props.profile);
-  // }
   componentWillMount() {
-    this.props.fetchGroups(this.props.profile);    
+    this.props.fetchGroups(this.props.profile);
   }
+
   renderGroups() {
     return _.map(this.props.groups, group => {
       return (
-        <Segment key={group.id}>
+        <Segment key={group.id}>          
           <div> {group.groups.name} </div>
+          <InviteLink group={group.groups} profile={this.props.profile}/>
         </Segment>
       );
     });
@@ -28,6 +30,8 @@ class Groups extends Component {
         <h2>Groups</h2>
         <Segment.Group>
           {this.renderGroups()}
+          <NewGroup profile={this.props.profile}/>
+          <JoinGroup profile={this.props.profile}/>
         </Segment.Group>
       </div>
     );

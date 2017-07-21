@@ -21,6 +21,7 @@ exports.up = function (knex, Promise) {
     knex.schema.createTableIfNotExists('groups', (t) => {
       t.increments('id').unsigned().primary();
       t.string('name').notNullable().unsigned();
+      t.string('shortID').nullable().unique();
     }),
     knex.schema.createTableIfNotExists('profiles_groups', (t) => {
       t.increments('id').unsigned().primary();
