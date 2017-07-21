@@ -23,11 +23,11 @@ class Main extends Component {
       <Segment.Group horizontal>
         <Segment><Groups /></Segment>
         <Segment><Channels /></Segment>
+        <Segment><Messages /></Segment>
       </Segment.Group>
     </div>
     );
   }  
 }
-      // <Segment><Messages /></Segment>
 
 export default connect(null, { fetchProfile} )(Main);

@@ -22,38 +22,13 @@ export let fetchChannels = function(groupId) {
   };
 };
 
-export let fetchMessages = function(channel) {
+export let fetchMessages = function(channelId) {
   // replace with real ajax request
-  // const request = axios.get(``);
-
-  // dummy request
-  // const request = [
-  //   {
-  //     id: 1,
-  //     user: 'Shi-Hao',
-  //     text: 'Hello friends!'
-  //   },
-  //   {
-  //     id: 2,
-  //     user: 'Peter',
-  //     text: 'What\'s up!'
-  //   },
-  //   {
-  //     id: 3,
-  //     user: 'Dylan',
-  //     text: 'I got the app deployed on Digital Ocean!' 
-  //   },
-  //   {
-  //     id: 4,
-  //     user: 'Gideon',
-  //     text: 'That\'s awesome! Here, have some spam!'  
-  //   }
-  // ];
-
-  // return {
-  //   type: FETCH_MESSAGES,
-  //   payload: request
-  // };
+  const request = axios.get(`/messages/${channelId}`);
+  return {
+    type: FETCH_MESSAGES,
+    payload: request
+  };
 };
 
 export let createMessage = function(message) {

@@ -34,7 +34,7 @@ app.use('/profileGroups', routes.profilesGroups);
 app.use('/channels', routes.channels);
 
 // add messages router
-app.use('/messages/', routes.messages);
+app.use('/messages', routes.messages);
 
 io.on('connection', function(socket) {
   console.log('a user has connected');

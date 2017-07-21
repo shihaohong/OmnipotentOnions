@@ -8,7 +8,7 @@ export default function(state = {}, action) {
     newObj[action.payload.id] = action.payload;
     return newObj;
   case FETCH_MESSAGES:
-    return _.mapKeys(action.payload, 'id');
+    return _.mapKeys(action.payload.data, 'id');
   default:
     return state;
   }   

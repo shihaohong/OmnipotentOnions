@@ -16,9 +16,9 @@ module.exports.postMessage = (req, res) => {
 };
 
 module.exports.getMessages = (req, res) => {
-  models.Message.where({ channel_id: req.body.channel_id }).fetchAll()
+  models.Message.where({ channel_id: req.params.id }).fetchAll()
     .then(messages => {
-      res.status(200).send(profiles);
+      res.status(200).send(messages);
     })
     .catch(err => {
       res.status(503).send(err);

@@ -7,6 +7,7 @@ import { Segment } from 'semantic-ui-react';
 
 export class Channels extends Component {
   componentWillMount() {
+    console.log('containers/channels I am hardcoded fix me');
     this.props.fetchChannels(1);
   }
 
