@@ -5,6 +5,9 @@ redis:
 onionhost_composed:
   image: onionhost
   command: npm start
+  environment: 
+    REDIS_URL: 'redis'
+    NODE_ENV: 'development'
   links: 
     - redis
   ports: 

@@ -1,4 +1,5 @@
 'use strict';
+process.env.NODE_ENV = process.env.NODE_ENV || 'default';
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
@@ -25,6 +26,8 @@ passport.deserializeUser((id, done) => {
       done(null, null, { message: 'No user found' });
     });
 });
+
+console.log('Google callbackURL: ', config.Google.callbackURL);
 
 passport.use('google', new GoogleStrategy({
   clientID: config.Google.clientID,
