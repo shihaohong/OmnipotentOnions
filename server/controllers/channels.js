@@ -24,3 +24,13 @@ module.exports.getGroupChannels = (req, res) => {
       res.status(503).send(err);
     });
 };
+
+module.exports.getChannel = (req, res) => {
+  models.Channel.where({ channel_id: req.params.channelId }).fetch()
+    .then(channel => {
+      res.status(200).send(channel);
+    })
+    .catch(err => {
+      res.status(503).send(err);
+    });
+};

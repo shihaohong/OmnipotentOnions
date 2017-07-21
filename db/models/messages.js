@@ -2,10 +2,10 @@ const db = require('../');
 
 const Message = db.Model.extend({
   tableName: 'messages',
-  profile: () => {
+  profile: function() {
     return this.belongsTo('Profile');
   },
-  channel: () => {
+  channel: function() {
     return this.belongsTo('Channel');
   }
 });

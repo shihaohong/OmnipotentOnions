@@ -3,8 +3,8 @@ const models = require('../../db/models');
 module.exports.postMessage = (req, res) => {
   models.Message.forge({ 
     text: req.body.text,
-    profile_id: req.params.id,
-    channel_id: req.body.channel_id
+    profile_id: req.body.profileId,
+    channel_id: req.params.id,
   }).save()
     .then(message => {
       models.Message.where({channel_id: message.channel_id}).fetchAll()

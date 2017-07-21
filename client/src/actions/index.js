@@ -61,7 +61,7 @@ export let createGroup = function(group, profile, shortID) {
 
 export let createMessage = function(message) {
   // replace with real ajax request
-  // const request = axios.post(``);
+  const request = axios.post(`/messages/${message.channelId}`);
   // axios.post(`/messages/${}`)
   // const request = {};
   // // change this back later

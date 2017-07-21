@@ -11,5 +11,8 @@ router.route('/:id')
   .get(ChannelController.getGroupChannels)
 ;
 
+router.route('/:id/:channelId')
+  .get(ChannelController.getChannel)
+;
 
 module.exports = router;

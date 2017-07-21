@@ -7,6 +7,8 @@ export class MessageInput extends Component {
 
   constructor(props) {
     super(props);
+    console.log('container/messages_input channel: ', this.props.channel);
+    console.log('container/messages_input profile: ', this.props.profile);
   }
 
   renderField(field) {
@@ -24,9 +26,9 @@ export class MessageInput extends Component {
 
   onSubmit(message) {
     // currently only sends { message: 'the message' }
-    const data = {
-      id: 5,
-      user: 'Shi-Hao',
+    const postMessage = {
+      channel_id: 5,
+      profile_id: 'Shi-Hao',
       text: message.message
     };
  
@@ -43,7 +45,7 @@ export class MessageInput extends Component {
         <h4>Message Input</h4>
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <Field
-            label='Please enter your message here'
+            placeholder='Please enter your message here'
             name='message'
             component={this.renderField}
           />
@@ -54,8 +56,15 @@ export class MessageInput extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    channel: state.channels,
+    profile: state.profile,
+  };
+};
+
 export default reduxForm({
   form: 'MessageForm'
 })(
-  connect(null, { createMessage })(MessageInput)
+  connect(mapStateToProps, { createMessage })(MessageInput)
 );

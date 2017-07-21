@@ -34,7 +34,9 @@ passport.use('google', new GoogleStrategy({
   clientSecret: config.Google.clientSecret,
   callbackURL: config.Google.callbackURL
 },
-(accessToken, refreshToken, profile, done) => getOrCreateOAuthProfile('google', profile, done))
+(accessToken, refreshToken, profile, done) => {
+  return getOrCreateOAuthProfile('google', profile, done);
+})
 );
 
 passport.use('facebook', new FacebookStrategy({
@@ -72,11 +74,15 @@ const getOrCreateOAuthProfile = (type, oauthProfile, done) => {
       return models.Profile.where({ email: oauthProfile.emails[0].value }).fetch();
     })
     .then(profile => {
+      // console.log('middleware/passport OAUTHPROFILE', oauthProfile.photos[0].value);      
+      let profilePic = oauthProfile.photos[0].value;
+      profilePic = profilePic.slice(0, profilePic.length - 2).concat('250');
       let profileInfo = {
         first: oauthProfile.name.givenName,
         last: oauthProfile.name.familyName,
         display: oauthProfile.displayName || `${oauthProfile.name.givenName} ${oauthProfile.name.familyName}`,
-        email: oauthProfile.emails[0].value
+        email: oauthProfile.emails[0].value,
+        profilePic: profilePic
       };
 
       if (profile) {
