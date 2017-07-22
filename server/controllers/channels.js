@@ -1,13 +1,20 @@
 const models = require('../../db/models');
 
 module.exports.createChannel = (req, res) => {
+  console.log('INSIDE CHANNEL CONTROLLER: ', req.query);
   models.Channel.forge({
-    name: req.body.name,
-    group_id: req.body.group_id
+    name: req.query.name,
+    group_id: req.params.groupId
   })
     .save()
     .then(result => {
-      res.status(201).send(result);
+      models.Channel.where({ group_id: result.attributes.group_id }).fetchAll()
+        .then(channels => {
+          res.status(201).send(channels);          
+        })
+        .catch(err => {
+          res.status(500).send(err);
+        });
     })
     .catch(err => {
       res.status(500).send(err);
@@ -15,8 +22,8 @@ module.exports.createChannel = (req, res) => {
 };
 
 module.exports.getGroupChannels = (req, res) => {
-  console.log('controllers/channel REQ.PARAMS: ', req.params.id);
-  models.Channel.where({ group_id: req.params.id }).fetchAll()
+  console.log('controllers/channel REQ.PARAMS: ', req.params.groupId);
+  models.Channel.where({ group_id: req.params.groupId }).fetchAll()
     .then(channels => {
       res.status(200).send(channels);
     })
@@ -25,12 +32,12 @@ module.exports.getGroupChannels = (req, res) => {
     });
 };
 
-module.exports.getChannel = (req, res) => {
-  models.Channel.where({ channel_id: req.params.channelId }).fetch()
-    .then(channel => {
-      res.status(200).send(channel);
-    })
-    .catch(err => {
-      res.status(503).send(err);
-    });
-};
+// module.exports.getChannel = (req, res) => {
+//   models.Channel.where({ channel_id: req.params.channelId }).fetch()
+//     .then(channel => {
+//       res.status(200).send(channel);
+//     })
+//     .catch(err => {
+//       res.status(503).send(err);
+//     });
+// };

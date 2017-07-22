@@ -9,15 +9,18 @@ import JoinGroup from './join_group';
 import { Segment } from 'semantic-ui-react';
 
 class Groups extends Component { 
-  componentWillMount() {
+  constructor(props) {
+    super(props);
     this.props.fetchGroups(this.props.profile);
   }
+  // componentWillMount() {
+  // }
 
   renderGroups() {
     return _.map(this.props.groups, group => {
       return (
         <Segment key={group.id}>          
-          <div> {group.groups.name} </div>
+          <button onClick={this.props.handleChannel} value={group.id}> {group.groups.name} </button>
           <InviteLink group={group.groups} profile={this.props.profile}/>
         </Segment>
       );

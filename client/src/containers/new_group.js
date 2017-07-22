@@ -23,7 +23,7 @@ class NewGroup extends Component {
     let newGroupName = element.groupName;
     let profile_id = this.props.profile.id;
     let shortID = shortid.generate();
-
+    element.groupName = '';
     this.props.createGroup(newGroupName, profile_id, shortID);
   }
 

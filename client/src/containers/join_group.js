@@ -42,7 +42,6 @@ class JoinGroup extends Component {
 }
 
 const mapStateToProps = function(state) {
-  console.log(state, 'state');
   return { group: state.group };
 };
 
