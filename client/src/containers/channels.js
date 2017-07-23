@@ -16,9 +16,7 @@ export class Channels extends Component {
     return _.map(this.props.channels, channel => {
       return (
         <Segment key={channel.id}>
-          <button value={channel.id}> 
-            {channel.name} 
-          </button>
+          <button value={channel.id} onClick={this.props.handleMessage}>{channel.name}</button>
         </Segment>
       );
     });
