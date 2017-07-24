@@ -16,11 +16,12 @@ module.exports.postMessage = (req, res) => {
 };
 
 module.exports.getMessages = (req, res) => {
-  models.Message.where({ channel_id: req.params.id }).fetchAll()
+  models.Message.where({ channel_id: req.params.id }).fetchAll({ withRelated: ['profile']})
     .then(messages => {
       res.status(200).send(messages);
     })
     .catch(err => {
+      console.log('ERRRRRRRRRR: ', err);
       res.status(503).send(err);
     });
 };

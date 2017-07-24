@@ -1,7 +1,6 @@
 const models = require('../../db/models');
 
 module.exports.createChannel = (req, res) => {
-  console.log('INSIDE CHANNEL CONTROLLER: ', req.query);
   models.Channel.forge({
     name: req.query.name,
     group_id: req.params.groupId
@@ -22,7 +21,6 @@ module.exports.createChannel = (req, res) => {
 };
 
 module.exports.getGroupChannels = (req, res) => {
-  console.log('controllers/channel REQ.PARAMS: ', req.params.groupId);
   models.Channel.where({ group_id: req.params.groupId }).fetchAll()
     .then(channels => {
       res.status(200).send(channels);

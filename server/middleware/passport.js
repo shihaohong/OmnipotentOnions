@@ -27,8 +27,6 @@ passport.deserializeUser((id, done) => {
     });
 });
 
-console.log('Google callbackURL: ', config.Google.callbackURL);
-
 passport.use('google', new GoogleStrategy({
   clientID: config.Google.clientID,
   clientSecret: config.Google.clientSecret,
@@ -74,7 +72,6 @@ const getOrCreateOAuthProfile = (type, oauthProfile, done) => {
       return models.Profile.where({ email: oauthProfile.emails[0].value }).fetch();
     })
     .then(profile => {
-      // console.log('middleware/passport OAUTHPROFILE', oauthProfile.photos[0].value);      
       let profilePic = oauthProfile.photos[0].value;
       profilePic = profilePic.slice(0, profilePic.length - 2).concat('250');
       let profileInfo = {
@@ -103,7 +100,6 @@ const getOrCreateOAuthProfile = (type, oauthProfile, done) => {
       done(err, null);
     })
     .catch(oauthAccount => {
-      console.log('a', oauthAccount);
       if (!oauthAccount) {
         throw oauthAccount;
       }

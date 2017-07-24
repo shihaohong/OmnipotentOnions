@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 export class Profile extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props.profile);
   }
   
   render() {
@@ -18,7 +17,6 @@ export class Profile extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('STATE', state);
   return {
     profile: state.profile
   };

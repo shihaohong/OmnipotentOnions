@@ -7,8 +7,8 @@ export class MessageInput extends Component {
 
   constructor(props) {
     super(props);
-    console.log('container/messages_input channel: ', this.props.channel);
-    console.log('container/messages_input profile: ', this.props.profile);
+    // console.log('container/messages_input channel: ', this.props.channel);
+    // console.log('container/messages_input profile: ', this.props.profile);
   }
 
   renderField(field) {
@@ -26,6 +26,7 @@ export class MessageInput extends Component {
 
   onSubmit(message) {
     // currently only sends { message: 'the message' }
+    console.log('message/input MESSAGES FROM INPUT', messages);
     const postMessage = {
       channel_id: 5,
       profile_id: 'Shi-Hao',

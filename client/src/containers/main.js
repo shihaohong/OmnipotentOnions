@@ -30,10 +30,19 @@ class Main extends Component {
         groupId: e.target.value
       });
     } else if (this.state.showChannel && this.state.groupId === e.target.value) {
-      this.setState({
-        showChannel: !this.state.showChannel,
-        groupId: undefined
-      });
+      if (this.state.showMessages) {
+        this.setState({
+          showChannel: !this.state.showChannel,
+          groupId: undefined,
+          showMessages: !this.state.showMessages,
+          channelId: undefined
+        });
+      } else {
+        this.setState({
+          showChannel: !this.state.showChannel,
+          groupId: undefined
+        });       
+      }
     } else if (this.state.showChannel && this.state.groupId !== e.target.value && this.state.showMessages) {
       this.props.fetchChannels(e.target.value);
       this.setState({
