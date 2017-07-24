@@ -6,7 +6,7 @@
     "start": "nodemon server",
     "test": "NODE_ENV=test grunt test",
     "client-test": "jest client",
-    "server-test": "mocha server/test/test.js",
+    "server-test": "mocha server/tests/test.js",
     "build": "webpack --display-error-details --watch",
     "redis": "redis-server"
   },
