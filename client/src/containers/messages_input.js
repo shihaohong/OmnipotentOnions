@@ -26,14 +26,16 @@ export class MessageInput extends Component {
 
   onSubmit(message) {
     // currently only sends { message: 'the message' }
-    console.log('message/input MESSAGES FROM INPUT', messages);
+    console.log('message/input MESSAGES FROM INPUT', message);
+    var randomId = Math.floor(Math.random() * 10000);
     const postMessage = {
+      id: randomId,
       channel_id: 5,
       profile_id: 'Shi-Hao',
       text: message.message
-    };
+    }; 
  
-    this.props.socket.emit('send', data);
+    this.props.socket.emit('send', postMessage);
     // this.props.createMessage(data);
     // clear data after message send
   }

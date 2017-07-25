@@ -40,6 +40,8 @@ io.on('connection', function(socket) {
   console.log('a user has connected');
   socket.on('send', (message) => {
     console.log('received message:', message);
+    // store in db here
+    // server should add the timestamp & id
     socket.emit('return-message', message);
   });
 });

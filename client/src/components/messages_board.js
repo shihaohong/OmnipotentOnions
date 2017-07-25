@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 
-import { Segment } from 'semantic-ui-react';
+import { Segment, Divider } from 'semantic-ui-react';
 
 class MessageBoard extends Component {
   constructor(props) {
@@ -24,13 +24,14 @@ class MessageBoard extends Component {
     console.log('compo/message_board: ', messages);
     return _.map(messages, message => {
       return (
-        <Segment key={message.id}> 
-          <span>
-            <h4>{message.profile.display}</h4>
-            <h8>{message.create_at}</h8>
-          </span>
-          <div>{message.text}</div>
-        </Segment>
+        <div>
+          <Segment key={message.id}> 
+            <strong>{message.profile_id}</strong>
+            <em>{/*<h8>{message.create_at}</h8>*/} 12:55pm </em>
+            <Divider fitted />
+            {message.text}
+          </Segment>
+        </div>
       );
     });
   }
