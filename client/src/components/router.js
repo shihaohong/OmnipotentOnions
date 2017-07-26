@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import Main from '../containers/main';
 import Profile from '../containers/profile';
+import Friends from '../containers/friends/friends';
 
 const Router = () => (
   <div>
@@ -12,6 +13,9 @@ const Router = () => (
       </Route>
       <Route path="/profile">
         <Profile />
+      </Route>
+      <Route path="/friends">
+        <Friends />
       </Route>                   
     </Switch>
   </div>

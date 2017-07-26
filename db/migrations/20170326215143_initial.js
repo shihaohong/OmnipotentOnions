@@ -40,6 +40,16 @@ exports.up = function (knex, Promise) {
       t.timestamp('create_at').defaultTo(knex.fn.now());
       t.integer('profile_id').references('profiles.id').onDelete('CASCADE');
       t.integer('channel_id').references('channels.id').onDelete('CASCADE');
+    }),
+    knex.schema.createTableIfNotExists('profiles_friends', (t) => {
+      t.increments('id').unsigned().primary();
+      t.integer('friend_id').references('profiles.id').onDelete('CASCADE');
+      t.integer('profile_id').references('profiles.id').onDelete('CASCADE');
+    }),
+    knex.schema.createTableIfNotExists('pending_friend_requests', (t) => {
+      t.increments('id').unsigned().primary();
+      t.integer('friend_id').references('profiles.id').onDelete('CASCADE');      
+      t.integer('profile_id').references('profiles.id').onDelete('CASCADE');
     })
   ]);
 };
@@ -59,7 +69,9 @@ exports.down = function (knex, Promise) {
     knex.raw('DROP TABLE if exists groups CASCADE'),
     knex.raw('DROP TABLE if exists profiles_groups CASCADE'),
     knex.raw('DROP TABLE if exists channels CASCADE'),
-    knex.raw('DROP TABLE if exists messages CASCADE')
+    knex.raw('DROP TABLE if exists messages CASCADE'),
+    knex.raw('DROP TABLE if exists profiles_friends CASCADE'),
+    knex.raw('DROP TABLE if exists pending_friend_requests CASCADE')
   ]);
 
 };

@@ -1,9 +1,10 @@
 <% include head.ejs%>
 
+    <a href="/" class="btn btn-default btn-sm">Home page</a>
+    <a href="/friends" class="btn btn-default btn-sm">Friends</a>
     <a href="/profile" class="btn btn-default btn-sm">Profile</a>
     <a href="/logout" class="btn btn-default btn-sm">Logout</a>
     <script> 
-        var myUser = <%- JSON.stringify(user) %>;
+      var myUser = <%- JSON.stringify(user) %>;
     </script>
-
 <% include foot.ejs%>

@@ -10,9 +10,15 @@ router.route('/')
 
 router.route('/profile')
   .get(middleware.auth.verify, (req, res) => {
-    res.render('profile.ejs');
+    console.log(req.user);
+    res.render('profile.ejs', {user: req.user});
   });
-  
+
+router.route('/friends')
+  .get(middleware.auth.verify, (req, res) => {
+    res.render('friends.ejs', {user: req.user});
+  });
+
 router.route('/login')
   .get((req, res) => {
     res.render('login.ejs', { message: req.flash('loginMessage') });
