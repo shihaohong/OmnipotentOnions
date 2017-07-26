@@ -27,7 +27,6 @@ export class MessageInput extends Component {
   onSubmit(message) {
     // currently only sends { message: 'the message' }
     console.log('message/input MESSAGES FROM INPUT', message);
-    var randomId = Math.floor(Math.random() * 10000);
     const postMessage = {
       id: randomId,
       channel_id: 5,
