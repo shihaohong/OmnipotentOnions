@@ -1,13 +1,13 @@
-import { CREATE_EVENT, DELETE_EVENT, FECTCH_EVENTS } from '../actions';
+import { JOIN, UNJOIN, FETCH_ALL_ATTENDEES } from '../actions';
 import _ from 'lodash';
 
 export default function(state = {}, action) {
   switch (action.type) {
-  case CREATE_EVENT:
+  case JOIN:
     return _.mapKeys(action.payload.data, 'id');
-  case DELETE_EVENT:
+  case UNJOIN:
     return _.mapKeys(action.payload.data, 'id');
-  case FETCH_EVENTS:
+  case FETCH_ALL_ATTENDEES:
     return _.mapKeys(action.payload.data, 'id');
   default:
     return state;

@@ -6,3 +6,5 @@ module.exports.Message = require('./messages');
 module.exports.ProfileGroup = require('./profilesGroups');
 module.exports.ProfileFriends = require('./profilesFriends');
 module.exports.PendingFriends = require('./pendingFriends');
+module.exports.Attendee = require('./attendees');
+module.exports.Event = require('./events');

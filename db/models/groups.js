@@ -2,7 +2,7 @@ const db = require('../');
 
 const Group = db.Model.extend({
   tableName: 'groups',
-  profile: () => {
+  profile: function() {
     return this.belongsTo('Profile');
   }
 });

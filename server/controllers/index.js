@@ -5,3 +5,5 @@ module.exports.ProfilesFriends = require('./profilesFriends');
 module.exports.Channels = require('./channels');
 module.exports.Messages = require('./messages');
 module.exports.PendingFriends = require('./pendingFriends');
+module.exports.Events = require('./events');
+module.exports.Attendees = require('./attendees');

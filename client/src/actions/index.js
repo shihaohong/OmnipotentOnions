@@ -21,15 +21,13 @@ export const FETCH_PENDING_REQUESTS = 'fetch_pending_requests';
 export const FETCH_FRIEND_REQUESTS = 'fetch_friend_requests';
 
 export const FETCH_EVENTS = 'fetch_events';
+export const FETCH_EVENT = 'fetch_event';
+export const CREATE_EVENT = 'create_event';
+export const DELETE_EVENT = 'delete_event';
 
-// export const fetchProfiles = function(user) {
-//   const request = axios.get(`/profileGroups/${user.id}`);
-
-//   return {
-//     type: FETCH_PROFILES,
-//     payload: request
-//   };
-// };
+export const JOIN_EVENT = 'join_event';
+export const UNJOIN_EVENT = 'unjoin_evnet';
+export const FETCH_ALL_ATTENDEES = 'fetch_all_attendees';
 
 export let fetchProfile = function(profile) {
   return {
@@ -99,37 +97,6 @@ export let createChannel = function(group) {
   };
 }; 
 
-/* -----------------------EVENTS ------------------------------------- */
-
-export let fetchEvents = function(groupId) {
-
-  const request = [
-    {
-      id: 2,
-      date: 'May 25, 2018',
-      name: 'Lecture w/ Luke Davis',
-      address: '944 Market St',
-      time: '8pm - 9pm',
-      group_id: 1,
-      creator: 1
-    },
-    {
-      id: 4,
-      date: 'July 25, 1994',
-      name: 'Lecture w/ Fred',
-      address: '944 Market Street',
-      time: '2pm - 4pm',
-      group_id: 1,
-      creator: 1
-    }
-  ];
-
-  return {
-    type: FETCH_EVENTS,
-    payload: request
-  };
-};
-
 /* -----------------------MESSAGES ------------------------------------- */
 
 export let fetchMessages = function(channelId) {
@@ -148,40 +115,9 @@ export let createMessage = function(message) {
   };
 }; 
 
-/* Friends List Action Creators */
+/* -----------------------FRIENDS------------------------------------- */
 
 export let fetchFriends = function(profileId) {
-  // hard-coded friends
-  // var friends = [
-  //   {
-  //     id: 12,
-  //     first: 'John',
-  //     last: 'Doe',
-  //     display: 'John Doe',
-  //     email: 'johndoe@anonymous.com'
-  //   },
-  //   {
-  //     id: 25,
-  //     first: 'Janet',
-  //     last: 'Doe',
-  //     display: 'Janet Doe',
-  //     email: 'janetdoe@anonymous.com'
-  //   },
-  //   {
-  //     id: 36,
-  //     first: 'Evets',
-  //     last: 'Bojs',
-  //     display: 'Evets Bojs',
-  //     email: 'elppa@elppa.com'
-  //   },
-  //   {
-  //     id: 77,
-  //     first: 'Derf',
-  //     last: 'Gnudriz',
-  //     display: 'Derf Gnudriz',
-  //     email: 'hr@$hr.com'
-  //   }
-  // ];
   let friends = axios.get(`/friendsget/${profileId}`);
 
   return {
@@ -191,22 +127,6 @@ export let fetchFriends = function(profileId) {
 };
 
 export let fetchPendingRequests = function(profileId) {
-  // var pending = [
-  //   {
-  //     id: 15,
-  //     first: 'Peter',
-  //     last: 'Tan',
-  //     display: 'Peter Tan',
-  //     email: 'pete@anonymous.com'
-  //   },
-  //   {
-  //     id: 126,
-  //     first: 'Dylan',
-  //     last: 'Mayoral',
-  //     display: 'Dylan Mayoral',
-  //     email: 'cooldancer@anonymous.com'
-  //   }
-  // ];
   var pending = axios.get(`/pendingfriends/pending/${profileId}`);
 
   return {
@@ -221,5 +141,64 @@ export let fetchFriendRequests = function(profileId) {
   return {
     type: FETCH_FRIEND_REQUESTS,
     payload: requests
+  };
+};
+
+/* -----------------------EVENTS------------------------------------- */
+export let createEvent = function(reqBody, groupId) {
+  let createEvent = axios.post(`/events/${groupId}`, reqBody);
+  return {
+    type: CREATE_EVENT,
+    payload: createEvent
+  };
+};
+
+export let deleteEvent = function(eventId, groupId) {
+  let deleteEvent = axios.delete(`/events/${groupId}`, { eventId: eventId });
+  return {
+    type: DELETE_EVENT,
+    payload: deleteEvent
+  };
+};
+
+export let fetchEvents = function(groupId) {
+  let events = axios.get(`/events/${groupId}`);
+  return {
+    type: FETCH_EVENTS,
+    payload: events
+  };
+};
+
+export let fetchEvent = function(groupId, eventId) {
+  let event = axios.get(`/events/${groupId}/${eventId}`);
+  return {
+    type: FETCH_EVENT,
+    payload: event
+  };
+};
+
+/* -----------------------ATTENDANCES------------------------------------- */
+
+export let joinEvent = function(eventId, profileId) {
+  let join = axios.post(`/attendnace/${eventId}`, { profileId: profileId});
+  return {
+    type: JOIN_EVENT,
+    payload: join
+  };
+};
+
+export let unjoinEvent = function(eventId, profileId) {
+  let unjoin = axios.delete(`/attendnace/${eventId}`, { profileId: profileId });
+  return {
+    type: UNJOIN_EVENT,
+    payload: unjoin
+  };
+};
+
+export let fetchAttendees = function(eventId) {
+  let fetchAttendees = axios.get(`/attendance/${eventId}`);
+  return {
+    type: FETCH_ALL_ATTENDEES,
+    payload: fetchAttendees
   };
 };
