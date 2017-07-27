@@ -20,6 +20,8 @@ export const FETCH_FRIENDS = 'fetch_friends';
 export const FETCH_PENDING_REQUESTS = 'fetch_pending_requests';
 export const FETCH_FRIEND_REQUESTS = 'fetch_friend_requests';
 
+export const FETCH_EVENTS = 'fetch_events';
+
 // export const fetchProfiles = function(user) {
 //   const request = axios.get(`/profileGroups/${user.id}`);
 
@@ -96,6 +98,37 @@ export let createChannel = function(group) {
     payload: request
   };
 }; 
+
+/* -----------------------EVENTS ------------------------------------- */
+
+export let fetchEvents = function(groupId) {
+
+  const request = [
+    {
+      id: 2,
+      date: 'May 25, 2018',
+      name: 'Lecture w/ Luke Davis',
+      address: '944 Market St',
+      time: '8pm - 9pm',
+      group_id: 1,
+      creator: 1
+    },
+    {
+      id: 4,
+      date: 'July 25, 1994',
+      name: 'Lecture w/ Fred',
+      address: '944 Market Street',
+      time: '2pm - 4pm',
+      group_id: 1,
+      creator: 1
+    }
+  ];
+
+  return {
+    type: FETCH_EVENTS,
+    payload: request
+  };
+};
 
 /* -----------------------MESSAGES ------------------------------------- */
 

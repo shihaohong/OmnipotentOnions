@@ -9,6 +9,7 @@ import ProfileReducer from './reducer_profile';
 import FriendsReducer from './reducer_friends';
 import PendingReducer from './reducer_pending';
 import FriendRequestsReducer from './reducer_requests';
+import EventsReducer from './reducer_events';
 
 const rootReducer = combineReducers({
   form: formReducer,
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   profile: ProfileReducer,
   friends: FriendsReducer,
   pending: PendingReducer,
-  requests: FriendRequestsReducer
+  requests: FriendRequestsReducer,
+  events: EventsReducer
 });
 
 export default rootReducer;

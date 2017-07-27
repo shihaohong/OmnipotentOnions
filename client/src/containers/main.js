@@ -10,7 +10,7 @@ import Messages from './messages';
 
 import Events from './events/events';
 import CreateEvent from './events/createEvent';
-import eventDetails from './events/eventDetails';
+import EventDetails from './events/eventDetails';
 import GroupEvents from './events/groupEvents';
 
 class Main extends Component {
@@ -24,6 +24,7 @@ class Main extends Component {
       showGroupEvents: false,
       showCreateEvents: false,
       showEventDetails: false,
+      eventId: null
     };
     this.onHandleChannel = this.onHandleChannel.bind(this);
     this.onHandleMessage = this.onHandleMessage.bind(this);
@@ -129,8 +130,12 @@ class Main extends Component {
 
   }
 
-  handleEventDetails() {
-    // need edgecases
+  handleEventDetails(eventId) {
+    console.log('handle event details was hit!', eventId);
+    this.setState({
+      showEventDetails: !this.state.showEventDetails,
+      eventId: eventId
+    });
   }
 
   render() {
@@ -139,8 +144,7 @@ class Main extends Component {
         <h1>Welcome to Connect, {window.myUser.display}</h1>
         <Segment.Group horizontal>
           {
-            this.state.showGroups ? <Segment><Groups profile={window.myUser} handleChannel={this.onHandleChannel} showEvents={this.onHandleEvents}/></Segment> 
-            : null
+            this.state.showGroups ? <Segment><Groups profile={window.myUser} handleChannel={this.onHandleChannel} showEvents={this.onHandleEvents}/></Segment> : null
           }          
           {
             this.state.showChannel ? <Segment><Channels groupId={this.state.groupId} handleMessage={this.onHandleMessage}/></Segment> : null
@@ -154,7 +158,10 @@ class Main extends Component {
             this.state.showEvents ? <Segment><Events showGroups={this.onHandleGroups} groupEvents={this.handleGroupEvents}/></Segment> : null
           }
           {
-            this.state.showGroupEvents ? <Segment><GroupEvents groupId={this.state.groupId}/></Segment> : null
+            this.state.showGroupEvents ? <Segment><GroupEvents groupId={this.state.groupId} handleEventDetails={this.handleEventDetails}/></Segment> : null
+          }
+          {
+            this.state.showEventDetails ? <Segment><EventDetails eventId={this.state.eventId} /></Segment> : null
           }
 
 
