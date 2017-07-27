@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { fetchFriendRequests, fetchPendingRequests, fetchFriends } from '../../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Button, Segment } from 'semantic-ui-react';
 
 import _ from 'lodash';
 import axios from 'axios';
@@ -11,64 +12,7 @@ export class PendingList extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { 
-      term: '',
-      danger: ''
-    };
-
-    this.onInputChange = this.onInputChange.bind(this);
-    this.onAddFriend = this.onAddFriend.bind(this);
     this.onCancelRequest = this.onCancelRequest.bind(this);
-  }
-
-  onAddFriend(e) {
-    e.preventDefault();
-    if (this.props.profile.email !== this.state.term) {
-      let isUserFriend, isUserAlreadyPending;
-
-      isUserFriend = _.reduce(this.props.friends, (bool, user) => {
-        if (user.friend.email === this.state.term) {
-          return true;
-        } else {
-          return bool || false;
-        }
-      }, false);
-
-      if (!isUserFriend) {
-        axios.post(`/pendingfriends/sendRequest/${this.props.profile.id}`, {
-          emailAddress: this.state.term
-        })
-          .then(response => {
-            console.log('success!');
-            this.props.fetchFriendRequests(this.props.profile.id);
-            this.setState({
-              term: ''
-            });
-          })
-          .catch(err => {
-            this.setState({
-              danger: 'User not found',
-            });
-          });
-      } else {
-        this.setState({
-          danger: 'User is already your friend',
-          term: ''
-        });
-      }
-    } else {
-      this.setState({
-        danger: 'You cannot add yourself as a friend',
-        term: ''
-      });
-    }
-  }
-
-  onInputChange(event) {
-    this.setState({
-      term: event.target.value,
-      danger: ''
-    });
   }
 
   onCancelRequest(friendId) {
@@ -106,33 +50,16 @@ export class PendingList extends Component {
       });
   }
 
-  renderForm() {
-    return (
-      <div> 
-        To add a friend, please enter their email address below and submit
-        <form onSubmit={this.onAddFriend}>
-          <input
-            placeholder='Enter email address here' 
-            value={this.state.term}
-            onChange={this.onInputChange}
-          /> <br/>
-          <div className='dangerMessage' style={{color: 'red'}} >{this.state.danger}</div>
-          <button>Add a friend</button>
-        </form>
-      </div>
-    );
-  }
-
   renderPendingRequests() {
     return _.map(this.props.pending, request => {
       return (
-        <div key={request.id}>
-          <div>Name: {request.user.display} </div>
-          <div>Email: {request.user.email} </div>
-          <button onClick={ () => { this.onAcceptRequest(request.profile_id); } }>Accept</button> 
-          <button onClick={ () => { this.onDeclineRequest(request.profile_id); } }>Decline</button><br/>
-          -----
-        </div>
+        <Segment key={request.id}>
+          <img src={request.user.profilePic} />
+          <div><strong>Name:</strong> {request.user.display} </div>
+          <div><strong>Email:</strong> {request.user.email} </div>
+          <Button onClick={ () => { this.onAcceptRequest(request.profile_id); } }>Accept</Button> 
+          <Button onClick={ () => { this.onDeclineRequest(request.profile_id); } }>Decline</Button><br/>
+        </Segment>
       );
     });
   }
@@ -140,11 +67,12 @@ export class PendingList extends Component {
   renderFriendRequests() {
     return _.map(this.props.requests, request => {
       return (
-        <div key={request.friend_id}>
-          <div>Name: {request.friend.display} </div>
-          <div>Email: {request.friend.email} </div>
-          <button onClick={() => { this.onCancelRequest(request.friend_id); }}>Cancel request</button> <br/>
-        </div>
+        <Segment key={request.friend_id}>
+          <img src={request.friend.profilePic} />
+          <div><strong>Name:</strong> {request.friend.display} </div>
+          <div><strong>Email:</strong> {request.friend.email} </div>
+          <Button onClick={() => { this.onCancelRequest(request.friend_id); }}>Cancel request</Button> <br/>
+        </Segment>
       );
     });
   }
@@ -152,12 +80,14 @@ export class PendingList extends Component {
   render() {
     return (
       <div>
-        <h3>Pending List</h3>
-        {this.renderForm()}
-        <h4>Pending Requests</h4>
-        {this.renderPendingRequests()}
-        <h4>Friend Requests</h4>
-        {this.renderFriendRequests()}
+        <h3>Pending Requests</h3>
+        <Segment.Group>
+          {this.renderPendingRequests()}
+        </Segment.Group>
+        <h3>Friend Requests</h3>
+        <Segment.Group>
+          {this.renderFriendRequests()}
+        </Segment.Group>
       </div>
     );
   }

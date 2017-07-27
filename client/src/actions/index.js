@@ -1,15 +1,11 @@
 import axios from 'axios';
 
-export const FETCH_PROFILES = 'fetch_profiles';
-export const FETCH_PROFILE = 'fetch_profile';
-
 export const FETCH_GROUPS = 'fetch_groups';
 export const JOIN_GROUP = 'join_group';
 export const CREATE_GROUP = 'create_group';
 
 export const FETCH_CHANNELS = 'fetch_channels';
 export const CREATE_CHANNEL = 'create_channel';
-
 
 export const FETCH_MESSAGES = 'fetch_messages';
 export const CREATE_MESSAGE = 'create_message';

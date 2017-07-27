@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchFriends } from '../../actions';
 import _ from 'lodash';
 import axios from 'axios';
+import { Button, Segment } from 'semantic-ui-react';
 
 export class FriendsList extends Component {
 
@@ -26,11 +27,12 @@ export class FriendsList extends Component {
   renderFriends() {
     return _.map(this.props.friends, (friend) => {
       return (
-        <div key={friend.id}>
-          <div> Name: {friend.friend.display} </div>
-          <div> Email: {friend.friend.email} </div>
-          <button onClick={ () => { this.onDeleteFriend(friend.friend_id); } }>Delete friend</button>
-        </div>
+        <Segment key={friend.id}>
+          <img src={friend.friend.profilePic} />
+          <div> <strong>Name:</strong> {friend.friend.display} </div>
+          <div> <strong>Email:</strong> {friend.friend.email} </div>
+          <Button color='red' onClick={ () => { this.onDeleteFriend(friend.friend_id); } }>Delete friend</Button>
+        </Segment>
       );
     });
   }
@@ -39,7 +41,9 @@ export class FriendsList extends Component {
     return (
       <div>
         <h3>Friends List</h3>
-        {this.renderFriends()}
+        <Segment.Group>
+          {this.renderFriends()}
+        </Segment.Group>
       </div>
     );
   }
