@@ -70,3 +70,4 @@ export default reduxForm({
 })(
   connect(mapStateToProps, { createMessage })(MessageInput)
 );
+

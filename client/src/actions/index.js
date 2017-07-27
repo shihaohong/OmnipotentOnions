@@ -187,22 +187,6 @@ export let fetchPendingRequests = function(profileId) {
 };
 
 export let fetchFriendRequests = function(profileId) {
-  // var requests = [
-  //   {
-  //     id: 300,
-  //     first: 'Cat',
-  //     last: 'Dog',
-  //     display: 'Cat Dog',
-  //     email: 'cat@dog.com'
-  //   },
-  //   {
-  //     id: 400,
-  //     first: 'Antique',
-  //     last: 'Healbot',
-  //     display: 'Antique Healbot',
-  //     email: 'antikill@bot.com'
-  //   }
-  // ];
   var requests = axios.get(`/pendingfriends/requests/${profileId}`);
 
   return {

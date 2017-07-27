@@ -6,12 +6,11 @@ import InviteLink from './invite_link';
 import NewGroup from './new_group';
 import JoinGroup from './join_group';
 
-import { Segment } from 'semantic-ui-react';
+import { Segment, Icon } from 'semantic-ui-react';
 
 class Groups extends Component { 
   constructor(props) {
     super(props);
-    console.log('profile in groups ', this.props.profile);
     this.props.fetchGroups(this.props.profile);
   }
 
@@ -34,6 +33,9 @@ class Groups extends Component {
           {this.renderGroups()}
           <NewGroup profile={this.props.profile}/>
           <JoinGroup profile={this.props.profile}/>
+          <button onClick={this.props.showEvents}>
+            <Icon name='calendar' size='big' />          
+          </button>
         </Segment.Group>
       </div>
     );

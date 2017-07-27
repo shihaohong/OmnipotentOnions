@@ -11,3 +11,5 @@ const Message = db.Model.extend({
 });
 
 module.exports = db.model('Message', Message);
+
+
