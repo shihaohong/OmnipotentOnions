@@ -1,5 +1,10 @@
 import axios from 'axios';
 
+export const FETCH_PROFILES = 'fetch_profiles';
+export const FETCH_PROFILE = 'fetch_profile';
+export const UPDATE_PROFILE_BIO = 'update_profile_bio';
+export const UPDATE_NICKNAME = 'update_nickname';
+
 export const FETCH_GROUPS = 'fetch_groups';
 export const JOIN_GROUP = 'join_group';
 export const CREATE_GROUP = 'create_group';
@@ -10,20 +15,19 @@ export const CREATE_CHANNEL = 'create_channel';
 export const FETCH_MESSAGES = 'fetch_messages';
 export const CREATE_MESSAGE = 'create_message';
 
-export const FETCH_PROFILE = 'fetch_profile';
 export const FETCH_FRIENDS = 'fetch_friends';
 
 export const FETCH_PENDING_REQUESTS = 'fetch_pending_requests';
 export const FETCH_FRIEND_REQUESTS = 'fetch_friend_requests';
 
-export const fetchProfiles = function(user) {
-  const request = axios.get(`/profileGroups/${user.id}`);
+// export const fetchProfiles = function(user) {
+//   const request = axios.get(`/profileGroups/${user.id}`);
 
-  return {
-    type: FETCH_PROFILES,
-    payload: request
-  };
-};
+//   return {
+//     type: FETCH_PROFILES,
+//     payload: request
+//   };
+// };
 
 export let fetchProfile = function(profile) {
   return {
@@ -31,6 +35,23 @@ export let fetchProfile = function(profile) {
     payload: profile
   };
 }; 
+
+export let updateProfileBio = function(aboutMe, profileId) {
+  const request = axios.post(`/profiles/${profileId}?bio=${aboutMe}`);
+  return {
+    type: UPDATE_PROFILE_BIO,
+    payload: request
+  };
+};
+
+export let updateNickname = function(nickname, profileId) {
+  console.log('i got to updateNicknameBio ', nickname, profileId);
+  const request = axios.post(`/profiles/${profileId}?nickname=${nickname}`);
+  return {
+    type: UPDATE_NICKNAME,
+    payload: request
+  };
+};
 
 /* -----------------------GROUPS ------------------------------------- */
 export const fetchGroups = function(user) {
@@ -42,6 +63,7 @@ export const fetchGroups = function(user) {
 };
 
 export let createGroup = function(group, profile, shortID) {
+  console.log(group);
   const request = axios.post(`/groups/createGroup/${group}?id=${profile}&shortID=${shortID}`);
   return {
     type: CREATE_GROUP,

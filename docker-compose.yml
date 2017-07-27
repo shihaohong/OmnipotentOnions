@@ -2,11 +2,12 @@ redis:
   image: redis
   ports: 
     - 9001:6379
-postgresql:
-  image: postgresql
+postgres:
+  image: postgres
   volumes:
     - /data
   environment:
+    POSTGRES_DB: thesis
     POSTGRES_PASSWORD: docker
     POSTGRES_USER: docker
   ports:
@@ -16,10 +17,10 @@ onionhost_composed:
   command: npm start
   environment: 
     REDIS_URL: 'redis'
-    POSTGRES_URL: 'postgresql'
+    POSTGRES_URL: 'postgres'
     NODE_ENV: 'development'
   links: 
     - redis
-    - postgresql
+    - postgres
   ports: 
     - 7000:3000

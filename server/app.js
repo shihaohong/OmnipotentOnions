@@ -30,6 +30,9 @@ app.use('/groups', routes.groups);
 // add profiles_groups router
 app.use('/profileGroups', routes.profilesGroups);
 
+// add profile router
+app.use('/profiles', routes.profiles);
+
 //  add channels router
 app.use('/channels', routes.channels);
 

@@ -41,23 +41,37 @@ module.exports.getOne = (req, res) => {
     });
 };
 
-module.exports.update = (req, res) => {
+module.exports.updateBio = (req, res) => {
   models.Profile.where({ id: req.params.id }).fetch()
     .then(profile => {
-      if (!profile) {
-        throw profile;
-      }
-      return profile.save(req.body, { method: 'update' });
-    })
-    .then(() => {
-      res.sendStatus(201);
+      var aboutMe = req.query.bio ? req.query.bio : profile.attributes.aboutMe;
+      var nickname = req.query.nickname ? req.query.nickname : profile.attributes.nickname;
+      let profileInfo = {
+        first: profile.attributes.first,
+        last: profile.attributes.last,
+        display: profile.attributes.display,
+        email: profile.attributes.email,
+        profilePic: profile.attributes.profilePic,
+        aboutMe: aboutMe,
+        nickname: nickname
+      };
+        //update profile with info with bio
+      profile.save(profileInfo, { method: 'update' })
+        .then(() => {
+          models.Profile.where({ id: req.params.id}).fetch()
+            .then(profile => {
+              res.status(201).send(profile);
+            }); 
+        })
+        .catch(err => {
+          res.status(500).send(err);
+        });  
+      // res.status(201).send(profile);
     })
     .error(err => {
       res.status(500).send(err);
     })
-    .catch(() => {
-      res.sendStatus(404);
-    });
+    .catch(() => res.sendStatus(404));
 };
 
 // module.exports.deleteOne = (req, res) => {
@@ -77,4 +91,3 @@ module.exports.update = (req, res) => {
 //     .catch(() => {
 //       res.sendStatus(404);
 //     });
-// };

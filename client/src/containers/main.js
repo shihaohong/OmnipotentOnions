@@ -81,6 +81,7 @@ class Main extends Component {
   render() {
     return (
       <div>
+        {console.log('main.js, the props, ' + console.log(this))}
         <h1>Welcome to Connect, {window.myUser.display}</h1>
         <Segment.Group horizontal>
           <Segment><Groups profile={window.myUser} handleChannel={this.onHandleChannel}/></Segment>

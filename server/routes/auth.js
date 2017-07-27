@@ -10,7 +10,7 @@ router.route('/')
 
 router.route('/profile')
   .get(middleware.auth.verify, (req, res) => {
-    console.log(req.user);
+    console.log('server/routes/auth.js', req.user);
     res.render('profile.ejs', {user: req.user});
   });
 
