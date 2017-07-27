@@ -111,7 +111,7 @@ export let fetchMessages = function(channelId) {
 export let createMessage = function(message) {
   return {
     type: CREATE_MESSAGE,
-    payload: request
+    payload: message
   };
 }; 
 
