@@ -48,10 +48,8 @@ app.use('/pendingfriends', routes.pendingFriends);
 io.on('connection', function(socket) {
   console.log('a user has connected');
   socket.on('send', (message) => {
-    console.log('received message:', message);
-    // store in db here
-    // server should add the timestamp & id
     socket.emit('return-message', message);
+    // socket.in(message.channel_id).emit('return-message', message);
   });
 });
 

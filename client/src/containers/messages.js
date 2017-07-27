@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchMessages, createMessage } from '../actions';
+import axios from 'axios';
 import io from 'socket.io-client';
 // try not to hardcode socket later
 const socket = io('http://localhost:8080');
@@ -10,13 +11,15 @@ import MessageInput from './messages_input';
 import { Segment } from 'semantic-ui-react';
 
 class Messages extends Component {
-  componentWillMount() {
-    // this.props.fetchMessages(1);
+  constructor(props) {
+    super(props);
   }
   
   componentDidMount() {
+    // socket.join(this.props.channelId);
     socket.on('return-message', message => {
       this.props.createMessage(message);
+      axios.post(`/messages/${message.channel_id}`, {text: message.text, profileId: message.profile_id});
     });
   }
 
@@ -33,6 +36,7 @@ class Messages extends Component {
           <Segment>
             <MessageInput
               socket={socket}
+              channelId={this.props.channelId}
             />
           </Segment>
         </Segment.Group>

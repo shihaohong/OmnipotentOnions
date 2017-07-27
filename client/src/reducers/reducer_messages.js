@@ -5,10 +5,11 @@ export default function(state = {}, action) {
   switch (action.type) {
   case CREATE_MESSAGE:
     var newObj = Object.assign({}, state);
-    newObj[action.payload.id] = action.payload;
+    newObj[action.payload.fake_time] = action.payload;
     return newObj;
   case FETCH_MESSAGES:
-    return _.mapKeys(action.payload, 'id');
+    // console.log('reducers/reducers_messages: ', action.payload.data);
+    return _.mapKeys(action.payload.data, 'id');
   default:
     return state;
   }   

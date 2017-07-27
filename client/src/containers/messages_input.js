@@ -24,19 +24,17 @@ export class MessageInput extends Component {
     );
   }
 
-  onSubmit(message) {
-    // currently only sends { message: 'the message' }
-    console.log('message/input MESSAGES FROM INPUT', message);
-    const postMessage = {
-      id: randomId,
-      channel_id: 5,
-      profile_id: 'Shi-Hao',
-      text: message.message
+  onSubmit(data) {
+    var message = {
+      channel_id: this.props.channelId,
+      profile_id: this.props.profile.id,
+      text: data.message
     }; 
- 
-    this.props.socket.emit('send', postMessage);
-    // this.props.createMessage(data);
-    // clear data after message send
+    data.message = '';
+    // Add display name & the client time, since they're available here.
+    message['profile'] = { display: this.props.profile.display};
+    message['fake_time'] = Date.now();
+    this.props.socket.emit('send', message);
   }
 
   render() {

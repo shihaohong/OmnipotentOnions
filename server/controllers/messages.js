@@ -7,8 +7,9 @@ module.exports.postMessage = (req, res) => {
     channel_id: req.params.id,
   }).save()
     .then(message => {
-      models.Message.where({channel_id: message.channel_id}).fetchAll()
-      .then(messages => res.status(201).send(messages));
+      res.status(201).send(message);
+      // models.Message.where({channel_id: message.channel_id}).fetchAll()
+      // .then(message => res.status(201).send(message));
     })
     .catch(err => {
       res.status(500).send(err);
