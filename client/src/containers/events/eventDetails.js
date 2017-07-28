@@ -10,7 +10,9 @@ export class EventDetails extends Component {
   constructor(props) {
     super(props);
 
-    let address = this.props.events[this.props.eventId].address;
+    console.log('event', this.props.events[this.props.eventId]);
+
+    let address = this.props.events[this.props.eventId].location;
     let geocoder = new google.maps.Geocoder();
 
     geocoder.geocode({'address': address}, (results, status) => {
@@ -18,7 +20,7 @@ export class EventDetails extends Component {
         let lat = (results[0].geometry.location.lat()).toFixed(2);
         let lng = (results[0].geometry.location.lng()).toFixed(2);
 
-        let eventDate = new Date(this.props.events[this.props.eventId].date);
+        let eventDate = new Date(this.props.events[this.props.eventId].startDate);
         let currentDate = new Date();
 
         let timeDiff = eventDate.getTime() - currentDate.getTime();
@@ -71,7 +73,7 @@ export class EventDetails extends Component {
 
   renderMaps() {
     let map, marker;
-    let address = this.props.events[this.props.eventId].address;
+    let address = this.props.events[this.props.eventId].location;
     let geocoder = new google.maps.Geocoder();
 
     geocoder.geocode({'address': address}, function(results, status) {
@@ -120,11 +122,11 @@ export class EventDetails extends Component {
     let currentEvent = this.props.events[this.props.eventId];
     return (
       <div> 
-        <h3>{currentEvent.name} </h3>
-        <strong>Date:</strong> {currentEvent.date} <br/>
-        <strong>Location:</strong> {currentEvent.address} <br/>
+        <h3>{currentEvent.eventName} </h3>
+        <strong>Date:</strong> {currentEvent.startDate} <br/>
+        <strong>Location:</strong> {currentEvent.location} <br/>
         <div id='map-canvas'></div>
-        <strong>Time:</strong> {currentEvent.time} <br/>
+        <strong>Time:</strong> {currentEvent.startTime} - {currentEvent.endTime} <br/>
         <div>
           <strong>Weather</strong> <br/> 
           {this.renderWeather()}

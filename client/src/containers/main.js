@@ -119,17 +119,19 @@ class Main extends Component {
   handleGroupEvents(e) {
     // show Group Events and should have some actions
     // need edge cases
+    console.log('main handlegroup ', e.target.value);
     this.setState({
       showGroupEvents: !this.state.showGroupEvents,
       groupId: e.target.value
     });
-
   }
 
-  handleCreateEvent() {
+  handleCreateEvent(e) {
     // need edge cases
-    
-
+    this.setState({
+      showCreateEvents: !this.state.showCreateEvents,
+      groupId: e.target.value
+    });
 
   }
 
@@ -143,6 +145,7 @@ class Main extends Component {
   render() {
     return (
       <div>
+        {console.log('main.js, the props, ' + console.log(this))}
         <h1>Welcome to Connect, {window.myUser.display}</h1>
         <Segment.Group horizontal>
           {
@@ -165,8 +168,9 @@ class Main extends Component {
           {
             this.state.showEventDetails ? <Segment><EventDetails eventId={this.state.eventId} /></Segment> : null
           }
-
-
+          {
+            this.state.showCreateEvents ? <Segment><CreateEvent showCreateEvents={this.handleCreateEvent} groupId={this.state.groupId}/></Segment> : null
+          }
         </Segment.Group>
       </div>
     );

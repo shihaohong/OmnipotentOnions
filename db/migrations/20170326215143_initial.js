@@ -55,10 +55,13 @@ exports.up = function (knex, Promise) {
     }),
     knex.schema.createTableIfNotExists('events', (t) => {
       t.increments('id').unsigned().primary();
-      t.string('date').notNullable();
-      t.string('name').notNullable();
-      t.string('address').notNullable();
-      t.string('time').notNullable();
+      t.string('eventName').notNullable();
+      t.string('location').notNullable();
+      t.string('startTime').notNullable();
+      t.string('startDate').notNullable();
+      t.string('endTime').notNullable();
+      t.string('endDate').notNullable();
+      t.string('detail').nullable();
       t.integer('group_id').references('groups.id').onDelete('CASCADE');
       t.integer('creator').references('profiles.id').onDelete('CASCADE');
     }),

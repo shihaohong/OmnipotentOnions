@@ -122,6 +122,4 @@ const mapStateToProps = (state) => {
 
 export default reduxForm({
   form: 'ProfileForm'
-})(
-  connect(mapStateToProps, {fetchProfile, updateProfileBio, updateNickname })(Profile)
-);
+})(connect(mapStateToProps, {fetchProfile, updateProfileBio, updateNickname })(Profile));

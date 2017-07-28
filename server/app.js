@@ -43,4 +43,10 @@ app.use('/friendsget', routes.profilesFriends);
 // add pending and requests router
 app.use('/pendingfriends', routes.pendingFriends);
 
+// add events router
+app.use('/events', routes.events);
+
+//add attendees router
+app.use('/attendees', routes.attendees);
+
 module.exports = app;

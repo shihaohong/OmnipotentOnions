@@ -46,7 +46,6 @@ module.exports.updateBio = (req, res) => {
     .then(profile => {
       var aboutMe = req.query.bio ? req.query.bio : profile.attributes.aboutMe;
       var nickname = req.query.nickname ? req.query.nickname : profile.attributes.nickname;
-      console.log('ABOUT ME INSIDE UPDATE: ', aboutMe, nickname);
       let profileInfo = {
         first: profile.attributes.first,
         last: profile.attributes.last,
@@ -75,20 +74,3 @@ module.exports.updateBio = (req, res) => {
     .catch(() => res.sendStatus(404));
 };
 
-// module.exports.deleteOne = (req, res) => {
-//   models.Profile.where({ id: req.params.id }).fetch()
-//     .then(profile => {
-//       if (!profile) {
-//         throw profile;
-//       }
-//       return profile.destroy();
-//     })
-//     .then(() => {
-//       res.sendStatus(200);
-//     })
-//     .error(err => {
-//       res.status(503).send(err);
-//     })
-//     .catch(() => {
-//       res.sendStatus(404);
-//     });

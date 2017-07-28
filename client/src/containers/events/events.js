@@ -12,6 +12,7 @@ class Events extends Component {
   }
 
   renderGroups() {
+    console.log('this.props.groups ', this.props);
     return _.map(this.props.groups, group => {
       return (
         <Segment key={group.id}>

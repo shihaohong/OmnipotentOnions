@@ -28,6 +28,7 @@ export const DELETE_EVENT = 'delete_event';
 export const JOIN_EVENT = 'join_event';
 export const UNJOIN_EVENT = 'unjoin_evnet';
 export const FETCH_ALL_ATTENDEES = 'fetch_all_attendees';
+/* -----------------------PROFILE ------------------------------------- */
 
 export let fetchProfile = function(profile) {
   return {
@@ -45,13 +46,13 @@ export let updateProfileBio = function(aboutMe, profileId) {
 };
 
 export let updateNickname = function(nickname, profileId) {
-  console.log('i got to updateNicknameBio ', nickname, profileId);
   const request = axios.post(`/profiles/${profileId}?nickname=${nickname}`);
   return {
     type: UPDATE_NICKNAME,
     payload: request
   };
 };
+
 
 /* -----------------------GROUPS ------------------------------------- */
 export const fetchGroups = function(user) {
@@ -97,45 +98,6 @@ export let createChannel = function(group) {
   };
 }; 
 
-/* -----------------------EVENTS ------------------------------------- */
-
-export let fetchEvents = function(groupId) {
-  let request = {};
-  request.data = [
-    {
-      id: 2,
-      date: '2018/05/25',
-      name: 'Lecture w/ Luke Davis',
-      address: '944 Market St',
-      time: '16:00 - 21:00',
-      group_id: 1,
-      creator: 1
-    },
-    {
-      id: 4,
-      date: '1994/08/4',
-      name: 'Shi Hao\'s Birthday',
-      address: 'Ipoh Garden, Millbrae',
-      time: '14:00 - 16:00',
-      group_id: 1,
-      creator: 1
-    },
-    {
-      id: 7,
-      date: '2017/07/31',
-      name: 'Graduation Party',
-      address: 'Temple Nightclub',
-      time: '20:00 - 23:59',
-      group_id: 1,
-      creator: 1
-    }
-  ];
-
-  return {
-    type: FETCH_EVENTS,
-    payload: request
-  };
-};
 
 /* -----------------------MESSAGES ------------------------------------- */
 
@@ -186,6 +148,7 @@ export let fetchFriendRequests = function(profileId) {
 
 /* -----------------------EVENTS------------------------------------- */
 export let createEvent = function(reqBody, groupId) {
+  console.log(reqBody, groupId);
   let createEvent = axios.post(`/events/${groupId}`, reqBody);
   return {
     type: CREATE_EVENT,
@@ -201,13 +164,14 @@ export let deleteEvent = function(eventId, groupId) {
   };
 };
 
-// export let fetchEvents = function(groupId) {
-//   let events = axios.get(`/events/${groupId}`);
-//   return {
-//     type: FETCH_EVENTS,
-//     payload: events
-//   };
-// };
+export let fetchEvents = function(groupId) {
+  console.log('fetch events in action ', groupId);
+  let events = axios.get(`/events/${groupId}`);
+  return {
+    type: FETCH_EVENTS,
+    payload: events
+  };
+};
 
 export let fetchEvent = function(groupId, eventId) {
   let event = axios.get(`/events/${groupId}/${eventId}`);

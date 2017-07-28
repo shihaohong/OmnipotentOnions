@@ -1,18 +1,38 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { fetchChannels, fetchEvents } from '../../actions';
+import CreateEvent from './createEvent';
 import _ from 'lodash';
-import { fetchEvents } from '../../actions';
-import { Segment, Icon, Button } from 'semantic-ui-react';
+
+import { Segment, Icon, Modal, Button } from 'semantic-ui-react';
 
 export class GroupEvents extends Component {
   constructor(props) {
     super(props);
-    this.props.fetchEvents(props.groupdId);
+    this.state = {
+      modalOpen: false
+    };
+    this.props.fetchEvents(this.props.groupId);
+
     this.handleEventClick = this.handleEventClick.bind(this);
+    this.handleOpen = this.handleOpen.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   handleEventClick(eventId) {
     this.props.handleEventDetails(eventId);
+  }
+
+  handleOpen() { 
+    this.setState({
+      modalOpen: true,
+    });
+  }
+
+  handleClose() { 
+    this.setState({
+      modalOpen: false,
+    });
   }
 
   renderEvents() {
@@ -20,7 +40,7 @@ export class GroupEvents extends Component {
       return (
         <Segment key={event.id}>
           <Button onClick={ () => { this.handleEventClick(event.id); } }>
-            {event.name}
+            {event.eventName}
           </Button>
         </Segment>
       );
@@ -30,12 +50,14 @@ export class GroupEvents extends Component {
   render() {
     return (
       <div>
-        <Segment.Group>
-          {this.renderEvents()}
-        </Segment.Group>
-        <button>
-          <Icon name='plus circle' size='big'/>        
-        </button>
+        {this.renderEvents()}
+        <Modal 
+          trigger={<Button onClick={this.handleOpen}><Icon name='plus circle' size='small'/></Button>}
+          open={this.state.modalOpen}
+          onClose={this.handleClose}
+        >
+          <CreateEvent groupId={this.props.groupId} handleClose={this.handleClose}/>
+        </Modal>
       </div>
     );
   }
