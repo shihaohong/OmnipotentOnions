@@ -83,7 +83,7 @@ export class CreateEvent extends Component {
       detail: this.state.detail,
       creator: this.props.profile.id
     };
-    // this.props.createEvent(body, groupId);
+    this.props.createEvent(body, groupId);
     console.log(this.props);
     this.props.handleClose();
     // this.props.createEvents();
