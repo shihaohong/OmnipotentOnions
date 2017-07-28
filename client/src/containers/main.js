@@ -134,7 +134,6 @@ class Main extends Component {
   }
 
   handleEventDetails(eventId) {
-    console.log('handle event details was hit!', eventId);
     this.setState({
       showEventDetails: !this.state.showEventDetails,
       eventId: eventId

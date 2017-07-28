@@ -7,21 +7,16 @@ import { Segment, Icon, Button } from 'semantic-ui-react';
 export class GroupEvents extends Component {
   constructor(props) {
     super(props);
-    console.log('constructor is running');
     this.props.fetchEvents(props.groupdId);
-    console.log('events', this.props.events);
-
     this.handleEventClick = this.handleEventClick.bind(this);
   }
 
   handleEventClick(eventId) {
-    console.log('handle event click... event id: ', eventId);
     this.props.handleEventDetails(eventId);
   }
 
   renderEvents() {
     return _.map(this.props.events, event => {
-      console.log('event', event);
       return (
         <Segment key={event.id}>
           <Button onClick={ () => { this.handleEventClick(event.id); } }>
