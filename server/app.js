@@ -5,8 +5,6 @@ const middleware = require('./middleware');
 const routes = require('./routes');
 
 const app = express();
-var server = app.listen(8080);
-const io = require('socket.io').listen(server);
 
 app.use(middleware.morgan('dev'));
 app.use(middleware.cookieParser());
@@ -44,18 +42,5 @@ app.use('/friendsget', routes.profilesFriends);
 
 // add pending and requests router
 app.use('/pendingfriends', routes.pendingFriends);
-
-// add events router
-app.use('/events', routes.events);
-// add attendance router
-app.use('/attendance', routes.attendees);
-
-io.on('connection', function(socket) {
-  console.log('a user has connected');
-  socket.on('send', (message) => {
-    socket.emit('return-message', message);
-    // socket.in(message.channel_id).emit('return-message', message);
-  });
-});
 
 module.exports = app;

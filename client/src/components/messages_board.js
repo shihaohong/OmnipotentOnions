@@ -10,9 +10,7 @@ class MessageBoard extends Component {
   }
 
   renderMessages (messages) {
-    // console.log('last message on message_board: ', messages[messages.length - 1]);
     return _.map(messages, message => {
-      // console.log('message-BOARD', message);
       return (
         <Segment key={message.id || message.fake_time}> 
           <strong>{message.profile.display}</strong>
@@ -29,6 +27,7 @@ class MessageBoard extends Component {
       return <div>Loading... </div>;
     } 
     
+
     return (
       <div>{this.renderMessages(this.props.messages)}</div>
     );

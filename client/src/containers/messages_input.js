@@ -7,8 +7,6 @@ export class MessageInput extends Component {
 
   constructor(props) {
     super(props);
-    // console.log('container/messages_input channel: ', this.props.channel);
-    // console.log('container/messages_input profile: ', this.props.profile);
   }
 
   renderField(field) {

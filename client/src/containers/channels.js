@@ -14,6 +14,7 @@ export class Channels extends Component {
 
   renderChannels() {
     return _.map(this.props.channels, channel => {
+      this.props.socket.emit('subscribe', channel.id);
       return (
         <Segment key={channel.id}>
           <button value={channel.id} onClick={this.props.handleMessage}>{channel.name}</button>

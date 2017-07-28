@@ -13,6 +13,9 @@ import CreateEvent from './events/createEvent';
 import EventDetails from './events/eventDetails';
 import GroupEvents from './events/groupEvents';
 
+import io from 'socket.io-client';
+const socket = io('http://localhost:3000');
+
 class Main extends Component {
   constructor(props) {
     super(props);
@@ -147,10 +150,10 @@ class Main extends Component {
             this.state.showGroups ? <Segment><Groups profile={window.myUser} handleChannel={this.onHandleChannel} showEvents={this.onHandleEvents}/></Segment> : null
           }          
           {
-            this.state.showChannel ? <Segment><Channels groupId={this.state.groupId} handleMessage={this.onHandleMessage}/></Segment> : null
+            this.state.showChannel ? <Segment><Channels socket={socket} groupId={this.state.groupId} handleMessage={this.onHandleMessage}/></Segment> : null
           }
           {
-            this.state.showMessages ? <Segment><Messages channelId={this.state.channelId}/></Segment> : null
+            this.state.showMessages ? <Segment><Messages socket={socket} channelId={this.state.channelId}/></Segment> : null
           }
 
 
