@@ -7,4 +7,8 @@ router.route('/createGroup/:id')
   .post(GroupController.createGroup)
 ;
 
+router.route('/fetchOneGroup/:id')
+  .get(GroupController.fetchOneGroup)
+;
+
 module.exports = router;

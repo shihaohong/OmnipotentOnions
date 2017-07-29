@@ -11,14 +11,16 @@ import { Segment, Icon } from 'semantic-ui-react';
 class Groups extends Component { 
   constructor(props) {
     super(props);
-    console.log('profile in groups ', this.props.profile);
-    this.props.fetchGroups(this.props.profile);
+  }
+
+  componentWillMount() {
+    this.props.fetchGroups(this.props.profile);    
   }
 
   renderGroups() {
     return _.map(this.props.groups, group => {
       return (
-        <Segment key={group.id}>    
+        <Segment key={group.id}>
           <button onClick={this.props.handleChannel} value={group.id}> {group.groups.name} </button>
           <InviteLink group={group.groups} profile={this.props.profile}/>
         </Segment>

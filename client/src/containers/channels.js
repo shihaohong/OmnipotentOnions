@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchChannels } from '../actions';
+import { fetchChannels, fetchOneGroup } from '../actions';
 import _ from 'lodash';
 
 import NewChannel from './new_channel';
@@ -18,6 +18,10 @@ export class Channels extends Component {
 
     this.onHandleVideoChatJoin = this.onHandleVideoChatJoin.bind(this);
     this.onHandleVideoChatLeave = this.onHandleVideoChatLeave.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.fetchOneGroup(this.props.groupId);
   }
 
   renderChannels() {
@@ -50,7 +54,7 @@ export class Channels extends Component {
         <button onClick={this.onHandleVideoChatJoin}>Join Video Chat</button>
         <button onClick={this.onHandleVideoChatLeave}>Leave Video Chat</button>
         {
-          this.state.showVideoChat ? <Segment><VideoChat /></Segment> : null
+          this.state.showVideoChat ? <Segment><VideoChat shortID={this.props.oneGroup.shortID}/></Segment> : null
         }
         <Segment.Group>
           {this.renderChannels()}
@@ -62,7 +66,7 @@ export class Channels extends Component {
 }
 
 const mapStateToProps = function(state) {
-  return { channels: state.channels };
+  return { channels: state.channels, oneGroup: state.oneGroup };
 };
 
-export default connect(mapStateToProps, { fetchChannels })(Channels);
+export default connect(mapStateToProps, { fetchChannels, fetchOneGroup })(Channels);

@@ -6,6 +6,7 @@ export const UPDATE_PROFILE_BIO = 'update_profile_bio';
 export const UPDATE_NICKNAME = 'update_nickname';
 
 export const FETCH_GROUPS = 'fetch_groups';
+export const FETCH_ONE_GROUP = 'fetch_one_group';
 export const JOIN_GROUP = 'join_group';
 export const CREATE_GROUP = 'create_group';
 
@@ -63,8 +64,15 @@ export const fetchGroups = function(user) {
   };
 };
 
+export const fetchOneGroup = function(group_id) {
+  const request = axios.get(`/groups/fetchOneGroup/${group_id}`);
+  return {
+    type: FETCH_ONE_GROUP,
+    payload: request
+  };
+};
+
 export let createGroup = function(group, profile, shortID) {
-  console.log(group);
   const request = axios.post(`/groups/createGroup/${group}?id=${profile}&shortID=${shortID}`);
   return {
     type: CREATE_GROUP,
@@ -72,8 +80,8 @@ export let createGroup = function(group, profile, shortID) {
   };
 };
 
-export const joinGroup = function(shortid, profile) {
-  const request = axios.post(`/profileGroups/joinGroup/${shortid}?id=${profile}`);
+export const joinGroup = function(shortID, profile) {
+  const request = axios.post(`/profileGroups/joinGroup/${shortID}?id=${profile}`);
   return {
     type: JOIN_GROUP,
     payload: request

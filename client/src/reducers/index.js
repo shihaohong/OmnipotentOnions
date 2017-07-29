@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
-import OneGroupReducer from './reducer_groups';
+import OneGroupReducer from './reducer_group';
+import GroupReducer from './reducer_groups';
 import GroupsReducer from './reducer_groups';
 import JoinGroupReducer from './reducer_join_group.js';
 import ChannelsReducer from './reducer_channels';
@@ -15,7 +16,8 @@ import EventReducer from './reducer_event';
 
 const rootReducer = combineReducers({
   form: formReducer,
-  group: OneGroupReducer,
+  oneGroup: OneGroupReducer,
+  group: GroupReducer,
   groups: GroupsReducer,
   joinGroup: JoinGroupReducer,
   channels: ChannelsReducer,

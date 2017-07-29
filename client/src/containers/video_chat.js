@@ -9,7 +9,10 @@ class VideoChat extends Component {
   }
   
   componentDidMount() {
-  /** CONFIG **/
+    /*UNIQUE CHANNEL FOR EACH GROUP*/
+    console.log('shortID', this.props.shortID);
+    
+    /** CONFIG **/
     var SIGNALING_SERVER = 'http://localhost';
     var USE_AUDIO = true;
     var USE_VIDEO = true;

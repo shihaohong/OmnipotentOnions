@@ -28,3 +28,13 @@ module.exports.createGroup = (req, res) => {
     });
 };
 
+module.exports.fetchOneGroup = (req, res) => {
+  models.Group.where({ id: req.params.id }).fetch()
+    .then(oneGroup => {
+      res.status(200).send(oneGroup);
+    })
+    .catch(err => {
+      res.status(503).send(err);
+    });
+};
+
