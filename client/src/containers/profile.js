@@ -44,7 +44,7 @@ export class Profile extends Component {
     console.log(this.state.showEditNickname);
   }
 
-  toggleBio(){
+  toggleBio() {
     this.setState({
       showEditBio: !this.state.showEditBio
     });
