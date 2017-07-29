@@ -11,5 +11,8 @@ router.route('/joinGroup/:id')
   .post(ProfileGroupController.joinGroup)
 ;
 
+router.route('/leaveGroup')
+  .post(ProfileGroupController.leaveGroup)
+;
 
 module.exports = router;

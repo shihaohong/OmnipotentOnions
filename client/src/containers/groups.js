@@ -5,6 +5,7 @@ import { fetchGroups } from '../actions';
 import InviteLink from './invite_link';
 import NewGroup from './new_group';
 import JoinGroup from './join_group';
+import LeaveGroup from './leave_group';
 
 import { Segment, Icon } from 'semantic-ui-react';
 
@@ -23,6 +24,7 @@ class Groups extends Component {
         <Segment key={group.id}>
           <button onClick={this.props.handleChannel} value={group.id}> {group.groups.name} </button>
           <InviteLink group={group.groups} profile={this.props.profile}/>
+          <LeaveGroup group={group}/>
         </Segment>
       );
     });

@@ -52,3 +52,21 @@ module.exports.addProfileGroup = (req, res) => {
       res.status(500).send(err);
     });
 };
+
+module.exports.leaveGroup = (req, res) => {
+  models.ProfileGroup.where({ id: req.query.id })
+    .destroy()
+    .then(() => {
+      models.ProfileGroup.where({ profile_id: req.query.profile_id })
+        .fetchAll({ withRelated: ['groups'] })
+        .then(groups => {
+          res.status(201).send(groups);
+        });
+    })
+    .error(err => {
+      res.status(500).send(err);
+    })
+    .catch(err => {
+      res.status(404).send(err);
+    });
+};

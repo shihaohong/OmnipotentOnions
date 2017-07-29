@@ -9,6 +9,7 @@ export const FETCH_GROUPS = 'fetch_groups';
 export const FETCH_ONE_GROUP = 'fetch_one_group';
 export const JOIN_GROUP = 'join_group';
 export const CREATE_GROUP = 'create_group';
+export const LEAVE_GROUP = 'leave_group';
 
 export const FETCH_CHANNELS = 'fetch_channels';
 export const CREATE_CHANNEL = 'create_channel';
@@ -72,8 +73,8 @@ export const fetchOneGroup = function(group_id) {
   };
 };
 
-export let createGroup = function(group, profile, shortID) {
-  const request = axios.post(`/groups/createGroup/${group}?id=${profile}&shortID=${shortID}`);
+export let createGroup = function(group, profile_id, shortID) {
+  const request = axios.post(`/groups/createGroup/${group}?id=${profile_id}&shortID=${shortID}`);
   return {
     type: CREATE_GROUP,
     payload: request
@@ -84,6 +85,14 @@ export const joinGroup = function(shortID, profile) {
   const request = axios.post(`/profileGroups/joinGroup/${shortID}?id=${profile}`);
   return {
     type: JOIN_GROUP,
+    payload: request
+  };
+};
+
+export let leaveGroup = function(profile_groups_id, profile_id) {
+  const request = axios.post(`/profileGroups/leaveGroup?id=${profile_groups_id}&profile_id=${profile_id}`);
+  return {
+    type: LEAVE_GROUP,
     payload: request
   };
 };
