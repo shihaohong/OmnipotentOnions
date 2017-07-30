@@ -1,3 +1,4 @@
+const url = require('url');
 let knex;
 
 // make updates based on config
