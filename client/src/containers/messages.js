@@ -47,7 +47,7 @@ class Messages extends Component {
   render() {
     return (
       <div> 
-        <h2> Messages </h2>
+        <h2> Messages: Channel {this.props.channelId} </h2>
         <Segment.Group>
           <Segment>
             <button onClick={this.onHandleVideoChatJoin} id='joinVideoChat'>Join Video Chat</button>

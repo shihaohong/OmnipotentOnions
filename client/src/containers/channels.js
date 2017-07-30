@@ -21,7 +21,7 @@ export class Channels extends Component {
       this.props.socket.emit('subscribe', channel.id);
       return (
         <Segment key={channel.id}>
-          <button value={channel.group_id} onClick={this.props.handleMessage}>{channel.name}</button>
+          <button value={channel.id} onClick={this.props.handleMessage}>{channel.name}</button>
         </Segment>
       );
     });

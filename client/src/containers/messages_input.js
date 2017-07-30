@@ -27,11 +27,10 @@ export class MessageInput extends Component {
       text: data.message,
       profile_id: this.props.profile.id,
       channel_id: this.props.channelId
-    }; 
+    };
     data.message = '';
+    axios.post(`/messages/${message.text}?channel_id=${message.channel_id}&profile_id=${message.profile_id}`);
     // Add display name & the client time, since they're available here.
-    console.log(message.channel_id, 'message');
-    this.props.createMessage(message);
     message['profile'] = { display: this.props.profile.display};
     message['fake_time'] = Date.now();
     this.props.socket.emit('send', message);
