@@ -2,7 +2,7 @@
   "name": "Connect",
   "version": "1.0.0",
   "scripts": {
-    "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash",
+    "heroku-postbuild": "webpack -p --config ./webpack.config.babel.js --progress",
     "start": "nodemon server",
     "test": "NODE_ENV=test grunt test",
     "client-test": "jest client",
@@ -21,7 +21,7 @@
     "bookshelf": "^0.10.3",
     "config": "^1.26.1",
     "connect-flash": "^0.1.1",
-    "connect-redis": "^3.2.0",
+    "connect-redis": "^3.3.0",
     "cookie-parser": "^1.4.3",
     "ejs": "^2.5.6",
     "express": "^4.15.2",
