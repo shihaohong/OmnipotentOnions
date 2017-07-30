@@ -4,7 +4,25 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const TwitterStrategy = require('passport-twitter').Strategy;
-const config = require('config')['passport'];
+
+let config;
+if (!process.env.GOOGLE_CLIENT_ID && !process.env.FACEBOOK_CLIENT_ID) { // if the process vars dont exist, use default.json
+  config = require('../../config/passport')['passport'];
+} else { // otherwise, grab it from config vars
+  config = {
+    'Google': {
+      'clientID': process.env.GOOGLE_CLIENT_ID,
+      'clientSecret': process.env.GOOGLE_CLIENT_SECRET,
+      'callbackURL': process.env.GOOGLE_CALLBACK_URL
+    },
+    'Facebook': {
+      'clientID': process.env.FACEBOOK_CLIENT_ID,
+      'clientSecret': process.env.FACEBOOK_CLIENT_SECRET,
+      'callbackURL': process.env.FACEBOOK_CALLBACK_URL
+    }
+  };
+}
+
 const models = require('../../db/models');
 
 passport.serializeUser((profile, done) => {
