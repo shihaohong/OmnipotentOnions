@@ -1,15 +1,14 @@
 const models = require('../../db/models');
 
 module.exports.createChannel = (req, res) => {
-  console.log('req.params: ', req.params);
   models.Channel.forge({
-    name: req.query.name,
-    group_id: req.params.groupId,
+    name: req.params.id,
+    group_id: req.query.group_id,
     shortID: req.query.shortID
   })
     .save()
-    .then(result => {
-      models.Channel.where({ group_id: result.attributes.group_id }).fetchAll()
+    .then(() => {
+      models.Channel.where({ group_id: req.query.group_id }).fetchAll()
         .then(channels => {
           res.status(201).send(channels);          
         })
@@ -23,12 +22,12 @@ module.exports.createChannel = (req, res) => {
 };
 
 module.exports.getGroupChannels = (req, res) => {
-  models.Channel.where({ group_id: req.params.groupId }).fetchAll()
+  models.Channel.where({ group_id: req.params.id }).fetchAll()
     .then(channels => {
       res.status(200).send(channels);
     })
     .catch(err => {
-      res.status(503).send(err);
+      res.status(500).send(err);
     });
 };
 

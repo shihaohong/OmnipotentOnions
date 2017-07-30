@@ -13,7 +13,7 @@ class Messages extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showVideoChat: false 
+      showVideoChat: false,
     };
 
     this.onHandleVideoChatJoin = this.onHandleVideoChatJoin.bind(this);
@@ -32,12 +32,16 @@ class Messages extends Component {
     this.setState({
       showVideoChat: true
     });
+    
+    document.getElementById('joinVideoChat').style.display = 'none';
   }
 
   onHandleVideoChatLeave() {
     this.setState({
       showVideoChat: false
     });
+
+    document.getElementById('joinVideoChat').style.display = 'initial';    
   }
 
   render() {
@@ -46,7 +50,7 @@ class Messages extends Component {
         <h2> Messages </h2>
         <Segment.Group>
           <Segment>
-            <button onClick={this.onHandleVideoChatJoin}>Join Video Chat</button>
+            <button onClick={this.onHandleVideoChatJoin} id='joinVideoChat'>Join Video Chat</button>
             {
               this.state.showVideoChat ? <VideoChat toggleVideo={this.onHandleVideoChatLeave} shortID={this.props.channelId}/> : null
             }
@@ -71,7 +75,7 @@ class Messages extends Component {
 }
 
 const mapStateToProps = function(state) {
-  return { messages: state.messages, profile: state.profile, channel: state.channels };
+  return { messages: state.messages, channel: state.channels };
 };
 
 export default connect(mapStateToProps, { fetchMessages, createMessage })(Messages);

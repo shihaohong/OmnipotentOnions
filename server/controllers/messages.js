@@ -1,15 +1,18 @@
 const models = require('../../db/models');
 
-module.exports.postMessage = (req, res) => {
+module.exports.createMessage = (req, res) => {
   models.Message.forge({ 
-    text: req.body.text,
-    profile_id: req.body.profileId,
-    channel_id: req.params.id,
+    text: req.params.id,
+    profile_id: req.query.profile_id,
+    channel_id: req.query.channel_id
   }).save()
-    .then(message => {
-      res.status(201).send(message);
-      // models.Message.where({channel_id: message.channel_id}).fetchAll()
-      // .then(message => res.status(201).send(message));
+    .then(() => {
+      // res.status(201).send(message);
+      models.Message.where({channel_id: req.query.channel_id}).fetchAll()
+        .then(message => {
+          // console.log(message, 'CREATE MESSAGE');
+          res.status(201).send(message);
+        });
     })
     .catch(err => {
       res.status(500).send(err);

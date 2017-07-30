@@ -33,9 +33,10 @@ class Main extends Component {
     this.onHandleMessage = this.onHandleMessage.bind(this);
     this.onHandleEvents = this.onHandleEvents.bind(this);
     this.onHandleGroups = this.onHandleGroups.bind(this);
+    this.handleDeleteGroup = this.handleDeleteGroup.bind(this);    
     this.handleCreateEvent = this.handleCreateEvent.bind(this);
-    this.handleEventDetails = this.handleEventDetails.bind(this);
     this.handleGroupEvents = this.handleGroupEvents.bind(this);
+    this.handleEventDetails = this.handleEventDetails.bind(this);
   }
   componentWillMount() {
     this.props.fetchProfile(window.myUser);    
@@ -116,13 +117,12 @@ class Main extends Component {
     });
   }
 
-  handleGroupEvents(e) {
-    // show Group Events and should have some actions
-    // need edge cases
-    // console.log('main handlegroup ', e.target.value);
+  handleDeleteGroup() {
     this.setState({
-      showGroupEvents: !this.state.showGroupEvents,
-      groupId: e.target.value
+      showChannel: false,
+      groupId: undefined,
+      showMessages: false,
+      channelId: undefined
     });
   }
 
@@ -133,6 +133,16 @@ class Main extends Component {
       groupId: e.target.value
     });
 
+  }
+
+  handleGroupEvents(e) {
+    // show Group Events and should have some actions
+    // need edge cases
+    // console.log('main handlegroup ', e.target.value);
+    this.setState({
+      showGroupEvents: !this.state.showGroupEvents,
+      groupId: e.target.value
+    });
   }
 
   handleEventDetails(eventId) {
@@ -149,7 +159,7 @@ class Main extends Component {
         <h1>Welcome to Connect, {window.myUser.display}</h1>
         <Segment.Group horizontal>
           {
-            this.state.showGroups ? <Segment><Groups profile={window.myUser} handleChannel={this.onHandleChannel} showEvents={this.onHandleEvents}/></Segment> : null
+            this.state.showGroups ? <Segment><Groups profile={window.myUser} handleDeleteGroup={this.handleDeleteGroup} handleChannel={this.onHandleChannel} showEvents={this.onHandleEvents}/></Segment> : null
           }          
           {
             this.state.showChannel ? <Segment><Channels socket={socket} groupId={this.state.groupId} handleMessage={this.onHandleMessage}/></Segment> : null

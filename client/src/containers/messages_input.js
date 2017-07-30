@@ -5,7 +5,6 @@ import { createMessage } from '../actions';
 import axios from 'axios';
 
 export class MessageInput extends Component {
-
   constructor(props) {
     super(props);
   }
@@ -25,13 +24,14 @@ export class MessageInput extends Component {
 
   onSubmit(data) {
     var message = {
-      channel_id: this.props.channelId,
+      text: data.message,
       profile_id: this.props.profile.id,
-      text: data.message
+      channel_id: this.props.channelId
     }; 
     data.message = '';
-    axios.post(`/messages/${message.channel_id}`, {text: message.text, profileId: message.profile_id});
     // Add display name & the client time, since they're available here.
+    console.log(message.channel_id, 'message');
+    this.props.createMessage(message);
     message['profile'] = { display: this.props.profile.display};
     message['fake_time'] = Date.now();
     this.props.socket.emit('send', message);

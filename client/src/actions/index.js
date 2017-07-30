@@ -107,8 +107,8 @@ export let fetchChannels = function(groupId) {
   };
 };
 
-export let createChannel = function(group, shortID) {
-  const request = axios.post(`/channels/${group.groupId}?name=${group.channelName}&shortID=${shortID}`);
+export let createChannel = function(channel, shortID) {
+  const request = axios.post(`/channels/${channel.name}?group_id=${channel.group_id}&shortID=${shortID}`);
   return {
     type: CREATE_CHANNEL,
     payload: request
@@ -119,7 +119,6 @@ export let createChannel = function(group, shortID) {
 /* -----------------------MESSAGES ------------------------------------- */
 
 export let fetchMessages = function(channelId) {
-  // replace with real ajax request
   const request = axios.get(`/messages/${channelId}`);
   return {
     type: FETCH_MESSAGES,
@@ -128,6 +127,7 @@ export let fetchMessages = function(channelId) {
 };
 
 export let createMessage = function(message) {
+  const request = axios.post(`/messages/${message.text}?channel_id=${message.channel_id}&profile_id=${message.profile_id}`);
   return {
     type: CREATE_MESSAGE,
     payload: message

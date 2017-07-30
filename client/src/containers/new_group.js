@@ -16,11 +16,11 @@ class NewGroup extends Component {
     );
   }
 
-  onSubmit(element) {
-    let newGroupName = element.groupName;
+  onSubmit(e) {
+    let newGroupName = e.groupName;
     let profile_id = this.props.profile.id;
     let shortID = shortid.generate();
-    element.groupName = '';
+    e.groupName = '';
     this.props.createGroup(newGroupName, profile_id, shortID);
   }
 

@@ -9,8 +9,8 @@ class MessageBoard extends Component {
     super(props);
   }
 
-  renderMessages (messages) {
-    return _.map(messages, message => {
+  renderMessages () {
+    return _.map(this.props.messages, message => {
       return (
         <Segment key={message.id || message.fake_time}> 
           <strong>{message.profile.display}</strong>
@@ -29,7 +29,9 @@ class MessageBoard extends Component {
     
 
     return (
-      <div>{this.renderMessages(this.props.messages)}</div>
+      <div>
+        {this.renderMessages()}
+      </div>
     );
   }
 

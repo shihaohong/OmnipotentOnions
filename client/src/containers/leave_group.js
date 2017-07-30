@@ -12,6 +12,8 @@ class LeaveGroup extends Component {
 
   onHandleLeaveGroup() {
     this.props.leaveGroup(this.props.group.id, this.props.group.profile_id);
+    // this.props.handleDeleteGroup();
+    this.props.handleDeleteGroup();
   }
 
   render() {

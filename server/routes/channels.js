@@ -7,7 +7,7 @@ const ChannelController = require('../controllers').Channels;
 //   .post(ChannelController.createChannel)
 // ;
 
-router.route('/:groupId')
+router.route('/:id')
   .get(ChannelController.getGroupChannels)
   .post(ChannelController.createChannel)
 ;
