@@ -56,6 +56,7 @@ module.exports.updateBio = (req, res) => {
         nickname: nickname
       };
         //update profile with info with bio
+      console.log('i got to line 65 ', profileInfo);
       profile.save(profileInfo, { method: 'update' })
         .then(() => {
           models.Profile.where({ id: req.params.id}).fetch()
