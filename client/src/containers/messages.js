@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchMessages, createMessage } from '../actions';
 
-import axios from 'axios';
 import io from 'socket.io-client';
 
+import VideoChat from './video_chat';
 import MessageBoard from '../components/messages_board';
 import MessageInput from './messages_input';
 import { Segment } from 'semantic-ui-react';
@@ -12,6 +12,12 @@ import { Segment } from 'semantic-ui-react';
 class Messages extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showVideoChat: false 
+    };
+
+    this.onHandleVideoChatJoin = this.onHandleVideoChatJoin.bind(this);
+    this.onHandleVideoChatLeave = this.onHandleVideoChatLeave.bind(this);
   }
   
   componentDidMount() {
@@ -19,7 +25,18 @@ class Messages extends Component {
       if (message.channel_id === this.props.channelId) {
         this.props.createMessage(message);
       }
-      axios.post(`/messages/${message.channel_id}`, {text: message.text, profileId: message.profile_id});
+    });
+  }
+  
+  onHandleVideoChatJoin() {
+    this.setState({
+      showVideoChat: true
+    });
+  }
+
+  onHandleVideoChatLeave() {
+    this.setState({
+      showVideoChat: false
     });
   }
 
@@ -28,6 +45,12 @@ class Messages extends Component {
       <div> 
         <h2> Messages </h2>
         <Segment.Group>
+          <Segment>
+            <button onClick={this.onHandleVideoChatJoin}>Join Video Chat</button>
+            {
+              this.state.showVideoChat ? <VideoChat toggleVideo={this.onHandleVideoChatLeave} shortID={this.props.channelId}/> : null
+            }
+          </Segment>
           <Segment>
             <MessageBoard 
               socket={this.props.socket}

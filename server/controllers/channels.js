@@ -1,9 +1,11 @@
 const models = require('../../db/models');
 
 module.exports.createChannel = (req, res) => {
+  console.log('req.params: ', req.params);
   models.Channel.forge({
     name: req.query.name,
-    group_id: req.params.groupId
+    group_id: req.params.groupId,
+    shortID: req.query.shortID
   })
     .save()
     .then(result => {

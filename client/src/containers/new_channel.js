@@ -3,6 +3,8 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { createChannel } from '../actions';
 
+import shortid from 'shortid';
+
 class NewChannel extends Component {
   renderField(field) {
     const { meta: { touched, error } } = field;
@@ -15,12 +17,14 @@ class NewChannel extends Component {
   }
 
   onCreateChannel(e) {
-    let newGroup = {
+    let newChannel = {
       groupId: this.props.groupId,
       channelName: e.channelName
     };
+    let shortID = shortid.generate();
+    console.log('In new_channel, generated shortID: ', shortID);
     e.channelName = '';
-    this.props.createChannel(newGroup);
+    this.props.createChannel(newChannel, shortID);
   }
 
   render() {

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { createMessage } from '../actions';
+import axios from 'axios';
 
 export class MessageInput extends Component {
 
@@ -29,6 +30,7 @@ export class MessageInput extends Component {
       text: data.message
     }; 
     data.message = '';
+    axios.post(`/messages/${message.channel_id}`, {text: message.text, profileId: message.profile_id});
     // Add display name & the client time, since they're available here.
     message['profile'] = { display: this.props.profile.display};
     message['fake_time'] = Date.now();

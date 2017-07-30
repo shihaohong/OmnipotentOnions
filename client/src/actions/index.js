@@ -107,8 +107,8 @@ export let fetchChannels = function(groupId) {
   };
 };
 
-export let createChannel = function(group) {
-  const request = axios.post(`/channels/${group.groupId}?name=${group.channelName}`);
+export let createChannel = function(group, shortID) {
+  const request = axios.post(`/channels/${group.groupId}?name=${group.channelName}&shortID=${shortID}`);
   return {
     type: CREATE_CHANNEL,
     payload: request

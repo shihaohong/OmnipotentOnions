@@ -35,6 +35,7 @@ exports.up = function (knex, Promise) {
       t.increments('id').unsigned().primary();
       t.string('name').notNullable();
       t.integer('group_id').references('groups.id').onDelete('CASCADE');
+      t.string('shortID').nullable().unique();
     }),
     knex.schema.createTableIfNotExists('messages', (t) => {
       t.increments('id').unsigned().primary();

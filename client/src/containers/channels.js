@@ -4,20 +4,12 @@ import { fetchChannels, fetchOneGroup } from '../actions';
 import _ from 'lodash';
 
 import NewChannel from './new_channel';
-import VideoChat from './video_chat';
 
 import { Segment } from 'semantic-ui-react';
 
 export class Channels extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      showVideoChat: false 
-    };
-
-    this.onHandleVideoChatJoin = this.onHandleVideoChatJoin.bind(this);
-    this.onHandleVideoChatLeave = this.onHandleVideoChatLeave.bind(this);
   }
 
   componentWillMount() {
@@ -35,27 +27,10 @@ export class Channels extends Component {
     });
   }
 
-  onHandleVideoChatJoin() {
-    this.setState({
-      showVideoChat: true
-    });
-  }
-
-  onHandleVideoChatLeave() {
-    this.setState({
-      showVideoChat: false
-    });
-  }
-
   render() {
     return (
       <div>
         <h2>Channels</h2>
-        <button onClick={this.onHandleVideoChatJoin}>Join Video Chat</button>
-        <button onClick={this.onHandleVideoChatLeave}>Leave Video Chat</button>
-        {
-          this.state.showVideoChat ? <Segment><VideoChat shortID={this.props.oneGroup.shortID}/></Segment> : null
-        }
         <Segment.Group>
           {this.renderChannels()}
           <NewChannel groupId={this.props.groupId}/>
