@@ -1,0 +1,22 @@
+{
+  "name": "OmnipotentOnions",
+  "scripts": {
+  },
+  "env": {
+    "REDIS_URL": {
+      "required": true
+    },
+    "DATABASE_URL": "postgres://wvicqrwrgxyzri:66b779302e35182a742350915dbeea27133fbc95ea708ddb57f4747bd0633567@ec2-23-23-244-83.compute-1.amazonaws.com:5432/ddh5pvr29ngfeu",
+    "NPM_CONFIG_PRODUCTION": "false",
+    "NPM_CONFIG_LOGLEVEL": "verbose"
+  },
+  "formation": {
+  },
+  "addons": [
+    "heroku-postgresql",
+    "heroku-redis"
+  ],
+  "buildpacks": [
+
+  ]
+}
