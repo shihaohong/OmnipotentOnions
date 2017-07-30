@@ -6,7 +6,30 @@
     "REDIS_URL": {
       "required": true
     },
-    "DATABASE_URL": "postgres://wvicqrwrgxyzri:66b779302e35182a742350915dbeea27133fbc95ea708ddb57f4747bd0633567@ec2-23-23-244-83.compute-1.amazonaws.com:5432/ddh5pvr29ngfeu",
+    "DATABASE_URL": {
+      "required": true
+    },
+    "REDIS_URL": {
+      "required": true
+    },
+    "FACEBOOK_CALLBACK_URL": {
+      "required": true
+    },
+    "FACEBOOK_CLIENT_ID": {
+      "required": true
+    },
+    "FACEBOOK_CLIENT_SECRET": {
+      "required": true
+    },
+    "GOOGLE_CALLBACK_URL": {
+      "required": true
+    },
+    "GOOGLE_CLIENT_ID": {
+      "required": true
+    },
+    "GOOGLE_CLIENT_SECRET": {
+      "required": true
+    },
     "NPM_CONFIG_PRODUCTION": "false",
     "NPM_CONFIG_LOGLEVEL": "verbose"
   },
