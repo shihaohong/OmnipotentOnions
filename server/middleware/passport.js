@@ -7,7 +7,7 @@ const TwitterStrategy = require('passport-twitter').Strategy;
 
 let config;
 if (!process.env.GOOGLE_CLIENT_ID && !process.env.FACEBOOK_CLIENT_ID) { // if the process vars dont exist, use default.json
-  config = require('config')['passport'];
+  config = require('../../config/passport')['passport'];
 } else { // otherwise, grab it from config vars
   config = {
     'Google': {
