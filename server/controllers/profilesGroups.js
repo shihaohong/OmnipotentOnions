@@ -14,19 +14,19 @@ module.exports.joinGroup = (req, res) => {
   models.Group.where({ shortID: req.params.id })
     .fetch()
     .then(group => {
-      models.ProfileGroup.forge()
-        .save({
-          profile_id: req.query.id,
-          group_id: group.id
-        })
-        .then((groups) => {      
-          models.ProfileGroup.where({ profile_id: req.query.id })
+      models.ProfileGroup.forge({
+        profile_id: req.query.id,
+        group_id: group.id
+      })
+      .save()
+      .then((groups) => {      
+        models.ProfileGroup.where({ profile_id: req.query.id })
             .fetchAll({ withRelated: ['groups'] })
             .then(groups => {
               console.log(groups);
               res.status(201).send(groups);
             });
-        });
+      });
     })
     .error(err => {
       res.status(500).send(err);
