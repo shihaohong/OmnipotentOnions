@@ -66,6 +66,7 @@ export const fetchGroups = function(user) {
 };
 
 export const fetchOneGroup = function(group_id) {
+  console.log('im in fetchOneGroup ', group_id);
   const request = axios.get(`/groups/fetchOneGroup/${group_id}`);
   return {
     type: FETCH_ONE_GROUP,
@@ -74,6 +75,7 @@ export const fetchOneGroup = function(group_id) {
 };
 
 export let createGroup = function(group, profile_id, shortID) {
+  console.log(group, profile_id, shortID);
   const request = axios.post(`/groups/createGroup/${group}?id=${profile_id}&shortID=${shortID}`);
   return {
     type: CREATE_GROUP,
@@ -164,7 +166,7 @@ export let fetchFriendRequests = function(profileId) {
 
 /* -----------------------EVENTS------------------------------------- */
 export let createEvent = function(reqBody, groupId) {
-  console.log(reqBody, groupId);
+  console.log('create event with these ', reqBody, groupId);
   let createEvent = axios.post(`/events/${groupId}`, reqBody);
   return {
     type: CREATE_EVENT,
@@ -181,7 +183,6 @@ export let deleteEvent = function(eventId, groupId) {
 };
 
 export let fetchEvents = function(groupId) {
-  console.log('fetch events in action ', groupId);
   let events = axios.get(`/events/${groupId}`);
   return {
     type: FETCH_EVENTS,

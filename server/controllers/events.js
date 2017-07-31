@@ -2,6 +2,8 @@ const models = require('../../db/models');
 
 module.exports.createEvent = (req, res) => {
   // POST EVENT
+  console.log(req.body);
+  console.log(typeof req.params.groupId);
   models.Event.forge({
     eventName: req.body.eventName,
     location: req.body.location,
@@ -15,7 +17,7 @@ module.exports.createEvent = (req, res) => {
   })
     .save()
     .then(event => {
-      console.log('im inside events? ', event.id, req.body.creator);
+      console.log('im inside events? ', event.id, event);
       models.Attendee.forge({
         event_id: event.id,
         profile_id: req.body.creator
@@ -25,6 +27,7 @@ module.exports.createEvent = (req, res) => {
           console.log('inside atttende ', attendee);
           models.Event.where({ group_id: req.params.groupId }).fetchAll()
             .then(events => {
+              console.log('I GOT EVENTS WHERE GROUP ID MATCHES THE ONE GIVEN ', events);
               res.status(201).send(events);
             })
             .error(err => {
@@ -62,10 +65,8 @@ module.exports.deleteEvent = (req, res) => {
 };
 
 module.exports.fetchEvents = (req, res) => {
-  console.log('FETCHED EVENTS: ', req.params.groupId);
   models.Event.where({ group_id: req.params.groupId }).fetchAll()
     .then(events => {
-      console.log('FETCHED EVENTS!!!!!!!!!!: ', events);
       res.status(200).send(events);
     })
     .error(err => {

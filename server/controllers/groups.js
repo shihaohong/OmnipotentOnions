@@ -1,6 +1,7 @@
 const models = require('../../db/models');
 
 module.exports.createGroup = (req, res) => {
+  console.log('Im in create Groups ', req.query);
   models.Group.forge()
     .save({ 
       name: req.params.id,
@@ -31,6 +32,7 @@ module.exports.createGroup = (req, res) => {
 module.exports.fetchOneGroup = (req, res) => {
   models.Group.where({ id: req.params.id }).fetch()
     .then(oneGroup => {
+      console.log('oneGroup ', oneGroup);
       res.status(200).send(oneGroup);
     })
     .catch(err => {
