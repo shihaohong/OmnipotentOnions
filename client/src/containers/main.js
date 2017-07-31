@@ -14,7 +14,7 @@ import EventDetails from './events/eventDetails';
 import GroupEvents from './events/groupEvents';
 
 import io from 'socket.io-client';
-const socket = io('http://localhost:3000');
+const socket = io();
 
 class Main extends Component {
   constructor(props) {
