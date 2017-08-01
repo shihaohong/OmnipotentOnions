@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { updateProfileBio, fetchProfile, updateNickname } from '../actions';
+import { Segment, Button, Container } from 'semantic-ui-react';
 import axios from 'axios';
 
 export class Profile extends Component {
@@ -78,38 +79,49 @@ export class Profile extends Component {
     const {handleSubmit} = this.props;
     return (
       <div>
-        {/* {console.log(window.myUser)} */}
-        <div id='edit'>
-          <span id='editBio'>
-            <button onClick={this.toggleBio}>edit bio</button> 
-          </span>
-          <span id='editNickName'>
-            <button onClick={this.toggleNickname}>edit nickname</button> 
-          </span>
+        <div>
+          <Button.Group widths='2'>
+            <Button onClick={this.toggleBio}>edit bio</Button>
+            <Button onClick={this.toggleNickname}>edit nickname</Button> 
+          </Button.Group>
         </div>
-        <img src={this.props.profile.profilePic}></img>
-        <p>Name: {this.props.profile.display}</p>
-        {
-          this.state.showEditNickname ?
-            <form onSubmit={handleSubmit(this.editNickname)}>
-              <Field
-                name='editNickname'
-                component='input'
-              />
-              <button type = 'submit'>Change Nickname</button>
-            </form> : <p>Nickname: {this.props.profile.nickname}</p>
-        }
-        <p>Email: {this.props.profile.email}</p>
-        {
-          this.state.showEditBio ? 
-            <form onSubmit={handleSubmit(this.editProfile)}>
-              <Field
-                name='editProfile'
-                component='textarea'
-              />
-              <button type = 'submit'>Change About Me</button>
-            </form> : <p>About Me: {this.props.profile.aboutMe}</p> 
-        }
+        <div className = 'ui two column grid'>
+          <div className = 'row'>
+            <div className = 'column'>
+              <img className="ui medium circular image" src={this.props.profile.profilePic}></img>
+            </div>
+            <div className = 'column'>
+              <Segment >
+                <p><b>Name:</b> {this.props.profile.display}</p>
+                {
+                  this.state.showEditNickname ?
+                    <form onSubmit={handleSubmit(this.editNickname)}>
+                      <Field
+                        name='editNickname'
+                        component='input'
+                      />
+                      <div>
+                        <Button type='submit' className="ui teal button mini">Change Nickname</Button>
+                      </div>
+                    </form> : <p><b>Nickname:</b> {this.props.profile.nickname}</p>
+                }
+                <p><b>Email:</b> {this.props.profile.email}</p>
+                {
+                  this.state.showEditBio ? 
+                    <form onSubmit={handleSubmit(this.editProfile)}>
+                      <Field
+                        name='editProfile'
+                        component='textarea'
+                      />
+                      <div>
+                        <Button type='submit' className="ui teal button mini">Change About Me</Button>
+                      </div>
+                    </form> : <p><b>About Me: </b>{this.props.profile.aboutMe}</p> 
+                }
+              </Segment>
+            </div>
+          </div>
+        </div>
       </div>    
     );
   }

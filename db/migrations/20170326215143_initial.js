@@ -9,7 +9,7 @@ exports.up = function (knex, Promise) {
       table.string('email', 100).nullable().unique();
       table.string('phone', 100).nullable();
       table.string('profilePic').nullable();
-      table.string('aboutMe').nullable();
+      table.string('aboutMe', 2000).nullable();
       table.string('nickname', 20).nullable();
       table.timestamps(true, true);
     }),
