@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchProfile, fetchChannels, fetchMessages } from '../actions';
 
-import { Segment } from 'semantic-ui-react';
+import { Segment, Menu, Header, Image } from 'semantic-ui-react';
 
 import Groups from './groups';
 import Channels from './channels';
@@ -163,39 +163,50 @@ class Main extends Component {
   handleEventDetails() {
     // need edgecases
   }
-
+// "position: fixed; left: 0px; bottom: 0px; width: 50em;"
   render() {
     return (
+
       <div>
-        {/* {console.log('main.js, the props, ' + console.log(this))} */}
-        <h1>Welcome to Connect, {window.myUser.display}</h1>
-        <Segment.Group horizontal>
-          {
-            this.state.showGroups ? <Segment><Groups profile={window.myUser} handleDeleteGroup={this.handleDeleteGroup} handleChannel={this.onHandleChannel} showEvents={this.onHandleEvents}/></Segment> : null
-          }          
-          {
-            this.state.showChannel ? <Segment><Channels socket={socket} groupId={this.state.groupId} handleMessage={this.onHandleMessage}/></Segment> : null
-          }
-          {
-            this.state.showMessages ? <Segment><Messages socket={socket} channelId={this.state.channelId}/></Segment> : null
-          }
-
-
-          {
-            this.state.showEvents ? <Segment><Events showGroups={this.onHandleGroups} groupEvents={this.handleGroupEvents}/></Segment> : null
-          }
-          {
-            this.state.showGroupEvents ? <Segment><GroupEvents groupId={this.state.groupId} handleEventDetails={this.handleEventDetails}/></Segment> : null
-          }
-          {
-            this.state.showEventDetails ? <Segment><EventDetails eventId={this.state.eventId} /></Segment> : null
-          }
-          {
-            this.state.showCreateEvents ? <Segment><CreateEvent showCreateEvents={this.handleCreateEvent} groupId={this.state.groupId}/></Segment> : null
-          }
-        </Segment.Group>
+        <Menu inverted vertical id='sidebar'>
+          <Menu.Item>
+            <Header as='h4' className='ui grey text'>
+              <Image shape='circular' src={window.myUser.profilePic}/>
+              {' '} {window.myUser.display}
+            </Header>
+          </Menu.Item>          
+          <Groups profile={window.myUser} handleChannel={this.onHandleChannel}></Groups>          
+        </Menu>
       </div>
     );
   }  
 }
 export default connect(null, { fetchProfile, fetchChannels, fetchMessages} )(Main);
+
+        // <h1>Welcome to Connect, {window.myUser.display}</h1>
+        // <Segment.Group horizontal>
+        //   {
+        //     this.state.showGroups ? <Segment><Groups profile={window.myUser} handleChannel={this.onHandleChannel} showEvents={this.onHandleEvents}/></Segment> 
+        //     : null
+        //   }          
+        //   {
+        //     this.state.showChannel ? <Segment><Channels socket={socket} groupId={this.state.groupId} handleMessage={this.onHandleMessage}/></Segment> : null
+        //   }
+        //   {
+        //     this.state.showMessages ? <Segment><Messages socket={socket} channelId={this.state.channelId}/></Segment> : null
+        //   }
+
+
+        //   {
+        //     this.state.showEvents ? <Segment><Events showGroups={this.onHandleGroups} groupEvents={this.handleGroupEvents}/></Segment> : null
+        //   }
+        //   {
+        //     this.state.showGroupEvents ? <Segment><GroupEvents groupId={this.state.groupId} handleEventDetails={this.handleEventDetails}/></Segment> : null
+        //   }
+        //   {
+        //     this.state.showEventDetails ? <Segment><EventDetails eventId={this.state.eventId} /></Segment> : null
+        //   }
+        //   {
+        //     this.state.showCreateEvents ? <Segment><CreateEvent showCreateEvents={this.handleCreateEvent} groupId={this.state.groupId}/></Segment> : null
+        //   }
+        // </Segment.Group>

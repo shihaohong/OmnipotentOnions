@@ -1,0 +1,47 @@
+@headerFont        : 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+@pageFont          : 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+@fontSmoothing     : antialiased;
+
+@importGoogleFonts : true;
+@googleFontName    : 'Lato';
+@googleFontSizes   : '400,700,400italic,700italic';
+@googleFontFamily  : '@{googleFontName}:@{googleFontSizes}';
+
+#map-canvas {
+  margin: 0;
+  padding: 0;
+  height: 400px;
+  max-width: none;
+}
+
+#map-canvas img {
+  max-width: none !important;
+}
+
+.signIn {
+  font-family: Helvetica;
+}
+
+#sidebar {
+  left: 0px;
+  width: 15em;
+  height: 100em;
+  border-radius: 0px;
+}
+
+.display {
+  color: grey;
+}
+
+.groupName {
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
+
+.buttonGroup {
+  font-size: 5px;
+}
+
+.event {
+  float: right;
+}

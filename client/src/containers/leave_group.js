@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { leaveGroup } from '../actions';
 
+import { Icon, Button } from 'semantic-ui-react';
+
 class LeaveGroup extends Component { 
   constructor(props) {	
     super(props);
@@ -18,9 +20,11 @@ class LeaveGroup extends Component {
 
   render() {
     return (
-      <div>
-        <button onClick={this.onHandleLeaveGroup}>Leave Group</button>
-      </div>
+      <Icon
+      inverted
+        color='teal'
+        name='minus'
+        onClick={this.onHandleLeaveGroup}/>
     );
   }
 }
