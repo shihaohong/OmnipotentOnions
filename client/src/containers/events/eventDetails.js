@@ -4,7 +4,7 @@ import { fetchChannels } from '../../actions';
 import _ from 'lodash';
 import axios from 'axios';
 
-import { Segment, Icon } from 'semantic-ui-react';
+import { Header, Segment, Icon, Container} from 'semantic-ui-react';
 
 export class EventDetails extends Component {
   constructor(props) {
@@ -118,12 +118,55 @@ export class EventDetails extends Component {
     }
   }
 
+  renderDateIcon(date) {
+    console.log('date: ', date);
+
+    const dateInfo = date.split('-');
+
+    console.log('date information: ', dateInfo);
+
+    let months = {
+      '01': 'JAN',
+      '02': 'FEB',
+      '03': 'MAR',
+      '04': 'APR',
+      '05': 'MAY',
+      '06': 'JUN',
+      '07': 'JUL',
+      '08': 'AUG',
+      '09': 'SEP',
+      '10': 'OCT',
+      '11': 'NOV',
+      '12': 'DEC'
+    };
+
+    let month = months[dateInfo[1]];
+
+    return (
+      <div className='dateIcon'> 
+        {month} <br/>
+        {dateInfo[2]} <br/>
+      </div>
+    );
+  }
+
   render() {
     let currentEvent = this.props.events[this.props.eventId];
     return (
-      <div> 
-        <h3>{currentEvent.eventName} </h3>
-        <strong>Date:</strong> {currentEvent.startDate} <br/>
+      <Container> 
+        {this.renderDateIcon(currentEvent.startDate)}
+        <div className='event-header'>
+          <Header as='h2'>{currentEvent.eventName} </Header>
+          <div>
+            <Icon name='clock' size='big'/> 
+            <div> 
+              {currentEvent.startDate} - {currentEvent.endDate} <br/>
+              Next Line <br/>
+            </div>
+          </div>
+        </div>
+        
+        <strong>Date:</strong>  <br/>
         <strong>Location:</strong> {currentEvent.location} <br/>
         <div id='map-canvas'></div>
         <strong>Time:</strong> {currentEvent.startTime} - {currentEvent.endTime} <br/>
@@ -131,7 +174,7 @@ export class EventDetails extends Component {
           <strong>Weather</strong> <br/> 
           {this.renderWeather()}
         </div> 
-      </div>
+      </Container>
     );
   } 
 
