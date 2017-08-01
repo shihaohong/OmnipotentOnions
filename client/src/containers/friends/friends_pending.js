@@ -54,11 +54,27 @@ export class PendingList extends Component {
     return _.map(this.props.pending, request => {
       return (
         <Segment key={request.id}>
-          <img src={request.user.profilePic} />
-          <div><strong>Name:</strong> {request.user.display} </div>
-          <div><strong>Email:</strong> {request.user.email} </div>
-          <Button onClick={ () => { this.onAcceptRequest(request.profile_id); } }>Accept</Button> 
-          <Button onClick={ () => { this.onDeclineRequest(request.profile_id); } }>Decline</Button><br/>
+          <div className='friend-list-div'>
+            <img 
+              className='friend-list-profile-pic'
+              src={request.user.profilePic} 
+            />
+            <div className='friend-list-data'>
+
+              <Button 
+                className='friend-list-button' 
+                onClick={ () => { this.onAcceptRequest(request.profile_id); } }
+              >Accept</Button> 
+
+              <Button 
+                className='friend-list-button' 
+                onClick={ () => { this.onDeclineRequest(request.profile_id); } }
+              >Decline</Button>
+
+              <strong>Name:</strong> {request.user.display} <br/>
+              <strong>Email:</strong> {request.user.email} <br/>
+            </div>
+          </div>
         </Segment>
       );
     });
@@ -68,10 +84,22 @@ export class PendingList extends Component {
     return _.map(this.props.requests, request => {
       return (
         <Segment key={request.friend_id}>
-          <img src={request.friend.profilePic} />
-          <div><strong>Name:</strong> {request.friend.display} </div>
-          <div><strong>Email:</strong> {request.friend.email} </div>
-          <Button onClick={() => { this.onCancelRequest(request.friend_id); }}>Cancel request</Button> <br/>
+          <div className='friend-list-div'>
+            <img 
+              className='friend-list-profile-pic'
+              src={request.friend.profilePic} 
+            />
+            <div className='friend-list-data'>
+
+              <Button 
+                className='friend-list-button' 
+                onClick={() => { this.onCancelRequest(request.friend_id); }}
+              >Cancel request</Button>
+
+              <strong>Name:</strong> {request.friend.display} <br />
+              <strong>Email:</strong> {request.friend.email} <br />
+            </div>
+          </div>
         </Segment>
       );
     });

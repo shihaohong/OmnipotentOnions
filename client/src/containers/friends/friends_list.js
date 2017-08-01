@@ -35,8 +35,10 @@ export class FriendsList extends Component {
             />
             <div className='friend-list-data'>
               <Button className='friend-list-button' color='red' onClick={ () => { this.onDeleteFriend(friend.friend_id); } }>Delete friend</Button>
-              <strong>Name:</strong> {friend.friend.display} <br/>
-              <strong>Email:</strong> {friend.friend.email}
+              <strong>Name:</strong> <br/>
+              {friend.friend.display} <br/>
+              <strong>Email:</strong> <br/>
+              {friend.friend.email}
             </div>
           </div>
         </Segment>
