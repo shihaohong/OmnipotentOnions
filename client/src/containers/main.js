@@ -146,22 +146,11 @@ class Main extends Component {
   }
 
   handleEventDetails(eventId) {
+    console.log('show event', this.state.showEventDetails);
     this.setState({
       showEventDetails: !this.state.showEventDetails,
       eventId: eventId
     });
-
-  }
-
-  handleCreateEvent() {
-    // need edge cases
-    
-
-
-  }
-
-  handleEventDetails() {
-    // need edgecases
   }
 
   render() {
