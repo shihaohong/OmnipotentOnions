@@ -86,7 +86,7 @@ class Main extends Component {
   }
 
   onHandleEvents() {
-    this.setState({
+    this.setState({ 
       showMain: !this.state.showMain
     });
   }
