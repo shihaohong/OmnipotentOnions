@@ -170,7 +170,7 @@ export class EventDetails extends Component {
           </div>
         </div>
         
-        <strong>Date:</strong>  <br/>
+        <strong>Date:</strong> <br/>
         <strong>Location:</strong> {currentEvent.location} <br/>
         <div id='map-canvas'></div>
         <strong>Time:</strong> {currentEvent.startTime} - {currentEvent.endTime} <br/>
