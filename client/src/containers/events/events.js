@@ -14,7 +14,11 @@ class Events extends Component {
   renderGroups() {
     return _.map(this.props.groups, group => {
       return (
-        <Menu.Item key={group.id} onClick={(e, d) => this.props.groupEvents(d.value)}>
+        <Menu.Item 
+          key={group.id} 
+          value={group.id}
+          onClick={ (e, d) => { this.props.handleEventsDisplay(d.value); } }
+        >
           {group.groups.name}
         </Menu.Item>
       );
@@ -26,8 +30,12 @@ class Events extends Component {
       <Menu.Item>
         <Menu.Header>
           Groups
-          <Icon className='events' inverted color='teal' name='comments outline'
-            onClick={this.props.handleEvents} />
+          <Icon 
+            className='events' 
+            inverted color='teal' 
+            name='comments outline'
+            onClick={this.props.handleEvents} 
+          />
         </Menu.Header>
         <Menu.Menu>
           {this.renderGroups()}

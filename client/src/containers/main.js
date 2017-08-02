@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchProfile, fetchChannels, fetchMessages } from '../actions';
+import { fetchProfile, fetchChannels, fetchMessages, fetchEvents } from '../actions';
 
 import { Segment, Menu, Header, Image } from 'semantic-ui-react';
 
@@ -19,18 +19,21 @@ const socket = io();
 class Main extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       showMain: true,
     };
+
     this.onHandleChannel = this.onHandleChannel.bind(this);
     this.onHandleMessage = this.onHandleMessage.bind(this);
     this.onHandleEvents = this.onHandleEvents.bind(this);
     this.onHandleGroups = this.onHandleGroups.bind(this);
     this.handleDeleteGroup = this.handleDeleteGroup.bind(this);    
     this.handleCreateEvent = this.handleCreateEvent.bind(this);
-    this.handleGroupEvents = this.handleGroupEvents.bind(this);
+    this.onDisplayEvents = this.onDisplayEvents.bind(this);
     this.handleEventDetails = this.handleEventDetails.bind(this);
   }
+
   componentWillMount() {
     this.props.fetchProfile(window.myUser);    
   }
@@ -83,13 +86,16 @@ class Main extends Component {
 
   }
 
-  handleGroupEvents(e) {
-    // show Group Events and should have some actions
-    // need edge cases
-    // console.log('main handlegroup ', e.target.value);
+  onHandleEvents() {
     this.setState({
-      showGroupEvents: !this.state.showGroupEvents,
-      groupId: e.target.value
+      showMain: !this.state.showMain
+    });
+  }
+
+  onDisplayEvents(groupId) {
+    this.props.fetchEvents(groupId);
+    this.setState({
+      groupId: groupId
     });
   }
 
@@ -100,7 +106,7 @@ class Main extends Component {
       eventId: eventId
     });
   }
-  // "position: fixed; left: 0px; bottom: 0px; width: 50em;"
+  
   render() {
     return (
 
@@ -114,25 +120,45 @@ class Main extends Component {
           </Menu.Item> 
           {
             this.state.showMain ? 
-              <Groups profile={window.myUser} handleChannel={this.onHandleChannel} handleEvents={this.onHandleEvents}/> 
-              :
-              <Events showGroups={this.onHandleGroups} groupEvents={this.handleGroupEvents} handleEvents={this.onHandleEvents}/>
+              <Groups 
+                profile={window.myUser} 
+                handleChannel={this.onHandleChannel}
+                handleEvents={this.onHandleEvents}/> :
+              <Events 
+                showGroups={this.onHandleGroups} 
+                handleEventsDisplay={this.onDisplayEvents}
+                handleEvents={this.onHandleEvents}
+              />
           }
           {
             this.state.showMain ? 
-              <Channels socket={socket} groupId={this.state.groupId} handleMessage={this.onHandleMessage}/> 
-              :
-              <GroupEvents groupId={this.state.groupId} handleEventDetails={this.handleEventDetails}/>
+              <Channels 
+                socket={socket} 
+                groupId={this.state.groupId} 
+                handleMessage={this.onHandleMessage}
+              /> :
+              <GroupEvents 
+                groupId={this.state.groupId} 
+                handleEventDetails={this.handleEventDetails}
+              />
           }
           
         </Menu>
         <div id='main'>
           {
-            this.state.showMain ? <Messages socket={socket} channelId={this.state.channelId}/> : <Messages socket={socket} channelId={1}/>
+            this.state.showMain ? 
+              <Messages 
+                socket={socket} 
+                channelId={this.state.channelId}
+              /> : 
+              <div>
+                Enter Event Details Here
+              </div>
           }
         </div>
       </div>
     );
   }  
 }
-export default connect(null, { fetchProfile, fetchChannels, fetchMessages} )(Main);
+
+export default connect(null, { fetchProfile, fetchEvents, fetchChannels, fetchMessages} )(Main);

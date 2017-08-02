@@ -36,11 +36,12 @@ export class GroupEvents extends Component {
   }
 
   renderEvents() {
+    console.log('rerender events', this.props.events);
     return _.map(this.props.events, event => {
       return (
         <Menu.Item key={event.id}
-            onClick={ (e, d) => { this.handleEventClick(d.id); }}>
-            {event.eventName}
+          onClick={ (e, d) => { this.handleEventClick(d.id); }}>
+          {event.eventName}
         </Menu.Item>
       );
     });
@@ -51,23 +52,28 @@ export class GroupEvents extends Component {
       <Menu.Item>
         <Menu.Header>
           Group Events
-        <Modal
-          trigger={<Icon className='events' 
-                         name='plus circle' 
-                         inverted color='teal' 
-                         size='small' 
-                         onClick={this.handleOpen}/>}
-          size='large'
-          open={this.state.modalOpen}
-          onClose={this.handleClose}
-          closeIcon='close'
-        >
-          <CreateEvent groupId={this.props.groupId} handleClose={this.handleClose}/>
-        </Modal>
+          <Modal
+            trigger={
+              <Icon className='events' 
+                name='plus circle' 
+                inverted color='teal' 
+                size='small' 
+                onClick={this.handleOpen}/>
+            }
+            size='large'
+            open={this.state.modalOpen}
+            onClose={this.handleClose}
+            closeIcon='close'
+          >
+            <CreateEvent 
+              groupId={this.props.groupId} 
+              handleClose={this.handleClose}
+            />
+          </Modal>
         </Menu.Header>
+
         <Menu.Menu>
           {this.renderEvents()}
-
         </Menu.Menu>
       </Menu.Item>
     );
