@@ -41,6 +41,9 @@ class Messages extends Component {
       showVideoChat: false
     });
 
+    io().emit('part', 'test');
+    io().emit('disconnect');    
+
     document.getElementById('joinVideoChat').style.display = 'initial';    
   }
 
@@ -52,7 +55,7 @@ class Messages extends Component {
           <Segment>
             <button onClick={this.onHandleVideoChatJoin} id='joinVideoChat'>Join Video Chat</button>
             {
-              this.state.showVideoChat ? <VideoChat toggleVideo={this.onHandleVideoChatLeave} shortID={this.props.channelId}/> : null
+              this.state.showVideoChat ? <VideoChat toggleVideo={this.onHandleVideoChatLeave} shortID={this.props.channelId} channel={'test'}/> : null
             }
           </Segment>
           <Segment>

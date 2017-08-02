@@ -62,6 +62,7 @@ io.on('connection', function(socket) {
   socket.on('join', function(config) {
     console.log('[' + socket.id + '] join ', config);
     var channel = config.channel;
+    console.log('this is the channel name:', channel);
     var userdata = config.userdata;
     if (channel in socket.channels) {
       console.log('[' + socket.id + '] ERROR: already joined ', channel);
@@ -78,6 +79,7 @@ io.on('connection', function(socket) {
     socket.channels[channel] = channel;
   });
   const part = function(channel) {
+    console.log('SOCKET CHANNELS', channel, socket.channels);
     console.log('[' + socket.id + '] part ');
     if (!(channel in socket.channels)) {
       console.log('[' + socket.id + '] ERROR: not in ', channel);
