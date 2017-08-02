@@ -5,16 +5,26 @@ import { createChannel } from '../actions';
 
 import shortid from 'shortid';
 
+import { Form, Icon, Menu } from 'semantic-ui-react';
+
 class NewChannel extends Component {
   renderField(field) {
-    const { meta: { touched, error } } = field;
-
+    // console.log('Field: ', field);
+    const { meta: { touched, error, warning }} = field; 
     return (
-      <div>
-        <input type='text' {...field.input}/>
-      </div>
+      <Form.Input 
+                  className='inputForm' 
+                  transparent={true} 
+                  size='large'
+                  placeholder='enter new channel name'
+                  type='text' {...field.input}/>
     );
+  } 
+
+  required(value) {
+    return value ? undefined : <p>Required</p>;
   }
+
 
   onCreateChannel(e) {
     console.log('eeeeeeeeee channels: ', e);
@@ -29,17 +39,13 @@ class NewChannel extends Component {
 
   render() {
     const { handleSubmit } = this.props;
-
     return (
-      <div>
-        <form onSubmit={handleSubmit(this.onCreateChannel.bind(this))}>
-          <Field
-            name='channelName'
-            component={this.renderField}
-          />
-          <button type='submit'>Create Channel</button>
-        </form>
-      </div>
+      <Form inverted={true} onSubmit={handleSubmit(this.onCreateChannel.bind(this)) }>        
+        <Field name="channelName" component={ this.renderField } validate={[this.required]}/>
+        <Form.Button className='formButton' type='submit' color='teal' size='mini'>
+          New Channel 
+        </Form.Button>
+      </Form>
     );
   }
 }
@@ -53,3 +59,15 @@ const mapStateToProps = (state) => {
 export default reduxForm({
   form: 'ChannelsForm'
 })( connect(mapStateToProps, { createChannel })(NewChannel) );
+
+    // return (
+    //   <div>
+    //     <form onSubmit={handleSubmit(this.onCreateChannel.bind(this))}>
+    //       <Field
+    //         name='channelName'
+    //         component={this.renderField}
+    //       />
+    //       <button type='submit'>Create Channel</button>
+    //     </form>
+    //   </div>
+    // );

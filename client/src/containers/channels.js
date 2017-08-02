@@ -4,24 +4,45 @@ import { fetchChannels, fetchOneGroup } from '../actions';
 import _ from 'lodash';
 
 import NewChannel from './new_channel';
+import ChannelList from './channelList';
 
-import { Icon, Menu, Input } from 'semantic-ui-react';
+import { Icon, Menu } from 'semantic-ui-react';
+
 
 export class Channels extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      activeItem: '',
+    };
+    this.handleItemClick = this.handleItemClick.bind(this);
   }
 
   // componentWillMount() {
   //   this.props.fetchOneGroup(this.props.groupId);
   // }
+  handleItemClick(e, { name }) {
+    console.log('INSIDE HANDDDDDDDLE CLICK');
+    this.setState({activeItem: name});
+  }
 
   renderChannels() {
     return _.map(this.props.channels, channel => {
-      console.log('YO CHANNEL!: ', channel);
       this.props.socket.emit('subscribe', channel.id);
       return (
-        <Menu.Item key={channel.id} onClick={this.props.handleMessage}>
+        // <ChannelList channel={channel}
+        //              key={channel.id}
+        //              handleItemClick={this.handleItemClick}
+        //              handleMessage={this.props.handleMessage}
+        //              activeItem={this.state.activeItem}
+        //              />
+        <Menu.Item key={channel.id}
+                   name={channel.name}
+                   onClick={(e, d) => {
+                     console.log('yOOOOOOOO'),
+                     this.handleItemClick(e, d),
+                     this.props.handleMessage; 
+                   }}>
           {channel.name}
         </Menu.Item>
       );
@@ -36,8 +57,8 @@ export class Channels extends Component {
         </Menu.Header>
         <Menu.Menu>
           {this.renderChannels()}
-          <NewChannel groupId={this.props.groupId}/>
         </Menu.Menu>
+        <NewChannel groupId={this.props.groupId}/>
       </Menu.Item>
     );
   }

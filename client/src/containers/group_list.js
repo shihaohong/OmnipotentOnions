@@ -7,7 +7,7 @@ import NewGroup from './new_group';
 import JoinGroup from './join_group';
 import LeaveGroup from './leave_group';
 
-import { Segment, Icon, Menu, Input } from 'semantic-ui-react';
+import { Icon, Menu, Input } from 'semantic-ui-react';
 
 class GroupList extends Component { 
   constructor(props) {
@@ -18,11 +18,6 @@ class GroupList extends Component {
     this.shortIdView = this.shortIdView.bind(this);
   }
 
-  // handleItemClick = (e, { name }) => this.setState({activeItem: name});
-  handleItemClick(e, {name}) {
-    this.setState({activeItem: name});
-  }
-
   shortIdView() {
     const message = 'Share this code with others to join the group! :';  
     // alert(message + '\n' + this.props.group.shortID);
@@ -31,13 +26,14 @@ class GroupList extends Component {
     });
   }
 
-
   render() {
     return (
       <Menu.Item className='groupName' 
-        key={this.props.group.group_id} 
+        key={this.props.group.group_id}
+        name={this.props.group.groups.name}
+        active={this.props.activeItem === this.props.group.groups.name}
         value={this.props.group.group_id} 
-        onClick={(e, d) => { this.props.handleChannel(d) ;}}>   
+        onClick={(e, d) => { this.props.handleItemClick(e, d), this.props.handleChannel(d); }}>   
         {this.props.group.groups.name}
         <InviteLink 
           group={this.props.group.groups} 
@@ -63,17 +59,3 @@ const mapStateToProps = function(state) {
 };
 
 export default connect(mapStateToProps, { fetchGroups })(GroupList);
-//         <button onClick={this.props.handleChannel} value={group.group_id}>  </button>
-      // <div>
-      //   <h2>Groups</h2>
-      //   <Segment.Group>
-      //     {this.renderGroups()}
-      //     <NewGroup profile={this.props.profile}/>
-      //     <JoinGroup profile={this.props.profile}/>
-      //     <button onClick={this.props.showEvents}>
-      //       <Icon name='calendar' size='big' />          
-      //     </button>
-      //   </Segment.Group>
-      // </div>
-
-      // #009c95

@@ -5,18 +5,28 @@ import { createGroup } from '../actions';
 
 import shortid from 'shortid';
 
+import { Form, Icon, Menu } from 'semantic-ui-react';
+
 class NewGroup extends Component {
   renderField(field) {
-    const { meta: { touched, error } } = field; 
-    
+    // console.log('Field: ', field);
+    const { meta: { touched, error, warning }} = field; 
     return (
-      <div>
-        <input type='text' {...field.input} />
-      </div>
+      <Form.Input 
+                  className='inputForm' 
+                  transparent={true} 
+                  size='large'
+                  placeholder='enter new group name'
+                  type='text' {...field.input}/>
     );
+  } 
+
+  required(value) {
+    return value ? undefined : <p>Required</p>;
   }
 
   onSubmit(e) {
+
     let newGroupName = e.groupName;
     let profile_id = this.props.profile.id;
     let shortID = shortid.generate();
@@ -28,15 +38,12 @@ class NewGroup extends Component {
     const { handleSubmit } = this.props;
 
     return (
-      <div>
-        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-          <Field
-            name='groupName'
-            component={this.renderField}
-          />
-          <button type='submit'>Create Group</button>
-        </form>
-      </div>
+      <Form inverted={true} onSubmit={handleSubmit(this.onSubmit.bind(this)) }>        
+        <Field name="groupName" component={ this.renderField } validate={[this.required]}/>
+        <Form.Button className='formButton' type='submit' color='teal' size='mini'>
+          New Group 
+        </Form.Button>
+      </Form>
     );
   }
 }
@@ -50,3 +57,15 @@ export default reduxForm({
 })(
   connect(mapStateToProps, { createGroup })(NewGroup)
 );
+
+      // <div>
+      //   <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+      //     <Field
+      //       name='groupName'
+      //       component={this.renderField}
+      //     />
+      //     <button type='submit'>Create Group</button>
+      //   </form>
+      // </div>
+
+
