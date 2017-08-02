@@ -9,21 +9,34 @@ import CreateEvent from './createEvent';
 class Events extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      activeItem: '',
+    };
+  }
+  handleItemClick(e, {name}) {
+    console.log('name: ', {name});
+    this.setState({activeItem: name});
   }
 
   renderGroups() {
     return _.map(this.props.groups, group => {
       return (
         <Menu.Item 
-          key={group.id} 
+          key={group.id}
+          name={group.groups.name}
+          active={this.state.activeItem === group.groups.name} 
           value={group.id}
-          onClick={ (e, d) => { this.props.handleEventsDisplay(d.value); } }
+          onClick={ (e, d) => { 
+            this.handleItemClick(e, d);
+            this.props.handleEventsDisplay(d.value); 
+          }}
         >
           {group.groups.name}
         </Menu.Item>
       );
     });
   }
+
 
   render () {
     return (

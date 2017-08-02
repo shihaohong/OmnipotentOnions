@@ -72,8 +72,7 @@ class Main extends Component {
   handleDeleteGroup() {
     this.setState({
       groupId: undefined,
-      showMessages: false,
-      channelId: undefined,
+      channelId: undefined
     });
   }
 

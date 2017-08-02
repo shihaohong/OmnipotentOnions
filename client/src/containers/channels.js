@@ -15,10 +15,10 @@ export class Channels extends Component {
     this.state = {
       activeItem: '',
     };
-    this.handleItemClick = this.handleItemClick.bind(this);
+    // this.handleItemClick = this.handleItemClick.bind(this);
   }
 
-  handleItemClick(e, { name }) {
+  handleItemClick(e, {name}) {
     this.setState({activeItem: name});
   }
 
@@ -28,6 +28,7 @@ export class Channels extends Component {
       return (
         <Menu.Item 
           key={channel.id}
+          active={this.state.activeItem === channel.name}
           value={channel.id}
           name={channel.name}
           onClick={(e, d) => {

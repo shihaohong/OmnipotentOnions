@@ -10,7 +10,8 @@ export class GroupEvents extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modalOpen: false
+      modalOpen: false,
+      activeItem: ''
     };
     this.props.fetchEvents(this.props.groupId);
 
@@ -29,6 +30,11 @@ export class GroupEvents extends Component {
     });
   }
 
+  handleItemClick(e, {name}) {
+    console.log('name: ', {name});
+    this.setState({activeItem: name});
+  }
+
   handleClose() { 
     this.setState({
       modalOpen: false,
@@ -36,13 +42,18 @@ export class GroupEvents extends Component {
   }
 
   renderEvents() {
-    console.log('rerender events', this.props.events);
+    // console.log('rerender events', this.props.events);
     return _.map(this.props.events, event => {
       return (
         <Menu.Item 
           key={event.id}
+          active={this.state.activeItem === event.name}
+          name={event.name}
           value={event.id}
-          onClick={ (e, d) => { this.handleEventClick(d.value); }}>
+          onClick={ (e, d) => { 
+            this.handleItemClick(e, d), 
+            this.handleEventClick(d.value); 
+          }}>
           {event.eventName}
         </Menu.Item>
       );
