@@ -33,7 +33,7 @@
 
 #sidebar {
   left: 0px;
-  width: 15%;
+  width: 20%;
   height: 100em;
   border-radius: 0px;
   float: left;
@@ -41,7 +41,7 @@
 
 #main {
   float: left;
-  width: 85%;
+  width: 80%;
   padding: 40px;
 }
 
@@ -85,6 +85,9 @@
   float: right;
 }
 
+.sharelink{
+  color: #008080;
+}
 .signIn {
   font-family: Helvetica;
 }

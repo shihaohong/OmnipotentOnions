@@ -20,14 +20,7 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showChannel: false,
-      showMessages: false,
-      showEvents: false,
-      showGroups: true,
-      showGroupEvents: false,
-      showCreateEvents: false,
-      showEventDetails: false,
-      eventId: null
+      showMain: true,
     };
     this.onHandleChannel = this.onHandleChannel.bind(this);
     this.onHandleMessage = this.onHandleMessage.bind(this);
@@ -43,39 +36,11 @@ class Main extends Component {
   }
 
   onHandleChannel (e) {
-    if (this.state.showChannel === false && this.state.groupId === undefined) {
-      this.props.fetchChannels(e.target.value);
-      this.setState({
-        showChannel: !this.state.showChannel,
-        groupId: e.target.value
-      });
-    } else if (this.state.showChannel && this.state.groupId === e.target.value) {
-      if (this.state.showMessages) {
-        this.setState({
-          showChannel: !this.state.showChannel,
-          groupId: undefined,
-          showMessages: !this.state.showMessages,
-          channelId: undefined
-        });
-      } else {
-        this.setState({
-          showChannel: !this.state.showChannel,
-          groupId: undefined
-        });       
-      }
-    } else if (this.state.showChannel && this.state.groupId !== e.target.value && this.state.showMessages) {
-      this.props.fetchChannels(e.target.value);
-      this.setState({
-        groupId: e.target.value,
-        showMessages: !this.state.showMessages,
-        channelId: undefined
-      });
-    } else if (this.state.showChannel && this.state.groupId !== e.target.value) {
-      this.props.fetchChannels(e.target.value);
-      this.setState({
-        groupId: e.target.value
-      });
-    }
+    console.log('E TARGET VALUE: ', e.value);
+    this.props.fetchChannels(e.value);
+    this.setState({
+      groupId: e.value,
+    });
   }
 
   onHandleMessage(e) {
@@ -100,10 +65,7 @@ class Main extends Component {
 
   onHandleEvents() {
     this.setState({
-      showChannel: false,
-      showMessages: false,
-      showEvents: true,
-      showGroups: false,
+      showMain: !this.state.showMain
     });
   }
 
@@ -163,9 +125,25 @@ class Main extends Component {
               <Image shape='circular' src={window.myUser.profilePic}/>
               {' '} {window.myUser.display}
             </Header>
-          </Menu.Item>          
-          <Groups profile={window.myUser} handleChannel={this.onHandleChannel}></Groups>          
+          </Menu.Item> 
+          {
+            this.state.showMain ? <Groups profile={window.myUser} handleChannel={this.onHandleChannel}
+              handleEvents={this.onHandleEvents}/> :
+              <Events showGroups={this.onHandleGroups} groupEvents={this.handleGroupEvents}
+                handleEvents={this.onHandleEvents}/>
+              
+          }
+          {
+            this.state.showMain ? <Channels socket={socket} groupId={this.state.groupId} handleMessage={this.onHandleMessage}/> :
+              <GroupEvents groupId={this.state.groupId} handleEventDetails={this.handleEventDetails}/>
+          }
+          
         </Menu>
+        <div id='main'>
+          {
+            this.state.showMain ? <Messages socket={socket} channelId={this.state.channelId}/> : null
+          }
+        </div>
       </div>
     );
   }  

@@ -4,7 +4,7 @@ import { fetchChannels, fetchEvents } from '../../actions';
 import CreateEvent from './createEvent';
 import _ from 'lodash';
 
-import { Segment, Icon, Modal, Button } from 'semantic-ui-react';
+import { Segment, Icon, Modal, Button, Menu } from 'semantic-ui-react';
 
 export class GroupEvents extends Component {
   constructor(props) {
@@ -38,21 +38,25 @@ export class GroupEvents extends Component {
   renderEvents() {
     return _.map(this.props.events, event => {
       return (
-        <Segment key={event.id}>
-          <Button onClick={ () => { this.handleEventClick(event.id); } }>
+        <Menu.Item key={event.id}
+            onClick={ (e, d) => { this.handleEventClick(d.id); }}>
             {event.eventName}
-          </Button>
-        </Segment>
+        </Menu.Item>
       );
     });
   }
 
   render() {
     return (
-      <div>
-        {this.renderEvents()}
+      <Menu.Item>
+        <Menu.Header>
+          Group Events
         <Modal
-          trigger={<Button onClick={this.handleOpen}><Icon name='plus circle' size='small'/></Button>}
+          trigger={<Icon className='events' 
+                         name='plus circle' 
+                         inverted color='teal' 
+                         size='small' 
+                         onClick={this.handleOpen}/>}
           size='large'
           open={this.state.modalOpen}
           onClose={this.handleClose}
@@ -60,7 +64,12 @@ export class GroupEvents extends Component {
         >
           <CreateEvent groupId={this.props.groupId} handleClose={this.handleClose}/>
         </Modal>
-      </div>
+        </Menu.Header>
+        <Menu.Menu>
+          {this.renderEvents()}
+
+        </Menu.Menu>
+      </Menu.Item>
     );
   }
 }
@@ -70,3 +79,5 @@ const mapStateToProps = function(state) {
 };
 
 export default connect(mapStateToProps, { fetchEvents })(GroupEvents);
+
+// <Icon className='events' inverted color='teal' name='comments outline' />

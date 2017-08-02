@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Icon, Segment } from 'semantic-ui-react';
+import { Icon, Segment, Menu } from 'semantic-ui-react';
 import _ from 'lodash';
 // import {} from '../../actions';
 import Details from './eventDetails';
@@ -12,29 +12,27 @@ class Events extends Component {
   }
 
   renderGroups() {
-    console.log('this.props.groups ', this.props);
     return _.map(this.props.groups, group => {
       return (
-        <Segment key={group.id}>
-          <button value={group.id} onClick={this.props.groupEvents}>
-            {group.groups.name}
-          </button>
-        </Segment>
+        <Menu.Item key={group.id} onClick={(e, d) => this.props.groupEvents(d.value)}>
+          {group.groups.name}
+        </Menu.Item>
       );
     });
   }
 
   render () {
     return (
-      <div>
-        <h2>Groups</h2>
-        <Segment.Group>
+      <Menu.Item>
+        <Menu.Header>
+          Groups
+          <Icon className='events' inverted color='teal' name='comments outline'
+            onClick={this.props.handleEvents} />
+        </Menu.Header>
+        <Menu.Menu>
           {this.renderGroups()}
-          <button onClick={this.props.showGroups}>          
-            <Icon name='comments outline' size='big'/>
-          </button>
-        </Segment.Group>
-      </div>
+        </Menu.Menu>
+      </Menu.Item>
     );
   }
 
