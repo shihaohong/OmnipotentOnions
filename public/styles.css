@@ -7,6 +7,11 @@
 @googleFontSizes   : '400,700,400italic,700italic';
 @googleFontFamily  : '@{googleFontName}:@{googleFontSizes}';
 
+#about-me-form {
+  width: 350px;
+  height: 125px;
+}
+
 #map-canvas {
   margin: 0;
   padding: 0;
@@ -24,10 +29,6 @@
 
 #friend-add-button {
   margin-left: 20px;
-}
-
-.signIn {
-  font-family: Helvetica;
 }
 
 #sidebar {
@@ -57,6 +58,7 @@
 .friend-list-div {
   height: 200px;
 }
+
 .friend-list-data {
   height: 200px;
   width: 80%;
@@ -81,4 +83,36 @@
 
 .events {
   float: right;
+}
+
+.signIn {
+  font-family: Helvetica;
+}
+
+#profile-page-pic {
+  padding: 40px;
+  width: 100%;
+  text-align: center;
+}
+
+#profile-page-segment {
+  width: 30%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.profile-page-data {
+  font-size: 15px;
+  line-height: 30px;
+}
+
+.profile-data-important {
+  font-size: 30px;
+  line-height: 40px;
+}
+
+#profile-page-img {
+  width: 250px;
+  margin: 0 auto;
+  padding-bottom: 20px;
 }
