@@ -115,6 +115,7 @@ class Main extends Component {
     if (this.state.eventId) {
       return ( 
         <EventDetails 
+          key={this.state.eventId}
           eventId={this.state.eventId}
         />
       );
