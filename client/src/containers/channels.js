@@ -38,10 +38,11 @@ export class Channels extends Component {
         //              />
         <Menu.Item key={channel.id}
                    name={channel.name}
+                   value={channel.id}
                    onClick={(e, d) => {
                      console.log('yOOOOOOOO'),
                      this.handleItemClick(e, d),
-                     this.props.handleMessage; 
+                     this.props.handleMessage(e, d); 
                    }}>
           {channel.name}
         </Menu.Item>

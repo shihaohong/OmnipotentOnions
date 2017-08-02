@@ -43,25 +43,12 @@ class Main extends Component {
     });
   }
 
-  onHandleMessage(d) {
-    // if (this.state.showChannel && this.state.channelId === undefined && this.state.showMessages === false) {
-    //   this.props.fetchMessages(e.target.value);
-    //   this.setState({
-    //     showMessages: !this.state.showMessages,
-    //     channelId: e.target.value
-    //   });
-    // } else if (this.state.showChannel && this.state.showMessages && this.state.channelId === e.target.value) {
-    //   this.setState({
-    //     showMessages: !this.state.showMessages,
-    //     channelId: undefined
-    //   });
-    // } else if (this.state.showChannel && this.state.showMessages && this.state.channelId !== e.target.value) {
-    //   this.props.fetchMessages(e.target.value);      
-    //   this.setState({
-    //     channelId: e.target.value
-    //   });
-    // }
-    console.log('D VALUE', d);
+  onHandleMessage(e, d) {
+    console.log('DDDDDDDD: ', d.value);
+    this.props.fetchMessages(d.value);
+    this.setState({
+      channelId: d.value
+    });
   }
 
   onHandleEvents() {
@@ -82,9 +69,7 @@ class Main extends Component {
 
   handleDeleteGroup() {
     this.setState({
-      showChannel: false,
       groupId: undefined,
-      showMessages: false,
       channelId: undefined
     });
   }
@@ -148,7 +133,6 @@ class Main extends Component {
             this.state.showMain ? <Messages socket={socket} channelId={this.state.channelId}/> : null
           }
         </div>
-
       </div>
     );
   }  
