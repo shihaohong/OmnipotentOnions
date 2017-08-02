@@ -18,11 +18,7 @@ export class Channels extends Component {
     this.handleItemClick = this.handleItemClick.bind(this);
   }
 
-  // componentWillMount() {
-  //   this.props.fetchOneGroup(this.props.groupId);
-  // }
   handleItemClick(e, { name }) {
-    console.log('INSIDE HANDDDDDDDLE CLICK');
     this.setState({activeItem: name});
   }
 
@@ -30,20 +26,15 @@ export class Channels extends Component {
     return _.map(this.props.channels, channel => {
       this.props.socket.emit('subscribe', channel.id);
       return (
-        // <ChannelList channel={channel}
-        //              key={channel.id}
-        //              handleItemClick={this.handleItemClick}
-        //              handleMessage={this.props.handleMessage}
-        //              activeItem={this.state.activeItem}
-        //              />
-        <Menu.Item key={channel.id}
-                   name={channel.name}
-                   value={channel.id}
-                   onClick={(e, d) => {
-                     console.log('yOOOOOOOO'),
-                     this.handleItemClick(e, d),
-                     this.props.handleMessage(e, d); 
-                   }}>
+        <Menu.Item 
+          key={channel.id}
+          value={channel.id}
+          name={channel.name}
+          onClick={(e, d) => {
+            this.handleItemClick(e, d),
+            this.props.handleMessage(e, d); 
+          }}
+        >
           {channel.name}
         </Menu.Item>
       );

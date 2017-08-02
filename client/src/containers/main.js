@@ -36,7 +36,7 @@ class Main extends Component {
   }
 
   onHandleChannel (e) {
-    console.log('E TARGET VALUE: ', e.value);
+    var firstChannel;
     this.props.fetchChannels(e.value);
     this.setState({
       groupId: e.value,
@@ -44,14 +44,13 @@ class Main extends Component {
   }
 
   onHandleMessage(e, d) {
-    console.log('DDDDDDDD: ', d.value);
     this.props.fetchMessages(d.value);
     this.setState({
-      channelId: d.value
+      channelId: d.value,
     });
   }
 
-  onHandleEvents() {
+  onHandleEvents() { 
     this.setState({
       showMain: !this.state.showMain
     });
@@ -70,7 +69,8 @@ class Main extends Component {
   handleDeleteGroup() {
     this.setState({
       groupId: undefined,
-      channelId: undefined
+      showMessages: false,
+      channelId: undefined,
     });
   }
 
@@ -100,7 +100,7 @@ class Main extends Component {
       eventId: eventId
     });
   }
-// "position: fixed; left: 0px; bottom: 0px; width: 50em;"
+  // "position: fixed; left: 0px; bottom: 0px; width: 50em;"
   render() {
     return (
 
@@ -114,23 +114,21 @@ class Main extends Component {
           </Menu.Item> 
           {
             this.state.showMain ? 
-            <Groups profile={window.myUser} handleChannel={this.onHandleChannel} handleEvents={this.onHandleEvents}/> 
+              <Groups profile={window.myUser} handleChannel={this.onHandleChannel} handleEvents={this.onHandleEvents}/> 
               :
-            <Events showGroups={this.onHandleGroups} groupEvents={this.handleGroupEvents}
-                handleEvents={this.onHandleEvents}/>
-              
+              <Events showGroups={this.onHandleGroups} groupEvents={this.handleGroupEvents} handleEvents={this.onHandleEvents}/>
           }
           {
             this.state.showMain ? 
-            <Channels socket={socket} groupId={this.state.groupId} handleMessage={this.onHandleMessage}/> 
+              <Channels socket={socket} groupId={this.state.groupId} handleMessage={this.onHandleMessage}/> 
               :
-            <GroupEvents groupId={this.state.groupId} handleEventDetails={this.handleEventDetails}/>
+              <GroupEvents groupId={this.state.groupId} handleEventDetails={this.handleEventDetails}/>
           }
           
         </Menu>
         <div id='main'>
           {
-            this.state.showMain ? <Messages socket={socket} channelId={this.state.channelId}/> : null
+            this.state.showMain ? <Messages socket={socket} channelId={this.state.channelId}/> : <Messages socket={socket} channelId={1}/>
           }
         </div>
       </div>
@@ -138,47 +136,3 @@ class Main extends Component {
   }  
 }
 export default connect(null, { fetchProfile, fetchChannels, fetchMessages} )(Main);
-
-
-//  const renderTextField = ({input, label, placeholder, width, meta: { touched, error, warning }}) => (
-//   <Form.Input onChange={e => input.onChange(e)} value={input.value} label={label} placeholder={placeholder} width={width} />
-// )
-// const required = value => {
-//   return value ? undefined  : <p> Required </p>
-// };
-// submit(values) {
-//     console.log('values: ', values);
-//   }
-// //inbetween render and return 
-// const { handleSubmit } = this.props;
-// <Form onSubmit={handleSubmit(this.submit.bind(this)).bind(this) }>
-//   <Field name="first_name" component={ renderTextField } validate={[required]} label="First Name" width={8}/>
-//   <Button primary type="submit">Update</Button>
-// </Form>
-        // <h1>Welcome to Connect, {window.myUser.display}</h1>
-        // <Segment.Group horizontal>
-        //   {
-        //     this.state.showGroups ? <Segment><Groups profile={window.myUser} handleChannel={this.onHandleChannel} showEvents={this.onHandleEvents}/></Segment> 
-        //     : null
-        //   }          
-        //   {
-        //     this.state.showChannel ? <Segment><Channels socket={socket} groupId={this.state.groupId} handleMessage={this.onHandleMessage}/></Segment> : null
-        //   }
-        //   {
-        //     this.state.showMessages ? <Segment><Messages socket={socket} channelId={this.state.channelId}/></Segment> : null
-        //   }
-
-
-        //   {
-        //     this.state.showEvents ? <Segment><Events showGroups={this.onHandleGroups} groupEvents={this.handleGroupEvents}/></Segment> : null
-        //   }
-        //   {
-        //     this.state.showGroupEvents ? <Segment><GroupEvents groupId={this.state.groupId} handleEventDetails={this.handleEventDetails}/></Segment> : null
-        //   }
-        //   {
-        //     this.state.showEventDetails ? <Segment><EventDetails eventId={this.state.eventId} /></Segment> : null
-        //   }
-        //   {
-        //     this.state.showCreateEvents ? <Segment><CreateEvent showCreateEvents={this.handleCreateEvent} groupId={this.state.groupId}/></Segment> : null
-        //   }
-        // </Segment.Group>
