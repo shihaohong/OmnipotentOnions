@@ -85,12 +85,6 @@ class Main extends Component {
 
   }
 
-  onHandleEvents() {
-    this.setState({
-      showMain: !this.state.showMain
-    });
-  }
-
   onDisplayEvents(groupId) {
     this.props.fetchEvents(groupId);
     this.setState({
