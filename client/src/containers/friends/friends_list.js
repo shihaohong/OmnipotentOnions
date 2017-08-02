@@ -43,7 +43,7 @@ export class FriendsList extends Component {
           </div>
         </Segment>
       );
-    });
+    }); 
   }
 
   render() {

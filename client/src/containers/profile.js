@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { updateProfileBio, fetchProfile, updateNickname } from '../actions';
-import { Segment, Button, Container } from 'semantic-ui-react';
+import { Image, Segment, Button, Container } from 'semantic-ui-react';
 import axios from 'axios';
 
 export class Profile extends Component {
   constructor(props) {
     super(props);
-    // console.log(this.props);
-    // this.props.fetchProfile(window.myUser);
     this.state = {
       showEditBio: false,
       showEditNickname: false
@@ -25,9 +23,6 @@ export class Profile extends Component {
   }
 
   renderField(field) {
-    // const { meta: { touched, error } } = field; 
-    // const textareaType = <textarea {...input} placeholder={label}  type={type} className={`form-control ${touched && invalid ? 'has-danger' : ''}`}/>;
-    // const inputType = <input {...input} placeholder={label}  type={type} className={`form-control ${touched && invalid ? 'has-danger' : ''}`}/>;
     return (
       <div>
         <input
@@ -42,14 +37,14 @@ export class Profile extends Component {
     this.setState({
       showEditNickname: !this.state.showEditNickname
     });
-    console.log(this.state.showEditNickname);
+    // console.log(this.state.showEditNickname);
   }
 
   toggleBio() {
     this.setState({
       showEditBio: !this.state.showEditBio
     });
-    console.log(this.state.showEditBio);
+    // console.log(this.state.showEditBio);
   }
 
 
@@ -62,7 +57,6 @@ export class Profile extends Component {
     }
     this.props.updateProfileBio(aboutMe, profile_id);
     this.toggleBio();
-    // this.props.fetchProfile(window.myUser);
   }
 
   editNickname(e) {
@@ -79,50 +73,54 @@ export class Profile extends Component {
     const {handleSubmit} = this.props;
     return (
       <div>
-        <div>
-          <Button.Group widths='2'>
-            <Button onClick={this.toggleBio}>edit bio</Button>
-            <Button onClick={this.toggleNickname}>edit nickname</Button> 
-          </Button.Group>
+        <div id='profile-page-pic'>
+          <div id='profile-page-img'>
+            <Image shape='circular' src={this.props.profile.profilePic} />
+          </div>
+          <Button className='profile-page-buttons' onClick={this.toggleNickname}>edit nickname</Button>
+          <Button className='profile-page-buttons' onClick={this.toggleBio}>edit bio</Button>
         </div>
-        <div className = 'ui two column grid'>
-          <div className = 'row'>
-            <div className = 'column'>
-              <img className="ui medium circular image" src={this.props.profile.profilePic}></img>
-            </div>
-            <div className = 'column'>
-              <Segment >
-                <p><b>Name:</b> {this.props.profile.display}</p>
-                {
-                  this.state.showEditNickname ?
-                    <form onSubmit={handleSubmit(this.editNickname)}>
-                      <Field
-                        name='editNickname'
-                        component='input'
-                      />
-                      <div>
-                        <Button type='submit' className="ui teal button mini">Change Nickname</Button>
-                      </div>
-                    </form> : <p><b>Nickname:</b> {this.props.profile.nickname}</p>
-                }
-                <p><b>Email:</b> {this.props.profile.email}</p>
-                {
-                  this.state.showEditBio ? 
-                    <form onSubmit={handleSubmit(this.editProfile)}>
-                      <Field
-                        name='editProfile'
-                        component='textarea'
-                      />
-                      <div>
-                        <Button type='submit' className="ui teal button mini">Change About Me</Button>
-                      </div>
-                    </form> : <p><b>About Me: </b>{this.props.profile.aboutMe}</p> 
-                }
-              </Segment>
-            </div>
+        <div id='profile-page-segment'>
+          <div className='profile-page-data'>
+            <p className='profile-data-important'>
+              {this.props.profile.display}
+            </p> 
+            
+            {
+              this.state.showEditNickname ?
+                <form onSubmit={handleSubmit(this.editNickname)}>
+                  <Field
+                    name='editNickname'
+                    component='input'
+                  />
+                  <div>
+                    <Button type='submit' className="ui teal button mini">Change Nickname</Button>
+                  </div>
+                </form> : <p><b>Nickname:</b> {this.props.profile.nickname}</p>
+            }
+            
+            <p><b>Email:</b> {this.props.profile.email}</p>
+            
+            {
+              this.state.showEditBio ? 
+                <form onSubmit={handleSubmit(this.editProfile)}>
+                  <Field
+                    id='about-me-form'
+                    name='editProfile'
+                    component='textarea'
+                  />
+                  <div>
+                    <Button type='submit' className="ui teal button mini">Change About Me</Button>
+                  </div>
+                </form> : 
+                <p>
+                  <b>About Me: </b> <br />
+                  {this.props.profile.aboutMe}
+                </p> 
+            }
           </div>
         </div>
-      </div>    
+      </div>
     );
   }
 }
@@ -130,7 +128,6 @@ export class Profile extends Component {
 const mapStateToProps = (state) => {
   return {groups: state.groups, profile: state.profile};
 };
-
 
 export default reduxForm({
   form: 'ProfileForm'
