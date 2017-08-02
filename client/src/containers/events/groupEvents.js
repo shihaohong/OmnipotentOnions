@@ -39,8 +39,10 @@ export class GroupEvents extends Component {
     console.log('rerender events', this.props.events);
     return _.map(this.props.events, event => {
       return (
-        <Menu.Item key={event.id}
-          onClick={ (e, d) => { this.handleEventClick(d.id); }}>
+        <Menu.Item 
+          key={event.id}
+          value={event.id}
+          onClick={ (e, d) => { this.handleEventClick(d.value); }}>
           {event.eventName}
         </Menu.Item>
       );

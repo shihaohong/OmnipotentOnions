@@ -101,12 +101,32 @@ class Main extends Component {
 
   handleEventDetails(eventId) {
     console.log('show event', this.state.showEventDetails);
+    console.log('event id', eventId);
+    
     this.setState({
       showEventDetails: !this.state.showEventDetails,
       eventId: eventId
     });
   }
-  
+
+  renderEventDetails() {
+    console.log('renderEventDetails', this.state.eventId);
+
+    if (this.state.eventId) {
+      return ( 
+        <EventDetails 
+          eventId={this.state.eventId}
+        />
+      );
+    } else {
+      return (
+        <div>
+          Please select an event
+        </div>
+      );
+    }
+  }
+
   render() {
     return (
 
@@ -151,9 +171,7 @@ class Main extends Component {
                 socket={socket} 
                 channelId={this.state.channelId}
               /> : 
-              <div>
-                Enter Event Details Here
-              </div>
+              this.renderEventDetails()
           }
         </div>
       </div>
