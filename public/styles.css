@@ -18,19 +18,56 @@
   max-width: none !important;
 }
 
+#friend-add-input {
+  width: 300px;
+}
+
+#friend-add-button {
+  margin-left: 20px;
+}
+
 .signIn {
   font-family: Helvetica;
 }
 
 #sidebar {
   left: 0px;
-  width: 15em;
+  width: 15%;
   height: 100em;
   border-radius: 0px;
+  float: left;
+}
+
+#main {
+  float: left;
+  width: 85%;
+  padding: 40px;
 }
 
 .display {
   color: grey;
+}
+
+.friend-list-profile-pic {
+  width: 200px;
+  height: 200px;
+  float: left;
+}
+
+.friend-list-div {
+  height: 200px;
+}
+.friend-list-data {
+  height: 200px;
+  width: 80%;
+  float: left;
+  font-size: 20px;
+  line-height: 30px;
+  padding-left: 15px;
+}
+
+.friend-list-button {
+  float: right;
 }
 
 .groupName {
@@ -42,6 +79,6 @@
   font-size: 5px;
 }
 
-.event {
+.events {
   float: right;
 }

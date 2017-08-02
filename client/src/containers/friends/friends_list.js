@@ -28,10 +28,19 @@ export class FriendsList extends Component {
     return _.map(this.props.friends, (friend) => {
       return (
         <Segment key={friend.id}>
-          <img src={friend.friend.profilePic} />
-          <div> <strong>Name:</strong> {friend.friend.display} </div>
-          <div> <strong>Email:</strong> {friend.friend.email} </div>
-          <Button color='red' onClick={ () => { this.onDeleteFriend(friend.friend_id); } }>Delete friend</Button>
+          <div className='friend-list-div'>
+            <img
+              className='friend-list-profile-pic'
+              src={friend.friend.profilePic} 
+            />
+            <div className='friend-list-data'>
+              <Button className='friend-list-button' color='red' onClick={ () => { this.onDeleteFriend(friend.friend_id); } }>Delete friend</Button>
+              <strong>Name:</strong> <br/>
+              {friend.friend.display} <br/>
+              <strong>Email:</strong> <br/>
+              {friend.friend.email}
+            </div>
+          </div>
         </Segment>
       );
     });

@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import FriendsAdd from './friends_add';
 import FriendsList from './friends_list';
 import PendingList from './friends_pending';
-import { Menu } from 'semantic-ui-react';
+import { Menu, Header, Image } from 'semantic-ui-react';
 
 export class Friends extends Component {
   constructor(props) {
@@ -30,13 +30,14 @@ export class Friends extends Component {
   }
 
   renderPage() {
+    console.log('id undefined?', this.props.profile.id);
     if (this.state.activeItem === 'Friends') {
       this.props.fetchFriends(this.props.profile.id);
       return <FriendsList />;
     } else if (this.state.activeItem === 'Pending') {
       this.props.fetchPendingRequests(this.props.profile.id);
       this.props.fetchFriendRequests(this.props.profile.id);
-      return <FriendsList />;
+      return <PendingList />;
     }  else if (this.state.activeItem === 'Add') {
       return <FriendsAdd />;
     }
@@ -46,26 +47,35 @@ export class Friends extends Component {
     const { activeItem } = this.state;
 
     return (
-      <div> 
-        <br/>
-        <Menu>
-          <Menu.Item 
-            name='Friends'
-            active={activeItem === 'Friends'}
-            onClick={this.handleItemClick}
-          />  
-          <Menu.Item
-            name='Pending'
-            active={activeItem === 'Pending'}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name='Add'
-            active={activeItem === 'Add'}
-            onClick={this.handleItemClick}
-          />
-        </Menu>
-        {this.renderPage()}
+      <div>
+        <div>
+          <Menu inverted vertical id='sidebar'>
+            <Menu.Item>
+              <Header as='h4' className='ui grey text'>
+                <Image shape='circular' src={window.myUser.profilePic}/>
+                {' '} {window.myUser.display}
+              </Header>
+            </Menu.Item>     
+            <Menu.Item 
+              name='Friends'
+              active={activeItem === 'Friends'}
+              onClick={this.handleItemClick}
+            />  
+            <Menu.Item
+              name='Pending'
+              active={activeItem === 'Pending'}
+              onClick={this.handleItemClick}
+            />
+            <Menu.Item
+              name='Add'
+              active={activeItem === 'Add'}
+              onClick={this.handleItemClick}
+            />
+          </Menu>
+        </div>
+        <div id='main'>
+          {this.renderPage()}
+        </div>
       </div>
     );
   }

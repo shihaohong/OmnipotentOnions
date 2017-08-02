@@ -72,11 +72,12 @@ export class FriendsAdd extends Component {
         <form onSubmit={this.onAddFriend}>
           <Segment>
             <Input
+              id='friend-add-input'
               placeholder='Enter an email address' 
               value={this.state.term}
               onChange={this.onInputChange}
             />
-            <Button>Add a friend</Button>
+            <Button id='friend-add-button'>Add a friend</Button>
             <div className='dangerMessage' style={{color: 'red'}} >{this.state.danger}</div>
           </Segment>
         </form>
