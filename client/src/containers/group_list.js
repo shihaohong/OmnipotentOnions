@@ -42,12 +42,15 @@ class GroupList extends Component {
           group={this.props.group} 
           handleDeleteGroup={this.props.handleDeleteGroup}/>
         {
-          this.state.showInvite ? <Input
-                                    className='sharelink'
-                                    color='teal'
-                                    inverted color='teal' 
-                                    value={`share this code: ${this.props.group.groups.shortID}`}
-                                    transparent={true}/> : null
+          this.state.showInvite ? 
+            <Input
+              className='sharelink'
+              color='teal'
+              inverted color='teal' 
+              value={`share this code: ${this.props.group.groups.shortID}`}
+              transparent={true}
+            /> : 
+            null
         }
       </Menu.Item>
     );

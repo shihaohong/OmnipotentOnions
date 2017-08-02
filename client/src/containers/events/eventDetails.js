@@ -12,6 +12,16 @@ export class EventDetails extends Component {
 
     console.log('event', this.props.events[this.props.eventId]);
 
+    this.getGeolocation();
+
+    this.state = {
+      isWeatherInformationAvailable: false,
+      tooLate: true,
+      weatherInformation: {}
+    };
+  }
+
+  getGeolocation() {
     let address = this.props.events[this.props.eventId].location;
     let geocoder = new google.maps.Geocoder();
 
@@ -58,13 +68,7 @@ export class EventDetails extends Component {
           tooLate: true
         });
       }
-    });
-
-    this.state = {
-      isWeatherInformationAvailable: false,
-      tooLate: true,
-      weatherInformation: {}
-    };
+    });    
   }
 
   componentDidMount() {
@@ -166,7 +170,7 @@ export class EventDetails extends Component {
           </div>
         </div>
         
-        <strong>Date:</strong>  <br/>
+        <strong>Date:</strong> <br/>
         <strong>Location:</strong> {currentEvent.location} <br/>
         <div id='map-canvas'></div>
         <strong>Time:</strong> {currentEvent.startTime} - {currentEvent.endTime} <br/>

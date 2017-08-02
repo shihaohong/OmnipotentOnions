@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { fetchFriends } from '../../actions';
 import _ from 'lodash';
 import axios from 'axios';
-import { Button, Segment } from 'semantic-ui-react';
+import { Image, Button, Segment } from 'semantic-ui-react';
 
 export class FriendsList extends Component {
 
@@ -29,9 +29,10 @@ export class FriendsList extends Component {
       return (
         <Segment key={friend.id}>
           <div className='friend-list-div'>
-            <img
+            <Image
               className='friend-list-profile-pic'
               src={friend.friend.profilePic} 
+              shape='circular'
             />
             <div className='friend-list-data'>
               <Button className='friend-list-button' color='red' onClick={ () => { this.onDeleteFriend(friend.friend_id); } }>Delete friend</Button>

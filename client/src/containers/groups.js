@@ -30,12 +30,13 @@ class Groups extends Component {
   renderGroups() {
     return _.map(this.props.groups, group => {
       return (
-        <GroupList group={group} 
-                   key={group.id} 
-                   handleChannel={this.props.handleChannel}
-                   handleItemClick={this.handleItemClick}
-                   activeItem={this.state.activeItem}
-                  />
+        <GroupList 
+          group={group} 
+          key={group.id} 
+          handleChannel={this.props.handleChannel}
+          handleItemClick={this.handleItemClick}
+          activeItem={this.state.activeItem}
+        />
       );
     });
   }
@@ -45,8 +46,12 @@ class Groups extends Component {
       <Menu.Item style={{paddingBottom: 40 + 'px'}}>
         <Menu.Header>
           Groups
-          <Icon className='events' inverted color='teal' name='calendar'
-            onClick={this.props.handleEvents} />
+          <Icon 
+            className='events' 
+            inverted color='teal' 
+            name='calendar'
+            onClick={this.props.handleEvents} 
+          />
         </Menu.Header>
           
         <Menu.Menu>
@@ -67,14 +72,14 @@ const mapStateToProps = function(state) {
 
 export default connect(mapStateToProps, { fetchGroups })(Groups);
 //         <button onClick={this.props.handleChannel} value={group.group_id}>  </button>
-      // <div>
-      //   <h2>Groups</h2>
-      //   <Segment.Group>
-      //     {this.renderGroups()}
-      //     <NewGroup profile={this.props.profile}/>
-      //     <JoinGroup profile={this.props.profile}/>
-      //     <button onClick={this.props.showEvents}>
-      //       <Icon name='calendar' size='big' />          
-      //     </button>
-      //   </Segment.Group>
-      // </div>
+// <div>
+//   <h2>Groups</h2>
+//   <Segment.Group>
+//     {this.renderGroups()}
+//     <NewGroup profile={this.props.profile}/>
+//     <JoinGroup profile={this.props.profile}/>
+//     <button onClick={this.props.showEvents}>
+//       <Icon name='calendar' size='big' />          
+//     </button>
+//   </Segment.Group>
+// </div>

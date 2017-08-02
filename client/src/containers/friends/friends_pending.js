@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { fetchFriendRequests, fetchPendingRequests, fetchFriends } from '../../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Button, Segment } from 'semantic-ui-react';
+import { Button, Segment, Image } from 'semantic-ui-react';
 
 import _ from 'lodash';
 import axios from 'axios';
@@ -18,16 +18,16 @@ export class PendingList extends Component {
   onCancelRequest(friendId) {
     axios.delete(`/pendingfriends/cancelrequest/${this.props.profile.id}/${friendId}`)
       .then(request => {
-        console.log('success!');
+        // console.log('success!');
         this.props.fetchFriendRequests(this.props.profile.id);
       })
       .catch(err => {
-        console.log('err: ', err);
+        // console.log('err: ', err);
       });
   }
 
   onAcceptRequest(friendId) {
-    console.log(friendId);
+    // console.log(friendId);
     axios.post(`/friendsget/${this.props.profile.id}/${friendId}`)
       .then(request => {
         console.log('success!');
@@ -35,18 +35,18 @@ export class PendingList extends Component {
         this.props.fetchPendingRequests(this.props.profile.id);
       })
       .catch(err => {
-        console.log('err: ', err);
+        // console.log('err: ', err);
       });
   }
 
   onDeclineRequest(friendId) {
     axios.delete(`/pendingfriends/cancelrequest/${friendId}/${this.props.profile.id}`)
       .then(request => {
-        console.log('success!');
+        // console.log('success!');
         this.props.fetchPendingRequests(this.props.profile.id);
       })
       .catch(err => {
-        console.log('err: ', err);
+        // console.log('err: ', err);
       });
   }
 
@@ -55,9 +55,10 @@ export class PendingList extends Component {
       return (
         <Segment key={request.id}>
           <div className='friend-list-div'>
-            <img 
+            <Image 
               className='friend-list-profile-pic'
               src={request.user.profilePic} 
+              shape='circular'
             />
             <div className='friend-list-data'>
 
@@ -85,9 +86,10 @@ export class PendingList extends Component {
       return (
         <Segment key={request.friend_id}>
           <div className='friend-list-div'>
-            <img 
+            <Image 
               className='friend-list-profile-pic'
               src={request.friend.profilePic} 
+              shape='circular'
             />
             <div className='friend-list-data'>
 
