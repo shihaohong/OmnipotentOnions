@@ -7,7 +7,7 @@ import io from 'socket.io-client';
 import VideoChat from './video_chat';
 import MessageBoard from '../components/messages_board';
 import MessageInput from './messages_input';
-import { Segment, Header } from 'semantic-ui-react';
+import { Segment, Header, Button } from 'semantic-ui-react';
 
 class Messages extends Component {
   constructor(props) {
@@ -53,7 +53,7 @@ class Messages extends Component {
         <div id='video-chat-fronter'>
           <Segment inverted color='grey'>
             <Header inverted color='teal' size='large'> {this.props.channelId ? this.props.channel[this.props.channelId].name : 'Select a Group & Channel...' } </Header>
-            <button onClick={this.onHandleVideoChatJoin} id='joinVideoChat'>Join Video Chat</button>
+            <Button className='ui teal' onClick={this.onHandleVideoChatJoin} id='joinVideoChat'>Join Video Chat</Button>
             {
               this.state.showVideoChat ? <VideoChat toggleVideo={this.onHandleVideoChatLeave} shortID={this.props.channelId}/> : null
             }

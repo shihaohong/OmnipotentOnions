@@ -97,5 +97,3 @@ const mapStateToProps = function(state) {
 };
 
 export default connect(mapStateToProps, { fetchEvents })(GroupEvents);
-
-// <Icon className='events' inverted color='teal' name='comments outline' />

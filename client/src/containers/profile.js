@@ -77,8 +77,8 @@ export class Profile extends Component {
           <div id='profile-page-img'>
             <Image shape='circular' src={this.props.profile.profilePic} />
           </div>
-          <Button className='profile-page-buttons' onClick={this.toggleNickname}>edit nickname</Button>
-          <Button className='profile-page-buttons' onClick={this.toggleBio}>edit bio</Button>
+          <Button className='profile-page-buttons ui teal' onClick={this.toggleNickname}>edit nickname</Button>
+          <Button className='profile-page-buttons ui teal' onClick={this.toggleBio}>edit bio</Button>
         </div>
         <div id='profile-page-segment'>
           <div className='profile-page-data'>
