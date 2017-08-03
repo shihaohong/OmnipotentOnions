@@ -107,6 +107,7 @@ export class EventDetails extends Component {
         console.log('WEAETHER(((( ', weather);
         let icon = weather.weather[0].icon;
         let url = `https://openweathermap.org/img/w/${icon}.png`;
+        
         return (
           <div className='event-detail-font'>
             <b>Weather description:</b> {weather.weather[0].description} <br />
