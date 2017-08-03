@@ -130,6 +130,7 @@ class Main extends Component {
     }
   }
 
+
   render() {
     return (
       <div>
@@ -145,7 +146,8 @@ class Main extends Component {
               <Groups 
                 profile={window.myUser} 
                 handleChannel={this.onHandleChannel}
-                handleEvents={this.onHandleEvents}/> :
+                handleEvents={this.onHandleEvents}/> 
+              :
               <Events 
                 showGroups={this.onHandleGroups} 
                 handleEventsDisplay={this.onDisplayEvents}
@@ -158,7 +160,8 @@ class Main extends Component {
                 socket={socket} 
                 groupId={this.state.groupId} 
                 handleMessage={this.onHandleMessage}
-              /> :
+              /> 
+              :
               <GroupEvents 
                 groupId={this.state.groupId} 
                 handleEventDetails={this.handleEventDetails}
@@ -172,7 +175,8 @@ class Main extends Component {
               <Messages 
                 socket={socket} 
                 channelId={this.state.channelId}
-              /> : 
+              /> 
+              : 
               this.renderEventDetails()
           }
         </div>

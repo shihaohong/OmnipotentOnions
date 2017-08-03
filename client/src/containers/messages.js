@@ -50,14 +50,14 @@ class Messages extends Component {
   render() {
     return (
       <div> 
-        <Segment inverted>
-          <Header color='grey' size='large'> {this.props.channelId ? this.props.channel[this.props.channelId].name : 'Select a Group & Channel...' } </Header>
+        <Segment inverted color='grey'>
+          <Header inverted color='teal' size='large'> {this.props.channelId ? this.props.channel[this.props.channelId].name : 'Select a Group & Channel...' } </Header>
           <button onClick={this.onHandleVideoChatJoin} id='joinVideoChat'>Join Video Chat</button>
           {
             this.state.showVideoChat ? <VideoChat toggleVideo={this.onHandleVideoChatLeave} shortID={this.props.channelId}/> : null
           }
         </Segment>
-        <div>
+        <div id='message-scroll'>
           <MessageBoard 
             socket={this.props.socket}
             messages={this.props.messages}
@@ -65,13 +65,13 @@ class Messages extends Component {
             profileId={this.props.profile.id}
           />
         </div>
-        <Segment>
+        <div id='message-input'>
           <MessageInput
             socket={this.props.socket}
             channelId={this.props.channelId}
             profile={this.props.profile}
           />
-        </Segment>
+        </div>
       </div>
     );
   }

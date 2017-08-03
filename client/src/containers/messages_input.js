@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { createMessage } from '../actions';
 import axios from 'axios';
+import { Segment, Form } from 'semantic-ui-react';
 
 var moment = require('moment');
 
@@ -25,33 +26,34 @@ export class MessageInput extends Component {
   }
 
   onSubmit(data) {
-    var message = {
-      text: data.message,
-      profile_id: this.props.profile.id,
-      channel_id: this.props.channelId
-    };
-    data.message = '';
-    axios.post(`/messages/${message.text}?channel_id=${message.channel_id}&profile_id=${message.profile_id}`);
-    // Add display name & the client time, since they're available here.
-    message['profile'] = this.props.profile;
-    message['create_at'] = moment().toISOString();
-    this.props.socket.emit('send', message);
+    if (data.message !== '' ) {
+      var message = {
+        text: data.message,
+        profile_id: this.props.profile.id,
+        channel_id: this.props.channelId
+      };
+      data.message = '';
+      axios.post(`/messages/${message.text}?channel_id=${message.channel_id}&profile_id=${message.profile_id}`);
+      // Add display name & the client time, since they're available here.
+      message['profile'] = this.props.profile;
+      message['create_at'] = moment().toISOString();
+      this.props.socket.emit('send', message);
+    }
   }
 
   render() {
     const { handleSubmit } = this.props;
 
     return (
-      <div>
-        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+      <Segment fluid inverted color='grey'>
+        <Form className='chat-text-entry' onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <Field 
-            placeholder='Please enter your message here'
+            placeholder='Enter your message here'
             name='message'
             component={this.renderField}
           />
-          <button type='submit'>Submit</button>
-        </form>
-      </div>
+        </Form>
+      </Segment>
     );
   }
 }

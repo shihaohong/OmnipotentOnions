@@ -13,11 +13,12 @@ class NewChannel extends Component {
     const { meta: { touched, error, warning }} = field; 
     return (
       <Form.Input 
-                  className='inputForm' 
-                  transparent={true} 
-                  size='large'
-                  placeholder='enter new channel name'
-                  type='text' {...field.input}/>
+        className='inputForm' 
+        transparent={true} 
+        size='large'
+        placeholder='enter new channel name'
+        type='text' {...field.input}
+      />
     );
   } 
 
@@ -27,7 +28,6 @@ class NewChannel extends Component {
 
 
   onCreateChannel(e) {
-    console.log('eeeeeeeeee channels: ', e);
     let newChannel = {
       name: e.channelName,
       group_id: this.props.groupId
@@ -59,15 +59,3 @@ const mapStateToProps = (state) => {
 export default reduxForm({
   form: 'ChannelsForm'
 })( connect(mapStateToProps, { createChannel })(NewChannel) );
-
-    // return (
-    //   <div>
-    //     <form onSubmit={handleSubmit(this.onCreateChannel.bind(this))}>
-    //       <Field
-    //         name='channelName'
-    //         component={this.renderField}
-    //       />
-    //       <button type='submit'>Create Channel</button>
-    //     </form>
-    //   </div>
-    // );
