@@ -39,8 +39,8 @@ export class EventDetails extends Component {
         if (diffDays < 16 && diffDays >= 0) {
           axios.get(`http://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lng}&units=metric&cnt=16&APPID=300dbc7cef6e1d88d172735c5f3cb721`)
             .then(result => {
-              console.log('diffDays: ', diffDays);
-              console.log('received weather data', result);
+              // console.log('diffDays: ', diffDays);
+              // console.log('received weather data', result);
 
               this.setState({
                 isWeatherInformationAvailable: true,
@@ -49,9 +49,9 @@ export class EventDetails extends Component {
               });
             });
         } else {
-          console.log('number of days: ', diffDays);
+          // console.log('number of days: ', diffDays);
           let waitTime = diffDays - 15;
-          console.log('waitTime: ', waitTime);
+          // console.log('waitTime: ', waitTime);
           this.setState({
             isWeatherInformationAvailable: true,
             tooLate: true,
@@ -101,17 +101,26 @@ export class EventDetails extends Component {
 
   renderWeather() {
     if (this.state.isWeatherInformationAvailable) {
-      console.log('info is available', this.state.weatherInformation);
+      // console.log('info is available', this.state.weatherInformation);
       if (!this.state.tooLate) {
         let weather = this.state.weatherInformation;
+        console.log('WEAETHER(((( ', weather);
+        let icon = weather.weather[0].icon;
+        let url = `http://openweathermap.org/img/w/${icon}.png`;
         return (
-          <div>
-            <strong>Temperature:</strong> <br/>
-            Min: {weather.temp.min} °C <br/>
-            Max: {weather.temp.max} °C <br/>
-            <strong>Pressure:</strong> {weather.pressure} hPa <br/>
-            <strong>Description:</strong> {weather.weather[0].description}
+          <div className='event-detail-font'>
+            <b>Weather description:</b> {weather.weather[0].description} <br />
+            <img className='weather-icon' src={url}/> <br/>
+            <p className='weather-max-temp'>{Math.ceil(weather.temp.max)} °C </p> | {Math.ceil(weather.temp.min)} °C<br/>
+            
+            <br />
 
+            <div className='weather-misc'>
+              <strong>Pressure:</strong> {weather.pressure} hPa <br/>
+              <strong>Wind speed:</strong> {weather.pressure} m/sec <br/>
+              <strong>Cloudiness:</strong> {weather.clouds}% <br/>
+              <strong>Humidity:</strong> {weather.humidity}% <br/>
+            </div>
           </div>
         );
       } else {
@@ -122,62 +131,65 @@ export class EventDetails extends Component {
     }
   }
 
-  renderDateIcon(date) {
-    console.log('date: ', date);
+  renderDate(date) {
+    // console.log('date: ', date);
 
     const dateInfo = date.split('-');
 
-    console.log('date information: ', dateInfo);
+    // console.log('date information: ', dateInfo);
 
     let months = {
-      '01': 'JAN',
-      '02': 'FEB',
-      '03': 'MAR',
-      '04': 'APR',
-      '05': 'MAY',
-      '06': 'JUN',
-      '07': 'JUL',
-      '08': 'AUG',
-      '09': 'SEP',
-      '10': 'OCT',
-      '11': 'NOV',
-      '12': 'DEC'
+      '01': 'Jan',
+      '02': 'Feb',
+      '03': 'Mar',
+      '04': 'Apr',
+      '05': 'May',
+      '06': 'Jun',
+      '07': 'Jul',
+      '08': 'Aug',
+      '09': 'Sep',
+      '10': 'Oct',
+      '11': 'Nov',
+      '12': 'Dec'
     };
 
     let month = months[dateInfo[1]];
 
-    return (
-      <div className='dateIcon'> 
-        {month} <br/>
-        {dateInfo[2]} <br/>
-      </div>
-    );
+    return month + ' ' + dateInfo[2];
   }
 
   render() {
     let currentEvent = this.props.events[this.props.eventId];
     return (
       <Container> 
-        {this.renderDateIcon(currentEvent.startDate)}
-        <div className='event-header'>
-          <Header as='h2'>{currentEvent.eventName} </Header>
-          <div>
-            <Icon name='clock' size='big'/> 
-            <div> 
-              {currentEvent.startDate} - {currentEvent.endDate} <br/>
-              Next Line <br/>
-            </div>
+        <div id='dateIcon'>
+          <div id='dateIconInner'>
+            {this.renderDate(currentEvent.startDate)}
           </div>
         </div>
-        
-        <strong>Date:</strong> <br/>
-        <strong>Location:</strong> {currentEvent.location} <br/>
+
+        <div className='event-header'>
+          <br />
+          <div className='event-title'>{currentEvent.eventName} </div>
+          <div className='event-header-icon'>
+            <Icon name='clock' size='large' color='grey'/>  
+            {this.renderDate(currentEvent.startDate)} at {currentEvent.startTime} to {this.renderDate(currentEvent.endDate)} at {currentEvent.endTime}
+            <br />
+            <Icon name='marker' size='large' color='grey'/>  
+            {currentEvent.location}
+          </div> 
+        </div>
+
         <div id='map-canvas'></div>
-        <strong>Time:</strong> {currentEvent.startTime} - {currentEvent.endTime} <br/>
-        <div>
-          <strong>Weather</strong> <br/> 
+        <div className='event-weather'>
+          <div className='event-detail-title'>Weather</div>
           {this.renderWeather()}
-        </div> 
+        </div>
+
+        <div className='event-detail-title'>Event Description</div>
+        <div className='event-detail-font'>
+          {currentEvent.detail}
+        </div>
       </Container>
     );
   } 

@@ -85,6 +85,12 @@ class Main extends Component {
 
   }
 
+  onHandleEvents() {
+    this.setState({ 
+      showMain: !this.state.showMain
+    });
+  }
+
   onDisplayEvents(groupId) {
     this.props.fetchEvents(groupId);
     this.setState({
@@ -123,7 +129,6 @@ class Main extends Component {
 
   render() {
     return (
-
       <div>
         <Menu inverted vertical id='sidebar'>
           <Menu.Item>
