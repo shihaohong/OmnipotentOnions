@@ -14,6 +14,7 @@ class GroupList extends Component {
     super(props);
     this.state = {
       showInvite: false,
+      
     };
     this.shortIdView = this.shortIdView.bind(this);
   }

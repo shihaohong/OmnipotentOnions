@@ -25,11 +25,23 @@ describe('Profile API', function() {
       endDate: '2017-07-30',
       detail: 'work pls'
     };
-		
     request(app)
       .post('/events/1')
       .send(event)
-      .expect(201, event)
+      .expect(201,
+        [{
+          id: 2,
+          eventName: 'Test Party',
+          location: '944 Market St. San Francisco',
+          creator: 1,
+          startTime: '16:00',
+          startDate: '2017-07-30',
+          endTime: '22:00',
+          endDate: '2017-07-30',
+          detail: 'work pls',
+          group_id: 1
+        }]
+      )
       .end(done);
   });
 			
@@ -39,5 +51,25 @@ describe('Profile API', function() {
       .expect(200)
       .end(done);
   });
+
+  it('accepts GET request to /:groupId/:eventId', function(done) {
+    request(app)
+      .get('/events/1/1')
+      .expect(res => {
+        length: res.body.length;
+      })
+      .expect(200, { id: 1,
+        eventName: 'OmniChat Party',
+        location: '944 Market St. San Francisco',
+        startTime: '16:00',
+        startDate: '2017-07-30',
+        endTime: '22:00',
+        endDate: '2017-07-30',
+        detail: 'Ogres are like onions',
+        group_id: null,
+        creator: null })
+      .end(done);
+  });
+
 });
 

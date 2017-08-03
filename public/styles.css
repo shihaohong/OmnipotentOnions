@@ -35,7 +35,7 @@
 
 #sidebar {
   left: 0px;
-  width: 20%;
+  width: 175px;
   height: 100em;
   border-radius: 0px;
   float: left;
@@ -43,8 +43,10 @@
 
 #main {
   float: left;
-  width: 80%;
+  width: 900px;
   padding: 40px;
+  left: 175px;
+  position: absolute;
 }
 
 .display {
@@ -79,9 +81,9 @@
   padding-bottom: 2em;
 } */
 
-.buttonGroup {
+ .buttonGroup {
   font-size: 5px;
-}
+} 
 
 .events {
   float: right;

@@ -26,6 +26,8 @@ class Groups extends Component {
     this.props.fetchGroups(this.props.profile);    
   }
 
+  //functioned called immediately and will send over
+  //group details, group id, and a function to switch channels
 
   renderGroups() {
     return _.map(this.props.groups, group => {
@@ -41,6 +43,8 @@ class Groups extends Component {
     });
   }
 
+  //render the Group menu portion of the side bar
+  
   render() {
     return (
       <Menu.Item style={{paddingBottom: 40 + 'px'}}>

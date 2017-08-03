@@ -42,7 +42,6 @@ export class GroupEvents extends Component {
   }
 
   renderEvents() {
-    // console.log('rerender events', this.props.events);
     return _.map(this.props.events, event => {
       return (
         <Menu.Item 

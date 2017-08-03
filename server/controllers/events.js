@@ -17,7 +17,6 @@ module.exports.createEvent = (req, res) => {
   })
     .save()
     .then(event => {
-      console.log('im inside events? ', event.id, event);
       models.Attendee.forge({
         event_id: event.id,
         profile_id: req.body.creator
@@ -27,7 +26,6 @@ module.exports.createEvent = (req, res) => {
           console.log('inside atttende ', attendee);
           models.Event.where({ group_id: req.params.groupId }).fetchAll()
             .then(events => {
-              console.log('I GOT EVENTS WHERE GROUP ID MATCHES THE ONE GIVEN ', events);
               res.status(201).send(events);
             })
             .error(err => {
@@ -42,6 +40,7 @@ module.exports.createEvent = (req, res) => {
 
 module.exports.deleteEvent = (req, res) => {
 //DELETE EVENT
+  console.log(req.body.eventId);
   models.Event.where({ id: req.body.eventId }).fetch()
     .then(event => {
       if (!event) {
