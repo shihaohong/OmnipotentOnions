@@ -129,7 +129,6 @@ class Main extends Component {
 
   render() {
     return (
-
       <div>
         <Menu inverted vertical id='sidebar'>
           <Menu.Item>
