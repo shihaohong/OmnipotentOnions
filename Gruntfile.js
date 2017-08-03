@@ -25,7 +25,7 @@ module.exports = function(grunt) {
           password: config.connection.password,
           host: config.connection.host,
           port: config.connection.port,
-          database: 'template1'
+          database: 'thesis'
         },
         name: config.connection.database
       }
