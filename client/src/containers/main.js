@@ -96,18 +96,6 @@ class Main extends Component {
       showEventDetails: !this.state.showEventDetails,
       eventId: eventId
     });
-
-  }
-
-  handleCreateEvent() {
-    // need edge cases
-    
-
-
-  }
-
-  handleEventDetails() {
-    // need edgecases
   }
 
   renderEventDetails() {
