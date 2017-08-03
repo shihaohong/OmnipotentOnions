@@ -104,14 +104,23 @@ export class EventDetails extends Component {
       // console.log('info is available', this.state.weatherInformation);
       if (!this.state.tooLate) {
         let weather = this.state.weatherInformation;
+        console.log('WEAETHER(((( ', weather);
+        let icon = weather.weather[0].icon;
+        let url = `http://openweathermap.org/img/w/${icon}.png`;
         return (
-          <div>
-            <strong>Temperature:</strong> <br/>
-            Min: {weather.temp.min} °C <br/>
-            Max: {weather.temp.max} °C <br/>
-            <strong>Pressure:</strong> {weather.pressure} hPa <br/>
-            <strong>Description:</strong> {weather.weather[0].description}
+          <div className='event-detail-font'>
+            <b>Weather description:</b> {weather.weather[0].description} <br />
+            <img className='weather-icon' src={url}/> <br/>
+            <p className='weather-max-temp'>{Math.ceil(weather.temp.max)} °C </p> | {Math.ceil(weather.temp.min)} °C<br/>
+            
+            <br />
 
+            <div className='weather-misc'>
+              <strong>Pressure:</strong> {weather.pressure} hPa <br/>
+              <strong>Wind speed:</strong> {weather.pressure} m/sec <br/>
+              <strong>Cloudiness:</strong> {weather.clouds}% <br/>
+              <strong>Humidity:</strong> {weather.humidity}% <br/>
+            </div>
           </div>
         );
       } else {
@@ -177,7 +186,7 @@ export class EventDetails extends Component {
           {this.renderWeather()}
         </div>
 
-        <div className='event-detail-title'>Details</div>
+        <div className='event-detail-title'>Event Description</div>
         <div className='event-detail-font'>
           {currentEvent.detail}
         </div>
