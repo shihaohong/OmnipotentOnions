@@ -137,6 +137,7 @@
 .formButton {
   float: right;
   margin-bottom: 14px !important;
+  z-index: 99; position:relative;
 }
 
 .formButton Button {

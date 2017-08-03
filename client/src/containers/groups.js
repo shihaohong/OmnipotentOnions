@@ -57,10 +57,9 @@ class Groups extends Component {
         <Menu.Menu>
         {this.renderGroups()}
         </Menu.Menu>
+
         <NewGroup profile={this.props.profile}/>
-
         <JoinGroup profile={this.props.profile}/>
-
       </Menu.Item>
     );
   }

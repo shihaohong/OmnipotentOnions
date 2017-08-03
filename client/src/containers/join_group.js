@@ -25,7 +25,7 @@ class JoinGroup extends Component {
 
 
   onSubmit(e) {
-    console.log('GRROUP: ', e);
+    console.log('shortID & profileID: ', e.shortId, this.props.profile.id);
     let shortID = e.shortID;
     let profile_id = this.props.profile.id;
     e.shortId = '';
