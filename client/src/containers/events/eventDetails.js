@@ -37,7 +37,7 @@ export class EventDetails extends Component {
         let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
         if (diffDays < 16 && diffDays >= 0) {
-          axios.get(`https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lng}&units=metric&cnt=16&APPID=300dbc7cef6e1d88d172735c5f3cb721`)
+          axios.get(`https://crossorigin.me/http://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lng}&units=metric&cnt=16&APPID=300dbc7cef6e1d88d172735c5f3cb721`)
             .then(result => {
               // console.log('diffDays: ', diffDays);
               // console.log('received weather data', result);
