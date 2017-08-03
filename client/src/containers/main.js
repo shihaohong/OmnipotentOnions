@@ -23,26 +23,26 @@ class Main extends Component {
 
     this.state = {
       showMain: true,
+      groupId: null,
+      channelId: null,
+      showCreateEvents: false,
+      showEventDetails: false
     };
 
     this.onHandleChannel = this.onHandleChannel.bind(this);
     this.onHandleMessage = this.onHandleMessage.bind(this);
     this.onHandleEvents = this.onHandleEvents.bind(this);
-    this.onHandleGroups = this.onHandleGroups.bind(this);
     this.handleDeleteGroup = this.handleDeleteGroup.bind(this);    
     this.handleCreateEvent = this.handleCreateEvent.bind(this);
     this.onDisplayEvents = this.onDisplayEvents.bind(this);
     this.handleEventDetails = this.handleEventDetails.bind(this);
   }
 
-  //Once sign on, your information is fetched
-  //as we go around the site, this information will be passed to load contents specific for each user
   componentWillMount() {
     this.props.fetchProfile(window.myUser);    
   }
 
   onHandleChannel (e) {
-    var firstChannel;
     this.props.fetchChannels(e.value);
     this.setState({
       groupId: e.value,
@@ -59,16 +59,6 @@ class Main extends Component {
   onHandleEvents() { 
     this.setState({
       showMain: !this.state.showMain
-    });
-  }
-
-  onHandleGroups() {
-    this.setState({
-      showEvents: false,
-      showGroups: true,
-      showGroupEvents: false,
-      showCreateEvents: false,
-      showEventDetails: false,
     });
   }
 
@@ -101,10 +91,7 @@ class Main extends Component {
     });
   }
 
-  handleEventDetails(eventId) {
-    console.log('show event', this.state.showEventDetails);
-    console.log('event id', eventId);
-    
+  handleEventDetails(eventId) {    
     this.setState({
       showEventDetails: !this.state.showEventDetails,
       eventId: eventId
@@ -124,8 +111,6 @@ class Main extends Component {
   }
 
   renderEventDetails() {
-    console.log('renderEventDetails', this.state.eventId);
-
     if (this.state.eventId) {
       return ( 
         <EventDetails 
@@ -158,10 +143,10 @@ class Main extends Component {
               <Groups 
                 profile={window.myUser} 
                 handleChannel={this.onHandleChannel}
-                handleEvents={this.onHandleEvents}/> 
+                handleEvents={this.onHandleEvents}
+              /> 
               :
               <Events 
-                showGroups={this.onHandleGroups} 
                 handleEventsDisplay={this.onDisplayEvents}
                 handleEvents={this.onHandleEvents}
               />

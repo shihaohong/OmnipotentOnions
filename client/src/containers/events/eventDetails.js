@@ -10,8 +10,6 @@ export class EventDetails extends Component {
   constructor(props) {
     super(props);
 
-    console.log('event', this.props.events[this.props.eventId]);
-
     this.getGeolocation();
 
     this.state = {
@@ -39,9 +37,6 @@ export class EventDetails extends Component {
         if (diffDays < 16 && diffDays >= 0) {
           axios.get(`https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lng}&units=metric&cnt=16&APPID=300dbc7cef6e1d88d172735c5f3cb721`)
             .then(result => {
-              // console.log('diffDays: ', diffDays);
-              // console.log('received weather data', result);
-
               this.setState({
                 isWeatherInformationAvailable: true,
                 weatherInformation: result.data.list[diffDays],
@@ -49,9 +44,7 @@ export class EventDetails extends Component {
               });
             });
         } else {
-          // console.log('number of days: ', diffDays);
           let waitTime = diffDays - 15;
-          // console.log('waitTime: ', waitTime);
           this.setState({
             isWeatherInformationAvailable: true,
             tooLate: true,
@@ -101,7 +94,6 @@ export class EventDetails extends Component {
 
   renderWeather() {
     if (this.state.isWeatherInformationAvailable) {
-      // console.log('info is available', this.state.weatherInformation);
       if (!this.state.tooLate) {
         let weather = this.state.weatherInformation;
         console.log('WEAETHER(((( ', weather);
@@ -133,11 +125,7 @@ export class EventDetails extends Component {
   }
 
   renderDate(date) {
-    // console.log('date: ', date);
-
     const dateInfo = date.split('-');
-
-    // console.log('date information: ', dateInfo);
 
     let months = {
       '01': 'Jan',
