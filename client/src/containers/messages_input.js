@@ -43,12 +43,12 @@ export class MessageInput extends Component {
 
   render() {
     const { handleSubmit } = this.props;
-
-    return (
-      <Segment inverted color='grey'>
+    var disableField = !this.props.channelId;
+    return disableField ? null : (
+      <Segment inverted>
         <Form className='chat-text-entry' onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <Field 
-            placeholder='Enter your message here'
+            placeholder="Enter your message here"
             name='message'
             component={this.renderField}
           />

@@ -30,7 +30,6 @@ export class Friends extends Component {
   }
 
   renderPage() {
-    console.log('id undefined?', this.props.profile.id);
     if (this.state.activeItem === 'Friends') {
       this.props.fetchFriends(this.props.profile.id);
       return <FriendsList />;
@@ -38,7 +37,7 @@ export class Friends extends Component {
       this.props.fetchPendingRequests(this.props.profile.id);
       this.props.fetchFriendRequests(this.props.profile.id);
       return <PendingList />;
-    }  else if (this.state.activeItem === 'Add') {
+    } else if (this.state.activeItem === 'Add') {
       return <FriendsAdd />;
     }
   }

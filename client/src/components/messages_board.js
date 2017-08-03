@@ -10,7 +10,7 @@ class MessageBoard extends Component {
   }
 
   renderMessages () {
-    var colors = ['orange', 'yellow', 'green', 'olive', 'blue', 'pink', 'violet', 'purple'];
+    var colors = ['blue', 'green', 'violet', 'brown', 'pink', 'yellow', 'purple', 'olive', 'orange'];
     var tempColors = colors.slice();
     var colorMap = {};
     return _.map(this.props.messages, (message, i) => {
@@ -19,8 +19,8 @@ class MessageBoard extends Component {
         tempColors = colors.slice();
       }
       if (!myMessage && !colorMap[message.profile.id]) {
-        var randColor = tempColors.splice(Math.floor(Math.random() * tempColors.length), 1)[0];
-        colorMap[message.profile.id] = randColor;
+        var assignedColor = tempColors.pop();
+        colorMap[message.profile.id] = assignedColor;
       }
       return myMessage ? (
         <Segment inverted color='teal' tertiary compact key={moment(message.create_at).valueOf()} textAlign='left'> 

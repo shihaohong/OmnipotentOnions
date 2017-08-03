@@ -50,8 +50,9 @@ class Messages extends Component {
   render() {
     return (
       <div>
+        <div id='chat-bg-color'>O</div>
         <div id='video-chat-fronter'>
-          <Segment inverted color='grey'>
+          <Segment inverted>
             <Header inverted color='teal' size='large'> {this.props.channelId ? this.props.channel[this.props.channelId].name : 'Select a Group & Channel...' } </Header>
             <Button className='ui teal' onClick={this.onHandleVideoChatJoin} id='joinVideoChat'>Join Video Chat</Button>
             {
