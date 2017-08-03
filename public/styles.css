@@ -12,6 +12,10 @@
   height: 125px;
 }
 
+#video-chat-fronter {
+  z-index: 100; position:relative;
+}
+
 #message-scroll {
   position: absolute;
   left: 22%;
