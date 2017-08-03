@@ -45,7 +45,7 @@ export class MessageInput extends Component {
     const { handleSubmit } = this.props;
 
     return (
-      <Segment fluid inverted color='grey'>
+      <Segment inverted color='grey'>
         <Form className='chat-text-entry' onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <Field 
             placeholder='Enter your message here'

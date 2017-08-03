@@ -14,7 +14,6 @@ class Events extends Component {
     };
   }
   handleItemClick(e, {name}) {
-    console.log('name: ', {name});
     this.setState({activeItem: name});
   }
 
@@ -25,7 +24,7 @@ class Events extends Component {
           key={group.id}
           name={group.groups.name}
           active={this.state.activeItem === group.groups.name} 
-          value={group.id}
+          value={group.group_id}
           onClick={ (e, d) => { 
             this.handleItemClick(e, d);
             this.props.handleEventsDisplay(d.value); 
