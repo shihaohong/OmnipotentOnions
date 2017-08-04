@@ -1,0 +1,14 @@
+{
+  "passport": {
+   "Google": {
+      "clientID": "FILL_ME_IN",
+      "clientSecret": "FILL_ME_IN",
+      "callbackURL": "FILL_ME_IN"
+    },
+    "Facebook": {
+      "clientID": "FILL_ME_IN",
+      "clientSecret": "FILL_ME_IN",
+      "callbackURL": "FILL_ME_IN"
+    }
+  }
+}

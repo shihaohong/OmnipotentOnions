@@ -1,6 +1,6 @@
-# Project Name
+# OmniChat
 
-The project description
+OmniChat is a chatroom-based organizational application. It's main features include creating chatrooms with messaging and audio/video communication. Another main feature is its capability of adding group-specific events that all members of a group can view.
 
 ## Team
 
@@ -11,11 +11,11 @@ The project description
 
 ## Roadmap
 
-View the project roadmap [here](https://docs.google.com/document/d/1yGF5G8IW_wUWLtsoPsByz7-ROYsVnniga2lB3uEiGNo/edit?usp=sharing)
+The project roadmap contains the main features and goals that we planned to and have implemented as we worked on this project. Please view the project roadmap [here](https://docs.google.com/document/d/1yGF5G8IW_wUWLtsoPsByz7-ROYsVnniga2lB3uEiGNo/edit?usp=sharing)
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines. This contains general and more specific information regarding workflow for all contributors to this codebase.
 
 # Table of Contents
 
@@ -27,16 +27,16 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 ## Usage
 
-> Some usage instructions
+$ yarn install
+$ yarn build
+$ yarn start
+$ redis-server ## NOTE: Please search for your own OS-specific methods of running Redis. Redis is required in order for this application to work.
 
 ## Requirements
 
 - Node 6.9.x
-- Redis 3.2.x
+- Redis 2.7.x
 - Postgresql 9.6.x
-- etc
-
-## Development
 
 ### Installing System Dependencies
 
@@ -51,14 +51,12 @@ Yarn is a replacement for npm. It's faster and *guarantees* consistency -- as yo
 ### Install Project Dependencies
 
 ```
-yarn global add grunt-cli knex eslint
+yarn global add knex eslint
 ```
 
 ## App Configuration
 
-Override settings `config/default.json` in any environment by making a copy of `config/ENV.example.json` and naming it `config/ENV.json` and setting the appropriate variable. 
-
-For environments that require use of environment variables, you can supply variables as defined in `config/custom-environment-variables.json`.
+Override settings `config/knex.json` and `config/passport.json` in any environment by making a copy of `config/knex.example.json` and `config/passport.example.json` and naming it `config/knex.json` and `config/passport.json` and setting the appropriate variable. 
 
 See https://www.npmjs.com/package/config
 And https://github.com/lorenwest/node-config/wiki/Environment-Variables#custom-environment-variables
@@ -66,6 +64,8 @@ And https://github.com/lorenwest/node-config/wiki/Environment-Variables#custom-e
 ## Database Initialization
 
 IMPORTANT: ensure `postgres` is running before performing these steps.
+
+
 
 ### Database Creation:
 
@@ -99,8 +99,8 @@ To run webpack build: `yarn run build`
 
 To run server: `yarn run start`
 
-To run tests: `yarn run test`
+To run tests: 
+1. Client-side tests:`yarn run client-test`
+2. Server-side tests:`yarn run server-test`
 
 To run your redis server for the session store `redis-server`
-
-
