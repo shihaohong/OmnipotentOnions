@@ -52,7 +52,7 @@ class Messages extends Component {
   render() {
     return (
       <div>
-        <div id='chat-bg-color'>O</div>
+        <div id='chat-bg-color'></div>
         <div id='video-chat-fronter'>
           <Segment inverted>
             <Header inverted color='teal' size='large'> {this.props.channelId ? this.props.channel[this.props.channelId].name : 'Select a Group & Channel...' } </Header>

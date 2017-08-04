@@ -154,6 +154,7 @@ class Main extends Component {
           }
           
         </Menu>
+        <div id='sidebar-spacer'></div>
         <div id='main'>
           {
             this.state.showMain ? 
