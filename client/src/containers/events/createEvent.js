@@ -6,10 +6,6 @@ import _ from 'lodash';
 import { Segment, Icon, Button, Header, Image, Modal, Input, Dropdown } from 'semantic-ui-react';
 
 export class CreateEvent extends Component {
-
-  //This section does not use react form like in profile
-  //The values are set here and referenced in an object to the reducer when needed
-
   constructor(props) {
     super(props);
     this.state = {
@@ -83,8 +79,6 @@ export class CreateEvent extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  //Eventhandlers
-
   eventNameChange(e) {
     var eventName = e.target.value;
     this.setState({
@@ -103,8 +97,6 @@ export class CreateEvent extends Component {
       startDate: startDate
     });
   }
-
-  //since we use semnatic ui, e.target.value wont work, so we use data
   startTimeChange(data) {
     console.log(data.value);
     var startTime = data.value;
@@ -132,8 +124,6 @@ export class CreateEvent extends Component {
       detail: detail
     });
   }
-
-  //Submit handler that sends data to an action to post event data to the database
 
   onSubmit(e) {
     console.log(this.props);

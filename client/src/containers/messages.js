@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchMessages, createMessage, fetchGroups, fetchChannels } from '../actions';
+import { fetchMessages, createMessage } from '../actions';
 
 import io from 'socket.io-client';
 
@@ -26,17 +26,6 @@ class Messages extends Component {
         this.props.createMessage(message);
       }
     });
-    console.log(this.props.profile);
-    this.props.fetchGroups(this.props.profile)
-      .then((groups) => {
-        this.props.fetchChannels(groups.payload.data[0].group_id)
-          .then((channels) => {
-            console.log(channels.payload.data);
-            this.setState({
-              channelId: channels.payload.data[0].id
-            });
-          });
-      }); 
   }
   
   onHandleVideoChatJoin() {
@@ -84,7 +73,6 @@ class Messages extends Component {
             socket={this.props.socket}
             channelId={this.props.channelId}
             profile={this.props.profile}
-            
           />
         </div>
       </div>
@@ -96,4 +84,4 @@ const mapStateToProps = function(state) {
   return { messages: state.messages, channel: state.channels, profile: state.profile };
 };
 
-export default connect(mapStateToProps, { fetchMessages, createMessage, fetchGroups, fetchChannels })(Messages);
+export default connect(mapStateToProps, { fetchMessages, createMessage })(Messages);

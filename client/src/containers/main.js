@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchProfile, fetchChannels, fetchMessages, fetchEvents, fetchGroups } from '../actions';
+import { fetchProfile, fetchChannels, fetchMessages, fetchEvents } from '../actions';
 
 import { Segment, Menu, Header, Image } from 'semantic-ui-react';
 
@@ -38,21 +38,8 @@ class Main extends Component {
     this.handleEventDetails = this.handleEventDetails.bind(this);
   }
 
-  //Once sign on, your information is fetched
-  //as we go around the site, this information will be passed to load contents specific for each user
   componentWillMount() {
-    this.props.fetchProfile(window.myUser);
-    this.props.fetchGroups(window.myUser)
-      .then((groups) => {
-        this.props.fetchChannels(groups.payload.data[0].group_id)
-          .then((channels) => {
-            this.props.fetchMessages(channels.payload.data[0].id);
-            this.setState({
-              groupId: groups.payload.data[0].group_id,
-              channelId: channels.payload.data[0].id
-            });
-          });
-      });
+    this.props.fetchProfile(window.myUser);    
   }
 
   onHandleChannel (e) {
@@ -60,11 +47,9 @@ class Main extends Component {
     this.setState({
       groupId: e.value,
     });
-    console.log(this.props);
   }
 
   onHandleMessage(e, d) {
-    console.log(d.value);
     this.props.fetchMessages(d.value);
     this.setState({
       channelId: d.value,
@@ -158,7 +143,6 @@ class Main extends Component {
             this.state.showMain ? 
               <Channels 
                 socket={socket} 
-                profile={window.myUser}
                 groupId={this.state.groupId} 
                 handleMessage={this.onHandleMessage}
               /> 
@@ -176,7 +160,6 @@ class Main extends Component {
               <Messages 
                 socket={socket} 
                 channelId={this.state.channelId}
-                profile={window.myUser}
               /> 
               : 
               this.renderEventDetails()
@@ -187,4 +170,4 @@ class Main extends Component {
   }  
 }
 
-export default connect(null, { fetchProfile, fetchEvents, fetchChannels, fetchMessages, fetchGroups} )(Main);
+export default connect(null, { fetchProfile, fetchEvents, fetchChannels, fetchMessages} )(Main);

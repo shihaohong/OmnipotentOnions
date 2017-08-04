@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { createGroup, createChannel } from '../actions';
+import { createGroup } from '../actions';
 
 import shortid from 'shortid';
 
@@ -13,11 +13,11 @@ class NewGroup extends Component {
     const { meta: { touched, error, warning }} = field; 
     return (
       <Form.Input 
-        className='inputForm' 
-        transparent={true} 
-        size='large'
-        placeholder='enter new group name'
-        type='text' {...field.input}/>
+                  className='inputForm' 
+                  transparent={true} 
+                  size='large'
+                  placeholder='enter new group name'
+                  type='text' {...field.input}/>
     );
   } 
 
@@ -31,14 +31,7 @@ class NewGroup extends Component {
     let profile_id = this.props.profile.id;
     let shortID = shortid.generate();
     e.groupName = '';
-    this.props.createGroup(newGroupName, profile_id, shortID)
-      .then((groups) => {
-        let newChannel = {
-          name: 'General',
-          group_id: groups.payload.data.pop().group_id
-        };
-        this.props.createChannel(newChannel, shortID);
-      }); 
+    this.props.createGroup(newGroupName, profile_id, shortID);
   }
 
   render() {
@@ -62,17 +55,17 @@ const mapStateToProps = function(state) {
 export default reduxForm({
   form: 'GroupsForm'
 })(
-  connect(mapStateToProps, { createGroup, createChannel })(NewGroup)
+  connect(mapStateToProps, { createGroup })(NewGroup)
 );
 
-// <div>
-//   <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-//     <Field
-//       name='groupName'
-//       component={this.renderField}
-//     />
-//     <button type='submit'>Create Group</button>
-//   </form>
-// </div>
+      // <div>
+      //   <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+      //     <Field
+      //       name='groupName'
+      //       component={this.renderField}
+      //     />
+      //     <button type='submit'>Create Group</button>
+      //   </form>
+      // </div>
 
 
