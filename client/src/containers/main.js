@@ -63,7 +63,6 @@ class Main extends Component {
   }
 
   handleDeleteGroup() {
-    console.log('DELETTE GROUOP!!!');
     this.setState({
       groupId: undefined,
       channelId: undefined

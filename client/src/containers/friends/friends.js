@@ -71,6 +71,7 @@ export class Friends extends Component {
               onClick={this.handleItemClick}
             />
           </Menu>
+          <div id='sidebar-spacer'></div>
         </div>
         <div id='main'>
           {this.renderPage()}

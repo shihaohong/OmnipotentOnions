@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { Button, Input, Segment } from 'semantic-ui-react';
+import { Button, Input, Segment, Header } from 'semantic-ui-react';
 
 export class FriendsAdd extends Component {
 
@@ -88,8 +88,11 @@ export class FriendsAdd extends Component {
   render() {
     return (
       <div>
-        <h3>Add Friend</h3>
-        <div>You can add friends with their email address.</div> <br/>
+        <div id='chat-bg-color'></div>
+        <Segment inverted>
+          <Header inverted color='teal' size='large'> Add Friend </Header>
+          <Header inverted color='teal' size='small'> You can add friends by entering their email addresses. </Header>
+        </Segment>
         {this.renderForm()}
       </div>
     );
