@@ -29,13 +29,21 @@ class GroupList extends Component {
 
   render() {
     return (
-      <Menu.Item className='groupName' 
-        key={this.props.group.group_id}
-        name={this.props.group.groups.name}
-        active={this.props.activeItem === this.props.group.groups.name}
-        value={this.props.group.group_id} 
-        onClick={(e, d) => { this.props.handleItemClick(e, d), this.props.handleChannel(d); }}>   
-        {this.props.group.groups.name}
+      <Menu.Item className='groupName'        
+        key={this.props.groups.group_id}
+        active={this.props.activeItem === this.props.group.groups.name}>
+        <div
+          style={{display: 'inline'}}
+          key={this.props.group.group_id}
+          name={this.props.group.groups.name}
+          value={this.props.group.group_id} 
+          onClick={() => { 
+            this.props.handleItemClick(this.props.group.groups.name), 
+            this.props.handleChannel(this.props.group.group_id); 
+          }}
+        >
+          {this.props.group.groups.name}
+        </div> 
         <InviteLink 
           group={this.props.group.groups} 
           profile={this.props.profile} showShortId={this.shortIdView}/>

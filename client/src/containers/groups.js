@@ -18,8 +18,8 @@ class Groups extends Component {
     };
     this.handleItemClick = this.handleItemClick.bind(this);
   }
-  handleItemClick(e, { name }) {
-
+  handleItemClick(name) {
+    console.log('NAME: ', name);
     this.setState({activeItem: name});
   }
   componentWillMount() {
@@ -38,6 +38,7 @@ class Groups extends Component {
           handleChannel={this.props.handleChannel}
           handleItemClick={this.handleItemClick}
           activeItem={this.state.activeItem}
+          handleDeleteGroup={this.props.handleDeleteGroup}
         />
       );
     });

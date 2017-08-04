@@ -15,6 +15,7 @@ export const CREATE_CHANNEL = 'create_channel';
 
 export const FETCH_MESSAGES = 'fetch_messages';
 export const CREATE_MESSAGE = 'create_message';
+export const EMPTY_CHANNELS = 'empty_channels';
 
 export const FETCH_FRIENDS = 'fetch_friends';
 
@@ -103,6 +104,14 @@ export let fetchChannels = function(groupId) {
   return {
     type: FETCH_CHANNELS,
     payload: request
+  };
+};
+
+export let emptyChannels = function () {
+  console.log('INSIDE ACTION INDEX');
+  return {
+    type: EMPTY_CHANNELS,
+    payload: {}
   };
 };
 

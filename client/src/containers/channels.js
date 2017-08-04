@@ -15,7 +15,7 @@ export class Channels extends Component {
     this.state = {
       activeItem: '',
     };
-    // this.handleItemClick = this.handleItemClick.bind(this);
+    this.handleItemClick = this.handleItemClick.bind(this);
   }
 
   handleItemClick(e, {name}) {
@@ -23,6 +23,7 @@ export class Channels extends Component {
   }
 
   renderChannels() {
+    console.log('CHANNELS: ', this.props.channels);
     return _.map(this.props.channels, channel => {
       this.props.socket.emit('subscribe', channel.id);
       return (

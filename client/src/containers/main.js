@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchProfile, fetchChannels, fetchMessages, fetchEvents } from '../actions';
+import { fetchProfile, fetchChannels, 
+  fetchMessages, fetchEvents, emptyChannels } from '../actions';
 
 import { Segment, Menu, Header, Image } from 'semantic-ui-react';
 
 import Groups from './groups';
 import Channels from './channels';
 import Messages from './messages';
-
 import Events from './events/events';
 import CreateEvent from './events/createEvent';
 import EventDetails from './events/eventDetails';
@@ -42,10 +42,10 @@ class Main extends Component {
     this.props.fetchProfile(window.myUser);    
   }
 
-  onHandleChannel (e) {
-    this.props.fetchChannels(e.value);
+  onHandleChannel (groupdId) {
+    this.props.fetchChannels(groupdId);
     this.setState({
-      groupId: e.value,
+      groupId: groupdId,
     });
   }
 
@@ -63,10 +63,12 @@ class Main extends Component {
   }
 
   handleDeleteGroup() {
+    console.log('DELETTE GROUOP!!!');
     this.setState({
       groupId: undefined,
       channelId: undefined
     });
+    this.props.emptyChannels();
   }
 
   handleCreateEvent(e) {
@@ -76,12 +78,6 @@ class Main extends Component {
       groupId: e.target.value
     });
 
-  }
-
-  onHandleEvents() {
-    this.setState({ 
-      showMain: !this.state.showMain
-    });
   }
 
   onDisplayEvents(groupId) {
@@ -96,6 +92,7 @@ class Main extends Component {
       showEventDetails: !this.state.showEventDetails,
       eventId: eventId
     });
+
   }
 
   renderEventDetails() {
@@ -132,6 +129,7 @@ class Main extends Component {
                 profile={window.myUser} 
                 handleChannel={this.onHandleChannel}
                 handleEvents={this.onHandleEvents}
+                handleDeleteGroup={this.handleDeleteGroup}
               /> 
               :
               <Events 
@@ -141,7 +139,8 @@ class Main extends Component {
           }
           {
             this.state.showMain ? 
-              <Channels 
+              <Channels
+                key={this.state.groupId}
                 socket={socket} 
                 groupId={this.state.groupId} 
                 handleMessage={this.onHandleMessage}
@@ -171,4 +170,4 @@ class Main extends Component {
   }  
 }
 
-export default connect(null, { fetchProfile, fetchEvents, fetchChannels, fetchMessages} )(Main);
+export default connect(null, { fetchProfile, fetchEvents, fetchChannels, fetchMessages, emptyChannels } )(Main);
