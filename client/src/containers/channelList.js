@@ -34,19 +34,19 @@ export class ChannelList extends Component {
   //   });
   // }
 
-  render() {
-    return (
-      <Menu.Item
-        key={this.props.channel.id}
-        name={this.props.channel.name}
-        active={this.props.activeItem === this.props.channel.name}
-        value={this.props.channel.id}
-        onClick={(e, d) => { this.props.handleItemClick(e, d), this.props.handleMessage(d.value); }}
-      >
-        {this.props.channel.name}
-      </Menu.Item>
-    );
-  }
+  // render() {
+  //   return (
+  //     <Menu.Item
+  //       key={this.props.channel.id}
+  //       name={this.props.channel.name}
+  //       active={this.props.activeItem === this.props.channel.name}
+  //       value={this.props.channel.id}
+  //       onClick={(e, d) => { this.props.handleItemClick(e, d), this.props.handleMessage(d.value); }}
+  //     >
+  //       {this.props.channel.name}
+  //     </Menu.Item>
+  //   );
+  // }
 }
 
 const mapStateToProps = function(state) {

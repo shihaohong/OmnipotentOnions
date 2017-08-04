@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchProfile, fetchChannels, 
-  fetchMessages, fetchEvents, emptyChannels } from '../actions';
+  fetchMessages, fetchEvents, emptyChannels, fetchGroups } from '../actions';
 
 import { Segment, Menu, Header, Image } from 'semantic-ui-react';
 
@@ -25,8 +25,10 @@ class Main extends Component {
       showMain: true,
       groupId: null,
       channelId: null,
+      channelName: null,
       showCreateEvents: false,
       showEventDetails: false
+
     };
 
     this.onHandleChannel = this.onHandleChannel.bind(this);
@@ -38,18 +40,36 @@ class Main extends Component {
     this.handleEventDetails = this.handleEventDetails.bind(this);
   }
 
+  //Once sign on, your information is fetched
+  //as we go around the site, this information will be passed to load contents specific for each user
   componentWillMount() {
-    this.props.fetchProfile(window.myUser);    
+    console.log('im mounting');
+    this.props.fetchProfile(window.myUser);
+    this.props.fetchGroups(window.myUser)
+      .then((groups) => {
+        this.props.fetchChannels(groups.payload.data[0].group_id)
+          .then((channels) => {
+            this.props.fetchMessages(channels.payload.data[0].id);
+            this.setState({
+              groupId: groups.payload.data[0].group_id,
+              channelId: channels.payload.data[0].id,
+              channelName: channels.payload.data[0].name
+            });
+          });
+      });
   }
 
-  onHandleChannel (groupdId) {
-    this.props.fetchChannels(groupdId);
+  onHandleChannel (groupId) {
+    console.log('handle channel ', groupId);
+    this.props.fetchChannels(groupId);
     this.setState({
-      groupId: groupdId,
+      groupId: groupId,
     });
+    console.log(this.props);
   }
 
   onHandleMessage(e, d) {
+    console.log(d.value);
     this.props.fetchMessages(d.value);
     this.setState({
       channelId: d.value,
@@ -141,8 +161,10 @@ class Main extends Component {
               <Channels
                 key={this.state.groupId}
                 socket={socket} 
+                profile={window.myUser}
                 groupId={this.state.groupId} 
                 handleMessage={this.onHandleMessage}
+                channelName={this.state.channelName}
               /> 
               :
               <GroupEvents 
@@ -159,6 +181,7 @@ class Main extends Component {
               <Messages 
                 socket={socket} 
                 channelId={this.state.channelId}
+                profile={window.myUser}
               /> 
               : 
               this.renderEventDetails()
@@ -169,4 +192,4 @@ class Main extends Component {
   }  
 }
 
-export default connect(null, { fetchProfile, fetchEvents, fetchChannels, fetchMessages, emptyChannels } )(Main);
+export default connect(null, { fetchProfile, fetchEvents, fetchChannels, fetchMessages, emptyChannels, fetchGroups } )(Main);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchChannels, fetchOneGroup } from '../actions';
+import { fetchChannels, fetchOneGroup, fetchGroups } from '../actions';
 import _ from 'lodash';
 
 import NewChannel from './new_channel';
@@ -18,9 +18,18 @@ export class Channels extends Component {
     this.handleItemClick = this.handleItemClick.bind(this);
   }
 
+  componentWillMount() {
+    this.setState({
+      activeItem: this.props.channelName
+    });
+  }
+
   handleItemClick(e, {name}) {
+    console.log(e);
     this.setState({activeItem: name});
   }
+
+  //creates a list of all channels
 
   renderChannels() {
     console.log('CHANNELS: ', this.props.channels);
@@ -62,4 +71,4 @@ const mapStateToProps = function(state) {
   return { channels: state.channels, oneGroup: state.oneGroup };
 };
 
-export default connect(mapStateToProps, { fetchChannels, fetchOneGroup })(Channels);
+export default connect(mapStateToProps, { fetchChannels, fetchOneGroup, fetchGroups })(Channels);

@@ -28,6 +28,7 @@ class NewChannel extends Component {
 
 
   onCreateChannel(e) {
+    console.log(this.props.groupId);
     let newChannel = {
       name: e.channelName,
       group_id: this.props.groupId

@@ -24,6 +24,8 @@ export class GroupEvents extends Component {
     this.props.handleEventDetails(eventId);
   }
 
+  //This creates a function that opens the modal, used when triggered in render
+
   handleOpen() { 
     this.setState({
       modalOpen: true,
@@ -35,11 +37,16 @@ export class GroupEvents extends Component {
     this.setState({activeItem: name});
   }
 
+  //creates a function that closes the modal
+  //used in createEvents, so that the modal will close on submit 
+
   handleClose() { 
     this.setState({
       modalOpen: false,
     });
   }
+  
+  //Maps the list of events from the user on the sidebar
 
   renderEvents() {
     return _.map(this.props.events, event => {
