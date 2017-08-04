@@ -46,7 +46,7 @@ class MessageBoard extends Component {
 
   render() {
     if (Object.keys(this.props.messages).length === 0) {
-      return <div>Loading... </div>;
+      return <div></div>;
     } 
     
 
