@@ -64,6 +64,7 @@ export class PendingList extends Component {
 
               <Button 
                 className='friend-list-button' 
+                color='teal'
                 onClick={ () => { this.onAcceptRequest(request.profile_id); } }
               >Accept</Button> 
 
@@ -96,7 +97,7 @@ export class PendingList extends Component {
               <Button 
                 className='friend-list-button' 
                 onClick={() => { this.onCancelRequest(request.friend_id); }}
-              >Cancel request</Button>
+              >Cancel Request</Button>
 
               <strong>Name:</strong> {request.friend.display} <br />
               <strong>Email:</strong> {request.friend.email} <br />

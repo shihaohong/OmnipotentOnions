@@ -77,7 +77,7 @@ export class FriendsAdd extends Component {
               value={this.state.term}
               onChange={this.onInputChange}
             />
-            <Button id='friend-add-button' color='teal'>Add a friend</Button>
+            <Button id='friend-add-button' color='teal'>Add a Friend</Button>
             <div className='dangerMessage' style={{color: 'red'}} >{this.state.danger}</div>
           </Segment>
         </form>

@@ -124,9 +124,9 @@ class Main extends Component {
       );
     } else {
       return (
-        <div>
-          Please select an event
-        </div>
+        <Segment inverted>
+          <Header inverted color='teal' size='large'> Please Select An Event </Header>
+        </Segment>
       );
     }
   }
@@ -184,7 +184,10 @@ class Main extends Component {
                 profile={window.myUser}
               /> 
               : 
-              this.renderEventDetails()
+              <div>
+                <div id='chat-bg-color'></div>
+                {this.renderEventDetails()}
+              </div>
           }
         </div>
       </div>

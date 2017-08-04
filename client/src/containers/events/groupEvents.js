@@ -58,7 +58,7 @@ export class GroupEvents extends Component {
           value={event.id}
           onClick={ (e, d) => {
             this.handleItemClick(e, d),
-            this.handleEventClick(d.name);
+            this.handleEventClick(event.id);
           }}>
           {event.eventName}
         </Menu.Item>

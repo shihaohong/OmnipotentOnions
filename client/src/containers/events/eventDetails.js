@@ -169,13 +169,16 @@ export class EventDetails extends Component {
           </div> 
         </div>
 
-        <div id='map-canvas'></div>
+        <div id='map-margin'>
+          <div id='map-canvas'></div>
+        </div>
+
         <div className='event-weather'>
           <div className='event-detail-title'>Weather</div>
           {this.renderWeather()}
         </div>
 
-        <div className='event-detail-title'>Event Description</div>
+        <div className='event-detail-title'>________ Event Description</div>
         <div className='event-detail-font'>
           {currentEvent.detail}
         </div>
