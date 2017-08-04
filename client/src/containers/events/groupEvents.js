@@ -43,16 +43,15 @@ export class GroupEvents extends Component {
 
   renderEvents() {
     return _.map(this.props.events, event => {
-      console.log('event', event);
       return (
         <Menu.Item 
           key={event.id}
-          active={this.state.activeItem === event.name}
-          name={event.name}
+          active={this.state.activeItem === event.eventName}
+          name={event.eventName}
           value={event.id}
           onClick={ (e, d) => {
-            this.handleItemClick(e, d), 
-            this.handleEventClick(d.value); 
+            this.handleItemClick(e, d),
+            this.handleEventClick(d.name);
           }}>
           {event.eventName}
         </Menu.Item>
