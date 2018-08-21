@@ -1,6 +1,6 @@
-# Project Name
+# Omnichat
 
-The project description
+Omnichat is an real-time communications application for organizations, teams and groups.
 
 ## Team
 
